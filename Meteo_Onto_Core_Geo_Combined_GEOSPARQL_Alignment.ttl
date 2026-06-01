@@ -1,0 +1,969 @@
+@base <http://meteo_onto.org/meteo_geo#> .
+@prefix : <http://meteo_onto.org/meteo_geo#> .
+@prefix Geo: <http://meteo_onto.org/meteo_geo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix Core: <http://meteo_onto.org/meteo_core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/dc/elements/1.1/contributor
+# 
+# http://purl.org/dc/elements/1.1/creator
+# 
+# http://purl.org/dc/elements/1.1/description
+# 
+# http://purl.org/dc/elements/1.1/title
+# 
+# http://purl.org/dc/terms/license
+# 
+# http://www.w3.org/2004/02/skos/core#definition
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Datatypes
+# #
+# #################################################################
+# 
+# 
+# http://meteo_onto.org/meteo_geo/WKTLiteral
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://meteo_onto.org/meteo_geo/hasAdministrativeLocation
+# 
+# http://meteo_onto.org/meteo_geo/hasCity
+# 
+# http://meteo_onto.org/meteo_geo/hasContain
+# 
+# http://meteo_onto.org/meteo_geo/hasCountry
+# 
+# http://meteo_onto.org/meteo_geo/hasDistrict
+# 
+# http://meteo_onto.org/meteo_geo/hasGeoPropertyOf
+# 
+# http://meteo_onto.org/meteo_geo/hasGeometry
+# 
+# http://meteo_onto.org/meteo_geo/hasInstitue
+# 
+# http://meteo_onto.org/meteo_geo/hasIntersection
+# 
+# http://meteo_onto.org/meteo_geo/hasLocality
+# 
+# http://meteo_onto.org/meteo_geo/hasMunicipality
+# 
+# http://meteo_onto.org/meteo_geo/hasOverlap
+# 
+# http://meteo_onto.org/meteo_geo/hasStateProvince
+# 
+# http://meteo_onto.org/meteo_geo/hasSubContinent
+# 
+# http://meteo_onto.org/meteo_geo/hasTouch
+# 
+# http://meteo_onto.org/meteo_geo/isAdministrativeLocationOF
+# 
+# http://meteo_onto.org/meteo_geo/isCityOf
+# 
+# http://meteo_onto.org/meteo_geo/isCountryOf
+# 
+# http://meteo_onto.org/meteo_geo/isDistrictOf
+# 
+# http://meteo_onto.org/meteo_geo/isGeoPropertyOf
+# 
+# http://meteo_onto.org/meteo_geo/isGeometryOf
+# 
+# http://meteo_onto.org/meteo_geo/isLocalityOf
+# 
+# http://meteo_onto.org/meteo_geo/isLocatedIn
+# 
+# http://meteo_onto.org/meteo_geo/isMunicipalityOf
+# 
+# http://meteo_onto.org/meteo_geo/isProvinceOf
+# 
+# http://meteo_onto.org/meteo_geo/isSubContinentOf
+# 
+# http://meteo_onto.org/meteo_geo/isWithIn
+# 
+# http://www.opengis.net/ont/geosparql#sfContains
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://meteo_onto.org/meteo_geo/hasCoordinate
+# 
+# http://meteo_onto.org/meteo_geo/hasName
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://meteo_onto.org/meteo_core/AdminLocation
+# 
+# http://meteo_onto.org/meteo_core/LocationType
+# 
+# http://meteo_onto.org/meteo_geo/AdminInstitute
+# 
+# http://meteo_onto.org/meteo_geo/AdminLocation
+# 
+# http://meteo_onto.org/meteo_geo/AgriculturalLand
+# 
+# http://meteo_onto.org/meteo_geo/Airport
+# 
+# http://meteo_onto.org/meteo_geo/Beach
+# 
+# http://meteo_onto.org/meteo_geo/Bridge
+# 
+# http://meteo_onto.org/meteo_geo/BusTerminal
+# 
+# http://meteo_onto.org/meteo_geo/City
+# 
+# http://meteo_onto.org/meteo_geo/ClimateGrid
+# 
+# http://meteo_onto.org/meteo_geo/Coastline
+# 
+# http://meteo_onto.org/meteo_geo/CoastlineFeature
+# 
+# http://meteo_onto.org/meteo_geo/CommunicationCenter
+# 
+# http://meteo_onto.org/meteo_geo/CommunityCenter
+# 
+# http://meteo_onto.org/meteo_geo/Continent
+# 
+# http://meteo_onto.org/meteo_geo/Country
+# 
+# http://meteo_onto.org/meteo_geo/DisasterManagementCenter
+# 
+# http://meteo_onto.org/meteo_geo/District
+# 
+# http://meteo_onto.org/meteo_geo/DroughtArea
+# 
+# http://meteo_onto.org/meteo_geo/ElectricalSubstation
+# 
+# http://meteo_onto.org/meteo_geo/Estuary
+# 
+# http://meteo_onto.org/meteo_geo/EvacuationCenter
+# 
+# http://meteo_onto.org/meteo_geo/EvacuationZone
+# 
+# http://meteo_onto.org/meteo_geo/FireStation
+# 
+# http://meteo_onto.org/meteo_geo/FloodZone
+# 
+# http://meteo_onto.org/meteo_geo/Flyover
+# 
+# http://meteo_onto.org/meteo_geo/ForecastGrid
+# 
+# http://meteo_onto.org/meteo_geo/Forest
+# 
+# http://meteo_onto.org/meteo_geo/GeoFeature
+# 
+# http://meteo_onto.org/meteo_geo/GeoGeometry
+# 
+# http://meteo_onto.org/meteo_geo/Geography
+# 
+# http://meteo_onto.org/meteo_geo/GovernmentAdministrativeOffice
+# 
+# http://meteo_onto.org/meteo_geo/Grassland
+# 
+# http://meteo_onto.org/meteo_geo/GridCell
+# 
+# http://meteo_onto.org/meteo_geo/HazardFeature
+# 
+# http://meteo_onto.org/meteo_geo/HighRiskArea
+# 
+# http://meteo_onto.org/meteo_geo/Hill
+# 
+# http://meteo_onto.org/meteo_geo/Hospital
+# 
+# http://meteo_onto.org/meteo_geo/HydrologicalFeature
+# 
+# http://meteo_onto.org/meteo_geo/Lagoon
+# 
+# http://meteo_onto.org/meteo_geo/Lake
+# 
+# http://meteo_onto.org/meteo_geo/LandCoverFeature
+# 
+# http://meteo_onto.org/meteo_geo/LandslideZone
+# 
+# http://meteo_onto.org/meteo_geo/Locality
+# 
+# http://meteo_onto.org/meteo_geo/LocationType
+# 
+# http://meteo_onto.org/meteo_geo/Mangrove
+# 
+# http://meteo_onto.org/meteo_geo/MedicalCenter
+# 
+# http://meteo_onto.org/meteo_geo/MeteorologyDepartment
+# 
+# http://meteo_onto.org/meteo_geo/MilitaryCamp
+# 
+# http://meteo_onto.org/meteo_geo/Municipality
+# 
+# http://meteo_onto.org/meteo_geo/NaturalFeature
+# 
+# http://meteo_onto.org/meteo_geo/ObservationGrid
+# 
+# http://meteo_onto.org/meteo_geo/Plain
+# 
+# http://meteo_onto.org/meteo_geo/Point
+# 
+# http://meteo_onto.org/meteo_geo/PoliceStation
+# 
+# http://meteo_onto.org/meteo_geo/PowerStation
+# 
+# http://meteo_onto.org/meteo_geo/RasterTile
+# 
+# http://meteo_onto.org/meteo_geo/ReliefCenter
+# 
+# http://meteo_onto.org/meteo_geo/RescueCenter
+# 
+# http://meteo_onto.org/meteo_geo/Reservior
+# 
+# http://meteo_onto.org/meteo_geo/Reservoir
+# 
+# http://meteo_onto.org/meteo_geo/ReservoirControlCenter
+# 
+# http://meteo_onto.org/meteo_geo/Ridge
+# 
+# http://meteo_onto.org/meteo_geo/River
+# 
+# http://meteo_onto.org/meteo_geo/Road
+# 
+# http://meteo_onto.org/meteo_geo/SafeZone
+# 
+# http://meteo_onto.org/meteo_geo/School
+# 
+# http://meteo_onto.org/meteo_geo/Seaport
+# 
+# http://meteo_onto.org/meteo_geo/Shelter
+# 
+# http://meteo_onto.org/meteo_geo/StateProvince
+# 
+# http://meteo_onto.org/meteo_geo/Steam
+# 
+# http://meteo_onto.org/meteo_geo/StormSurgeArea
+# 
+# http://meteo_onto.org/meteo_geo/Stream
+# 
+# http://meteo_onto.org/meteo_geo/SubContinent
+# 
+# http://meteo_onto.org/meteo_geo/TerrainFeature
+# 
+# http://meteo_onto.org/meteo_geo/TransportFeature
+# 
+# http://meteo_onto.org/meteo_geo/TransportHub
+# 
+# http://meteo_onto.org/meteo_geo/Tunnel
+# 
+# http://meteo_onto.org/meteo_geo/University
+# 
+# http://meteo_onto.org/meteo_geo/Valley
+# 
+# http://meteo_onto.org/meteo_geo/WaterTreatmentPlant
+# 
+# http://meteo_onto.org/meteo_geo/WeatherStation
+# 
+# http://meteo_onto.org/meteo_geo/Wetland
+# 
+# http://www.opengis.net/ont/geosparql#Feature
+# 
+# http://www.opengis.net/ont/geosparql#Geometry
+# 
+# http://www.opengis.net/ont/geosparql#SpatialObject
+# 
+# 
+# 
+# #################################################################
+# #
+# #    General axioms
+# #
+# #################################################################
+# 
+# 
+# 
+# 
+# 
+# 
+# Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
+
+<meteo_geo_align_sparql> a owl:Ontology;
+  owl:versionIRI Geo:GEO_SPARQL_ALIGN1_0;
+  owl:imports <http://www.opengis.net/ont/geosparql#1.1>, <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core.ttl>;
+  <http://purl.org/dc/elements/1.1/contributor> "Prof. Dulani Meedeniya"@en;
+  <http://purl.org/dc/elements/1.1/creator> "H. K. Pasan Gunasekara"@en;
+  <http://purl.org/dc/elements/1.1/description> "This ontology represents Geo Graphical Features with respect meteorological data"@en;
+  <http://purl.org/dc/elements/1.1/title> "MeteoOnto_Geo_GeoSPARQL_Align"@en;
+  <http://purl.org/dc/terms/license> "https://creativecommons.org/licenses/by/4.0/"@en;
+  owl:versionInfo "http://meteo_onto.org/meteo_geo/GEO1_0"@en .
+
+<http://purl.org/dc/elements/1.1/contributor> a owl:AnnotationProperty .
+
+<http://purl.org/dc/elements/1.1/creator> a owl:AnnotationProperty .
+
+<http://purl.org/dc/elements/1.1/description> a owl:AnnotationProperty .
+
+<http://purl.org/dc/elements/1.1/title> a owl:AnnotationProperty .
+
+<http://purl.org/dc/terms/license> a owl:AnnotationProperty .
+
+<http://www.w3.org/2004/02/skos/core#definition> a owl:AnnotationProperty .
+
+Geo:WKTLiteral a rdfs:Datatype .
+
+Geo:hasAdministrativeLocation a owl:ObjectProperty, owl:TransitiveProperty;
+  rdfs:subPropertyOf Geo:hasContain;
+  owl:inverseOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:AdminLocation;
+  rdfs:range Geo:AdminLocation;
+  owl:propertyChainAxiom _:genid2 .
+
+_:genid2 a rdf:List;
+  rdf:first Geo:hasAdministrativeLocation;
+  rdf:rest _:genid1 .
+
+_:genid1 a rdf:List;
+  rdf:first Geo:hasAdministrativeLocation;
+  rdf:rest rdf:nil .
+
+Geo:hasCity a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isCityOf;
+  rdfs:domain Geo:Municipality;
+  rdfs:range Geo:City .
+
+Geo:hasContain a owl:ObjectProperty, owl:TransitiveProperty;
+  owl:equivalentProperty <http://www.opengis.net/ont/geosparql#sfContains>;
+  rdfs:subPropertyOf Geo:hasGeoPropertyOf;
+  owl:inverseOf Geo:isWithIn;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range Geo:GeoFeature .
+
+<http://www.opengis.net/ont/geosparql#sfContains> a owl:ObjectProperty .
+
+Geo:hasCountry a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isCountryOf;
+  rdfs:domain Geo:SubContinent;
+  rdfs:range Geo:Country .
+
+Geo:hasDistrict a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isDistrictOf;
+  rdfs:domain Geo:StateProvince;
+  rdfs:range Geo:District .
+
+Geo:hasGeoPropertyOf a owl:ObjectProperty, owl:TransitiveProperty;
+  rdfs:subPropertyOf owl:topObjectProperty;
+  owl:inverseOf Geo:isGeoPropertyOf;
+  rdfs:domain Geo:Geography;
+  rdfs:range Geo:Geography .
+
+Geo:hasGeometry a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasGeoPropertyOf;
+  owl:inverseOf Geo:isGeometryOf;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range Geo:GeoGeometry .
+
+Geo:hasInstitue a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasGeoPropertyOf, <http://www.opengis.net/ont/geosparql#sfContains>;
+  owl:inverseOf Geo:isLocatedIn;
+  rdfs:domain Geo:AdminLocation;
+  rdfs:range Geo:AdminInstitute;
+  owl:propertyChainAxiom _:genid4 .
+
+_:genid4 a rdf:List;
+  rdf:first Geo:hasAdministrativeLocation;
+  rdf:rest _:genid3 .
+
+_:genid3 a rdf:List;
+  rdf:first Geo:hasInstitue;
+  rdf:rest rdf:nil .
+
+Geo:hasIntersection a owl:ObjectProperty, owl:SymmetricProperty;
+  rdfs:subPropertyOf Geo:hasGeoPropertyOf;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range Geo:GeoFeature .
+
+Geo:hasLocality a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isLocalityOf;
+  rdfs:domain Geo:City;
+  rdfs:range Geo:Locality .
+
+Geo:hasMunicipality a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isMunicipalityOf;
+  rdfs:domain Geo:District;
+  rdfs:range Geo:Municipality .
+
+Geo:hasOverlap a owl:ObjectProperty, owl:SymmetricProperty;
+  rdfs:subPropertyOf Geo:hasGeoPropertyOf;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range Geo:GeoFeature .
+
+Geo:hasStateProvince a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isProvinceOf;
+  rdfs:domain Geo:Country;
+  rdfs:range Geo:StateProvince .
+
+Geo:hasSubContinent a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:hasAdministrativeLocation;
+  owl:inverseOf Geo:isSubContinentOf;
+  rdfs:domain Geo:Continent;
+  rdfs:range Geo:SubContinent .
+
+Geo:hasTouch a owl:ObjectProperty, owl:SymmetricProperty;
+  rdfs:subPropertyOf Geo:hasGeoPropertyOf;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range Geo:GeoFeature .
+
+Geo:isAdministrativeLocationOF a owl:ObjectProperty, owl:TransitiveProperty;
+  rdfs:subPropertyOf Geo:isWithIn;
+  rdfs:domain Geo:AdminLocation;
+  rdfs:range Geo:AdminLocation .
+
+Geo:isCityOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:City;
+  rdfs:range Geo:Municipality .
+
+Geo:isCountryOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:Country;
+  rdfs:range Geo:SubContinent .
+
+Geo:isDistrictOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:District;
+  rdfs:range Geo:StateProvince .
+
+Geo:isGeoPropertyOf a owl:ObjectProperty, owl:TransitiveProperty;
+  rdfs:subPropertyOf owl:topObjectProperty;
+  rdfs:domain Geo:Geography;
+  rdfs:range Geo:Geography .
+
+Geo:isGeometryOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isGeoPropertyOf;
+  rdfs:domain Geo:GeoGeometry;
+  rdfs:range Geo:GeoFeature .
+
+Geo:isLocalityOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:Locality;
+  rdfs:range Geo:City .
+
+Geo:isLocatedIn a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isGeoPropertyOf;
+  rdfs:domain Geo:AdminInstitute;
+  rdfs:range Geo:AdminLocation .
+
+Geo:isMunicipalityOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:Municipality;
+  rdfs:range Geo:District .
+
+Geo:isProvinceOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:StateProvince;
+  rdfs:range Geo:Country .
+
+Geo:isSubContinentOf a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isAdministrativeLocationOF;
+  rdfs:domain Geo:SubContinent;
+  rdfs:range Geo:Continent .
+
+Geo:isWithIn a owl:ObjectProperty;
+  rdfs:subPropertyOf Geo:isGeoPropertyOf;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range Geo:GeoFeature .
+
+Geo:hasCoordinate a owl:DatatypeProperty;
+  rdfs:subPropertyOf owl:topDataProperty;
+  rdfs:domain Geo:GeoGeometry;
+  rdfs:range Geo:WKTLiteral .
+
+Geo:hasName a owl:DatatypeProperty;
+  rdfs:subPropertyOf owl:topDataProperty;
+  rdfs:domain Geo:GeoFeature;
+  rdfs:range xsd:string .
+
+Core:AdminLocation owl:equivalentClass Geo:AdminLocation .
+
+Core:LocationType owl:equivalentClass Geo:LocationType .
+
+Geo:AdminInstitute a owl:Class;
+  rdfs:subClassOf Geo:GeoFeature .
+
+Geo:AdminLocation a owl:Class;
+  rdfs:subClassOf Geo:GeoFeature;
+  owl:disjointWith Geo:LocationType .
+
+Geo:AgriculturalLand a owl:Class;
+  rdfs:subClassOf Geo:LandCoverFeature .
+
+Geo:Airport a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:Beach a owl:Class;
+  rdfs:subClassOf Geo:CoastlineFeature .
+
+Geo:Bridge a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:BusTerminal a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:City a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:ClimateGrid a owl:Class;
+  rdfs:subClassOf Geo:LocationType .
+
+Geo:Coastline a owl:Class;
+  rdfs:subClassOf Geo:CoastlineFeature .
+
+Geo:CoastlineFeature a owl:Class;
+  rdfs:subClassOf Geo:NaturalFeature .
+
+Geo:CommunicationCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:CommunityCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Continent a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:Country a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:DisasterManagementCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:District a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:DroughtArea a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:ElectricalSubstation a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Estuary a owl:Class;
+  rdfs:subClassOf Geo:CoastlineFeature .
+
+Geo:EvacuationCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:EvacuationZone a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:FireStation a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:FloodZone a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:Flyover a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:ForecastGrid a owl:Class;
+  rdfs:subClassOf Geo:LocationType .
+
+Geo:Forest a owl:Class;
+  rdfs:subClassOf Geo:LandCoverFeature .
+
+Geo:GeoFeature a owl:Class;
+  rdfs:subClassOf Geo:Geography, <http://www.opengis.net/ont/geosparql#Feature> .
+
+<http://www.opengis.net/ont/geosparql#Feature> a owl:Class .
+
+Geo:GeoGeometry a owl:Class;
+  rdfs:subClassOf Geo:Geography, <http://www.opengis.net/ont/geosparql#Geometry> .
+
+<http://www.opengis.net/ont/geosparql#Geometry> a owl:Class .
+
+Geo:Geography a owl:Class;
+  rdfs:subClassOf <http://www.opengis.net/ont/geosparql#SpatialObject> .
+
+<http://www.opengis.net/ont/geosparql#SpatialObject> a owl:Class .
+
+Geo:GovernmentAdministrativeOffice a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Grassland a owl:Class;
+  rdfs:subClassOf Geo:LandCoverFeature .
+
+Geo:GridCell a owl:Class;
+  rdfs:subClassOf Geo:LocationType .
+
+Geo:HazardFeature a owl:Class;
+  rdfs:subClassOf Geo:NaturalFeature .
+
+Geo:HighRiskArea a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:Hill a owl:Class;
+  rdfs:subClassOf Geo:TerrainFeature .
+
+Geo:Hospital a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:HydrologicalFeature a owl:Class;
+  rdfs:subClassOf Geo:NaturalFeature .
+
+Geo:Lagoon a owl:Class;
+  rdfs:subClassOf Geo:CoastlineFeature .
+
+Geo:Lake a owl:Class;
+  rdfs:subClassOf Geo:HydrologicalFeature .
+
+Geo:LandCoverFeature a owl:Class;
+  rdfs:subClassOf Geo:NaturalFeature .
+
+Geo:LandslideZone a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:Locality a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:LocationType a owl:Class;
+  rdfs:subClassOf Geo:GeoFeature .
+
+Geo:Mangrove a owl:Class;
+  rdfs:subClassOf Geo:LandCoverFeature .
+
+Geo:MedicalCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:MeteorologyDepartment a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:MilitaryCamp a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Municipality a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:NaturalFeature a owl:Class;
+  rdfs:subClassOf Geo:GeoFeature .
+
+Geo:ObservationGrid a owl:Class;
+  rdfs:subClassOf Geo:LocationType .
+
+Geo:Plain a owl:Class;
+  rdfs:subClassOf Geo:TerrainFeature .
+
+Geo:Point a owl:Class;
+  rdfs:subClassOf Geo:LocationType .
+
+Geo:PoliceStation a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:PowerStation a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:RasterTile a owl:Class;
+  rdfs:subClassOf Geo:LocationType .
+
+Geo:ReliefCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:RescueCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Reservior a owl:Class;
+  rdfs:subClassOf Geo:TerrainFeature .
+
+Geo:Reservoir a owl:Class;
+  rdfs:subClassOf Geo:HydrologicalFeature .
+
+Geo:ReservoirControlCenter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Ridge a owl:Class;
+  rdfs:subClassOf Geo:TerrainFeature .
+
+Geo:River a owl:Class;
+  rdfs:subClassOf Geo:HydrologicalFeature .
+
+Geo:Road a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:SafeZone a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:School a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Seaport a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:Shelter a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:StateProvince a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:Steam a owl:Class;
+  rdfs:subClassOf Geo:TerrainFeature .
+
+Geo:StormSurgeArea a owl:Class;
+  rdfs:subClassOf Geo:HazardFeature .
+
+Geo:Stream a owl:Class;
+  rdfs:subClassOf Geo:HydrologicalFeature .
+
+Geo:SubContinent a owl:Class;
+  rdfs:subClassOf Geo:AdminLocation .
+
+Geo:TerrainFeature a owl:Class;
+  rdfs:subClassOf Geo:NaturalFeature .
+
+Geo:TransportFeature a owl:Class;
+  rdfs:subClassOf Geo:GeoFeature;
+  rdfs:label "Transport Feature"@en;
+  <http://www.w3.org/2004/02/skos/core#definition> "Represents Transport features with respect to each Geo Graphical areas"@en .
+
+Geo:TransportHub a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:Tunnel a owl:Class;
+  rdfs:subClassOf Geo:TransportFeature .
+
+Geo:University a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Valley a owl:Class;
+  rdfs:subClassOf Geo:TerrainFeature .
+
+Geo:WaterTreatmentPlant a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:WeatherStation a owl:Class;
+  rdfs:subClassOf Geo:AdminInstitute .
+
+Geo:Wetland a owl:Class;
+  rdfs:subClassOf Geo:HydrologicalFeature .
+
+_:genid5 a owl:AllDisjointClasses;
+  owl:members _:genid29 .
+
+_:genid29 a rdf:List;
+  rdf:first Geo:Airport;
+  rdf:rest _:genid28 .
+
+_:genid28 a rdf:List;
+  rdf:first Geo:CommunicationCenter;
+  rdf:rest _:genid27 .
+
+_:genid27 a rdf:List;
+  rdf:first Geo:CommunityCenter;
+  rdf:rest _:genid26 .
+
+_:genid26 a rdf:List;
+  rdf:first Geo:DisasterManagementCenter;
+  rdf:rest _:genid25 .
+
+_:genid25 a rdf:List;
+  rdf:first Geo:ElectricalSubstation;
+  rdf:rest _:genid24 .
+
+_:genid24 a rdf:List;
+  rdf:first Geo:EvacuationCenter;
+  rdf:rest _:genid23 .
+
+_:genid23 a rdf:List;
+  rdf:first Geo:FireStation;
+  rdf:rest _:genid22 .
+
+_:genid22 a rdf:List;
+  rdf:first Geo:GovernmentAdministrativeOffice;
+  rdf:rest _:genid21 .
+
+_:genid21 a rdf:List;
+  rdf:first Geo:Hospital;
+  rdf:rest _:genid20 .
+
+_:genid20 a rdf:List;
+  rdf:first Geo:MedicalCenter;
+  rdf:rest _:genid19 .
+
+_:genid19 a rdf:List;
+  rdf:first Geo:MeteorologyDepartment;
+  rdf:rest _:genid18 .
+
+_:genid18 a rdf:List;
+  rdf:first Geo:MilitaryCamp;
+  rdf:rest _:genid17 .
+
+_:genid17 a rdf:List;
+  rdf:first Geo:PoliceStation;
+  rdf:rest _:genid16 .
+
+_:genid16 a rdf:List;
+  rdf:first Geo:PowerStation;
+  rdf:rest _:genid15 .
+
+_:genid15 a rdf:List;
+  rdf:first Geo:ReliefCenter;
+  rdf:rest _:genid14 .
+
+_:genid14 a rdf:List;
+  rdf:first Geo:RescueCenter;
+  rdf:rest _:genid13 .
+
+_:genid13 a rdf:List;
+  rdf:first Geo:ReservoirControlCenter;
+  rdf:rest _:genid12 .
+
+_:genid12 a rdf:List;
+  rdf:first Geo:School;
+  rdf:rest _:genid11 .
+
+_:genid11 a rdf:List;
+  rdf:first Geo:Seaport;
+  rdf:rest _:genid10 .
+
+_:genid10 a rdf:List;
+  rdf:first Geo:Shelter;
+  rdf:rest _:genid9 .
+
+_:genid9 a rdf:List;
+  rdf:first Geo:TransportHub;
+  rdf:rest _:genid8 .
+
+_:genid8 a rdf:List;
+  rdf:first Geo:University;
+  rdf:rest _:genid7 .
+
+_:genid7 a rdf:List;
+  rdf:first Geo:WaterTreatmentPlant;
+  rdf:rest _:genid6 .
+
+_:genid6 a rdf:List;
+  rdf:first Geo:WeatherStation;
+  rdf:rest rdf:nil .
+
+_:genid30 a owl:AllDisjointClasses;
+  owl:members _:genid38 .
+
+_:genid38 a rdf:List;
+  rdf:first Geo:City;
+  rdf:rest _:genid37 .
+
+_:genid37 a rdf:List;
+  rdf:first Geo:Continent;
+  rdf:rest _:genid36 .
+
+_:genid36 a rdf:List;
+  rdf:first Geo:Country;
+  rdf:rest _:genid35 .
+
+_:genid35 a rdf:List;
+  rdf:first Geo:District;
+  rdf:rest _:genid34 .
+
+_:genid34 a rdf:List;
+  rdf:first Geo:Locality;
+  rdf:rest _:genid33 .
+
+_:genid33 a rdf:List;
+  rdf:first Geo:Municipality;
+  rdf:rest _:genid32 .
+
+_:genid32 a rdf:List;
+  rdf:first Geo:StateProvince;
+  rdf:rest _:genid31 .
+
+_:genid31 a rdf:List;
+  rdf:first Geo:SubContinent;
+  rdf:rest rdf:nil .
+
+_:genid39 a owl:AllDisjointClasses;
+  owl:members _:genid45 .
+
+_:genid45 a rdf:List;
+  rdf:first Geo:ClimateGrid;
+  rdf:rest _:genid44 .
+
+_:genid44 a rdf:List;
+  rdf:first Geo:ForecastGrid;
+  rdf:rest _:genid43 .
+
+_:genid43 a rdf:List;
+  rdf:first Geo:GridCell;
+  rdf:rest _:genid42 .
+
+_:genid42 a rdf:List;
+  rdf:first Geo:ObservationGrid;
+  rdf:rest _:genid41 .
+
+_:genid41 a rdf:List;
+  rdf:first Geo:Point;
+  rdf:rest _:genid40 .
+
+_:genid40 a rdf:List;
+  rdf:first Geo:RasterTile;
+  rdf:rest rdf:nil .
+
+_:genid46 a owl:AllDisjointClasses;
+  owl:members _:genid53 .
+
+_:genid53 a rdf:List;
+  rdf:first Geo:DroughtArea;
+  rdf:rest _:genid52 .
+
+_:genid52 a rdf:List;
+  rdf:first Geo:EvacuationZone;
+  rdf:rest _:genid51 .
+
+_:genid51 a rdf:List;
+  rdf:first Geo:FloodZone;
+  rdf:rest _:genid50 .
+
+_:genid50 a rdf:List;
+  rdf:first Geo:HighRiskArea;
+  rdf:rest _:genid49 .
+
+_:genid49 a rdf:List;
+  rdf:first Geo:LandslideZone;
+  rdf:rest _:genid48 .
+
+_:genid48 a rdf:List;
+  rdf:first Geo:SafeZone;
+  rdf:rest _:genid47 .
+
+_:genid47 a rdf:List;
+  rdf:first Geo:StormSurgeArea;
+  rdf:rest rdf:nil .
