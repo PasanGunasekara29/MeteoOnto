@@ -1,0 +1,878 @@
+@prefix : <http://meteo_onto.org/meteo_extreame#> .
+@prefix ext: <http://meteo_onto.org/meteo_extreame/> .
+@prefix geo: <http://meteo_onto.org/meteo_geo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix elec: <http://sweetontology.net/phenElecMag/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix envImp: <http://sweetontology.net/phenEnvirImpact/> .
+@prefix atmoPrec: <http://sweetontology.net/phenAtmoPrecipitation/> .
+@prefix atmoWind: <http://sweetontology.net/phenAtmoWind/> .
+@prefix fluidDyn: <http://sweetontology.net/phenFluidDynamics/> .
+@prefix atmoThermo: <http://sweetontology.net/phenAtmoThermo/> .
+@prefix meteo_core: <http://meteo_onto.org/meteo_core/> .
+@base <http://meteo_onto.org/meteo_extreame> .
+
+<http://meteo_onto.org/meteo_extreame> rdf:type owl:Ontology ;
+                                        owl:versionIRI ext:Extreame1_0 ;
+                                        owl:imports <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core.ttl> ,
+                                                    <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core_Geo_Combined.ttl> ;
+                                        <http://purl.org/dc/elements/1.1/contributor> "Prof. Dulani Meedeniya"@en ;
+                                        <http://purl.org/dc/elements/1.1/creator> "H. K. Pasan Gunasekara"@en ;
+                                        <http://purl.org/dc/elements/1.1/description> "This ontology represents Extreame Weather Concepts with respect meteorological data"@en ;
+                                        <http://purl.org/dc/elements/1.1/title> "MeteoOnto_Extreame"@en ;
+                                        <http://purl.org/dc/terms/license> "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                        owl:versionInfo "http://meteo_onto.org/meteo_geo/EXTREAME1_0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/hasValue
+meteo_core:hasValue rdfs:range xsd:float .
+
+
+###  http://purl.org/dc/elements/1.1/contributor
+<http://purl.org/dc/elements/1.1/contributor> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+<http://purl.org/dc/elements/1.1/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+<http://purl.org/dc/elements/1.1/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+<http://purl.org/dc/elements/1.1/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_extreame/administrativeRegionOfEvent
+ext:administrativeRegionOfEvent rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                                owl:inverseOf ext:occursInAdministrativeRegion ;
+                                rdfs:domain meteo_core:AdminLocation ;
+                                rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/basedOnIndicator
+ext:basedOnIndicator rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                     owl:inverseOf ext:indicatorUsedFor ;
+                     rdfs:domain ext:Severity ;
+                     rdfs:range ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasEventDuration
+ext:hasEventDuration rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                     owl:inverseOf ext:isEventDuration ;
+                     rdfs:domain ext:ExtreameEvent ;
+                     rdfs:range meteo_core:TimeDuration .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasEventProperties
+ext:hasEventProperties rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                       owl:inverseOf ext:isEventPropertyOf ;
+                       rdfs:domain ext:ExtreameEvent ;
+                       rdfs:range ext:EventProperty .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasEventStatus
+ext:hasEventStatus rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                   owl:inverseOf ext:statusOfEvent ;
+                   rdfs:domain ext:ExtreameEvent ;
+                   rdfs:range ext:EventStatus .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasExtreameWeatherAttribute
+ext:hasExtreameWeatherAttribute rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf owl:topObjectProperty ;
+                                owl:inverseOf ext:isExtreameWeatherAttributeOf ;
+                                rdf:type owl:TransitiveProperty ;
+                                rdfs:domain ext:Extreame ;
+                                rdfs:range ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasLifecycleStage
+ext:hasLifecycleStage rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                      owl:inverseOf ext:stageOfEvent ;
+                      rdfs:domain ext:ExtreameEvent ;
+                      rdfs:range ext:EventLifecycle .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasObserved
+ext:hasObserved rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                owl:inverseOf ext:isEventOf ;
+                rdfs:domain ext:Observation ;
+                rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasSeverity
+ext:hasSeverity rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                owl:inverseOf ext:isSeverityOf ;
+                rdfs:domain ext:Observation ;
+                rdfs:range ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/hasSpatialExtent
+ext:hasSpatialExtent rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                     owl:inverseOf ext:isSpatialExtentOf ;
+                     rdfs:domain ext:ExtreameEvent ;
+                     rdfs:range ext:EventSpatialExtent .
+
+
+###  http://meteo_onto.org/meteo_extreame/indicatorUsedFor
+ext:indicatorUsedFor rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                     rdfs:domain ext:SeverityIndicator ;
+                     rdfs:range ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/isEventDuration
+ext:isEventDuration rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                    rdfs:domain meteo_core:TimeDuration ;
+                    rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/isEventOf
+ext:isEventOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+              rdfs:domain ext:ExtreameEvent ;
+              rdfs:range ext:Observation .
+
+
+###  http://meteo_onto.org/meteo_extreame/isEventPropertyOf
+ext:isEventPropertyOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                      rdfs:domain ext:EventProperty ;
+                      rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/isExtreameWeatherAttributeOf
+ext:isExtreameWeatherAttributeOf rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf owl:topObjectProperty ;
+                                 rdf:type owl:TransitiveProperty ;
+                                 rdfs:domain ext:Extreame ;
+                                 rdfs:range ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/isSeverityOf
+ext:isSeverityOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                 rdfs:domain ext:Severity ;
+                 rdfs:range ext:Observation .
+
+
+###  http://meteo_onto.org/meteo_extreame/isSpatialExtentOf
+ext:isSpatialExtentOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                      rdfs:domain ext:EventSpatialExtent ;
+                      rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/locationOfEvent
+ext:locationOfEvent rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                    owl:inverseOf ext:occursAtLocation ;
+                    rdfs:domain meteo_core:LocationType ;
+                    rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/occursAtLocation
+ext:occursAtLocation rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                     rdfs:domain ext:ExtreameEvent ;
+                     rdfs:range meteo_core:LocationType .
+
+
+###  http://meteo_onto.org/meteo_extreame/occursInAdministrativeRegion
+ext:occursInAdministrativeRegion rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+                                 rdfs:domain ext:ExtreameEvent ;
+                                 rdfs:range meteo_core:AdminLocation .
+
+
+###  http://meteo_onto.org/meteo_extreame/scaleUsedBy
+ext:scaleUsedBy rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                owl:inverseOf ext:usesScale ;
+                rdfs:domain ext:SeverityScale ;
+                rdfs:range ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/stageOfEvent
+ext:stageOfEvent rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                 rdfs:domain ext:EventLifecycle ;
+                 rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/statusOfEvent
+ext:statusOfEvent rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf ext:isExtreameWeatherAttributeOf ;
+                  rdfs:domain ext:EventStatus ;
+                  rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/usesScale
+ext:usesScale rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ext:hasExtreameWeatherAttribute ;
+              rdfs:domain ext:Severity ;
+              rdfs:range ext:SeverityScale .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/MeteoCore
+meteo_core:MeteoCore rdfs:subClassOf owl:Thing .
+
+
+###  http://meteo_onto.org/meteo_extreame/AtmosphericPhenomena
+ext:AtmosphericPhenomena rdf:type owl:Class ;
+                         rdfs:subClassOf ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/AtmosphericPrecipitation
+ext:AtmosphericPrecipitation rdf:type owl:Class ;
+                             rdfs:subClassOf ext:AtmosphericPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/Blizzard
+ext:Blizzard rdf:type owl:Class ;
+             rdfs:subClassOf ext:AtmosphericPrecipitation .
+
+
+###  http://meteo_onto.org/meteo_extreame/ColdWave
+ext:ColdWave rdf:type owl:Class ;
+             rdfs:subClassOf ext:TemperatureExtreme .
+
+
+###  http://meteo_onto.org/meteo_extreame/ConsecutiveColdDays
+ext:ConsecutiveColdDays rdf:type owl:Class ;
+                        rdfs:subClassOf ext:TemperatureIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/ConsecutiveDryDays
+ext:ConsecutiveDryDays rdf:type owl:Class ;
+                       rdfs:subClassOf ext:RainfallIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/ConsecutiveHotDays
+ext:ConsecutiveHotDays rdf:type owl:Class ;
+                       rdfs:subClassOf ext:TemperatureIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/ConsecutiveWetDays
+ext:ConsecutiveWetDays rdf:type owl:Class ;
+                       rdfs:subClassOf ext:RainfallIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/ConvectiveStorm
+ext:ConvectiveStorm rdf:type owl:Class ;
+                    rdfs:subClassOf ext:AtmosphericPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/CycloneScale
+ext:CycloneScale rdf:type owl:Class ;
+                 rdfs:subClassOf ext:SeverityScale .
+
+
+###  http://meteo_onto.org/meteo_extreame/DebrisFlow
+ext:DebrisFlow rdf:type owl:Class ;
+               rdfs:subClassOf ext:GeomorphologicalProcess .
+
+
+###  http://meteo_onto.org/meteo_extreame/Dissipation
+ext:Dissipation rdf:type owl:Class ;
+                rdfs:subClassOf ext:EventLifecycle .
+
+
+###  http://meteo_onto.org/meteo_extreame/Drought
+ext:Drought rdf:type owl:Class ;
+            rdfs:subClassOf ext:HydrologicalPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/DroughtIndicator
+ext:DroughtIndicator rdf:type owl:Class ;
+                     rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/DroughtScale
+ext:DroughtScale rdf:type owl:Class ;
+                 rdfs:subClassOf ext:SeverityScale .
+
+
+###  http://meteo_onto.org/meteo_extreame/DustStorm
+ext:DustStorm rdf:type owl:Class ;
+              rdfs:subClassOf ext:AtmosphericPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/EventDuration
+ext:EventDuration rdf:type owl:Class ;
+                  rdfs:subClassOf ext:EventProperty .
+
+
+###  http://meteo_onto.org/meteo_extreame/EventLifecycle
+ext:EventLifecycle rdf:type owl:Class ;
+                   rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/EventProperty
+ext:EventProperty rdf:type owl:Class ;
+                  rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/EventSpatialExtent
+ext:EventSpatialExtent rdf:type owl:Class ;
+                       rdfs:subClassOf ext:EventProperty ,
+                                       geo:GeoFeature .
+
+
+###  http://meteo_onto.org/meteo_extreame/EventStatus
+ext:EventStatus rdf:type owl:Class ;
+                rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/Extreame
+ext:Extreame rdf:type owl:Class ;
+             rdfs:subClassOf owl:Thing .
+
+
+###  http://meteo_onto.org/meteo_extreame/ExtreameEvent
+ext:ExtreameEvent rdf:type owl:Class ;
+                  rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/ExtremeSeverity
+ext:ExtremeSeverity rdf:type owl:Class ;
+                    rdfs:subClassOf ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/Flood
+ext:Flood rdf:type owl:Class ;
+          rdfs:subClassOf ext:HydrologicalPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/FloodScale
+ext:FloodScale rdf:type owl:Class ;
+               rdfs:subClassOf ext:SeverityScale .
+
+
+###  http://meteo_onto.org/meteo_extreame/ForecastEvent
+ext:ForecastEvent rdf:type owl:Class ;
+                  rdfs:subClassOf ext:EventStatus ;
+                  owl:disjointWith ext:ObservedEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/Formation
+ext:Formation rdf:type owl:Class ;
+              rdfs:subClassOf ext:EventLifecycle .
+
+
+###  http://meteo_onto.org/meteo_extreame/FrostEvent
+ext:FrostEvent rdf:type owl:Class ;
+               rdfs:subClassOf ext:TemperatureExtreme .
+
+
+###  http://meteo_onto.org/meteo_extreame/GeomorphologicalProcess
+ext:GeomorphologicalProcess rdf:type owl:Class ;
+                            rdfs:subClassOf ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/Hailstorm
+ext:Hailstorm rdf:type owl:Class ;
+              rdfs:subClassOf ext:AtmosphericPrecipitation .
+
+
+###  http://meteo_onto.org/meteo_extreame/HeatIndex
+ext:HeatIndex rdf:type owl:Class ;
+              rdfs:subClassOf ext:TemperatureIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/HeatWaveScale
+ext:HeatWaveScale rdf:type owl:Class ;
+                  rdfs:subClassOf ext:SeverityScale .
+
+
+###  http://meteo_onto.org/meteo_extreame/Heatwave
+ext:Heatwave rdf:type owl:Class ;
+             rdfs:subClassOf ext:TemperatureExtreme .
+
+
+###  http://meteo_onto.org/meteo_extreame/HeavyRainfall
+ext:HeavyRainfall rdf:type owl:Class ;
+                  rdfs:subClassOf ext:AtmosphericPrecipitation .
+
+
+###  http://meteo_onto.org/meteo_extreame/HighSeverity
+ext:HighSeverity rdf:type owl:Class ;
+                 rdfs:subClassOf ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/HydrologicalPhenomena
+ext:HydrologicalPhenomena rdf:type owl:Class ;
+                          rdfs:subClassOf ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_extreame/IceAccumulation
+ext:IceAccumulation rdf:type owl:Class ;
+                    rdfs:subClassOf ext:SnowIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/IceStorm
+ext:IceStorm rdf:type owl:Class ;
+             rdfs:subClassOf ext:AtmosphericPrecipitation .
+
+
+###  http://meteo_onto.org/meteo_extreame/Intensification
+ext:Intensification rdf:type owl:Class ;
+                    rdfs:subClassOf ext:EventLifecycle .
+
+
+###  http://meteo_onto.org/meteo_extreame/Landslide
+ext:Landslide rdf:type owl:Class ;
+              rdfs:subClassOf ext:GeomorphologicalProcess .
+
+
+###  http://meteo_onto.org/meteo_extreame/Lightning
+ext:Lightning rdf:type owl:Class ;
+              rdfs:subClassOf ext:AtmosphericPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/LowSeverity
+ext:LowSeverity rdf:type owl:Class ;
+                rdfs:subClassOf ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/MarineHeatwave
+ext:MarineHeatwave rdf:type owl:Class ;
+                   rdfs:subClassOf ext:TemperatureExtreme .
+
+
+###  http://meteo_onto.org/meteo_extreame/Mature
+ext:Mature rdf:type owl:Class ;
+           rdfs:subClassOf ext:EventLifecycle .
+
+
+###  http://meteo_onto.org/meteo_extreame/ModerateSeverity
+ext:ModerateSeverity rdf:type owl:Class ;
+                     rdfs:subClassOf ext:Severity .
+
+
+###  http://meteo_onto.org/meteo_extreame/Mudslide
+ext:Mudslide rdf:type owl:Class ;
+             rdfs:subClassOf ext:GeomorphologicalProcess .
+
+
+###  http://meteo_onto.org/meteo_extreame/Observation
+ext:Observation rdf:type owl:Class ;
+                rdfs:subClassOf meteo_core:Observation ,
+                                ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/ObservedEvent
+ext:ObservedEvent rdf:type owl:Class ;
+                  rdfs:subClassOf ext:EventStatus .
+
+
+###  http://meteo_onto.org/meteo_extreame/PDSI
+ext:PDSI rdf:type owl:Class ;
+         rdfs:subClassOf ext:DroughtIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/PressureAnomaly
+ext:PressureAnomaly rdf:type owl:Class ;
+                    rdfs:subClassOf ext:PressureIndicator ;
+                    owl:disjointWith ext:PressureDrop .
+
+
+###  http://meteo_onto.org/meteo_extreame/PressureDrop
+ext:PressureDrop rdf:type owl:Class ;
+                 rdfs:subClassOf ext:PressureIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/PressureIndicator
+ext:PressureIndicator rdf:type owl:Class ;
+                      rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/RainfallAccumulation
+ext:RainfallAccumulation rdf:type owl:Class ;
+                         rdfs:subClassOf ext:RainfallIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/RainfallIndicator
+ext:RainfallIndicator rdf:type owl:Class ;
+                      rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/RainfallIntensity
+ext:RainfallIntensity rdf:type owl:Class ;
+                      rdfs:subClassOf ext:RainfallIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/RiverLevel
+ext:RiverLevel rdf:type owl:Class ;
+               rdfs:subClassOf ext:WaterIndicator ;
+               owl:disjointWith ext:SurfaceRunoff .
+
+
+###  http://meteo_onto.org/meteo_extreame/SPEI
+ext:SPEI rdf:type owl:Class ;
+         rdfs:subClassOf ext:DroughtIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/SPI
+ext:SPI rdf:type owl:Class ;
+        rdfs:subClassOf ext:DroughtIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/SevereThunderstorm
+ext:SevereThunderstorm rdf:type owl:Class ;
+                       rdfs:subClassOf ext:ConvectiveStorm ;
+                       owl:disjointWith ext:Tornado .
+
+
+###  http://meteo_onto.org/meteo_extreame/Severity
+ext:Severity rdf:type owl:Class ;
+             owl:equivalentClass [ rdf:type owl:Class ;
+                                   owl:unionOf ( ext:ExtremeSeverity
+                                                 ext:HighSeverity
+                                                 ext:LowSeverity
+                                                 ext:ModerateSeverity
+                                               )
+                                 ] ;
+             rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/SeverityIndicator
+ext:SeverityIndicator rdf:type owl:Class ;
+                      rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/SeverityScale
+ext:SeverityScale rdf:type owl:Class ;
+                  rdfs:subClassOf ext:Extreame .
+
+
+###  http://meteo_onto.org/meteo_extreame/SnowIndicator
+ext:SnowIndicator rdf:type owl:Class ;
+                  rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/SnowSeverityScale
+ext:SnowSeverityScale rdf:type owl:Class ;
+                      rdfs:subClassOf ext:SeverityScale .
+
+
+###  http://meteo_onto.org/meteo_extreame/SnowfallAccumulation
+ext:SnowfallAccumulation rdf:type owl:Class ;
+                         rdfs:subClassOf ext:SnowIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/SnowfallRate
+ext:SnowfallRate rdf:type owl:Class ;
+                 rdfs:subClassOf ext:SnowIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/StormSurge
+ext:StormSurge rdf:type owl:Class ;
+               rdfs:subClassOf ext:HydrologicalPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/SurfaceRunoff
+ext:SurfaceRunoff rdf:type owl:Class ;
+                  rdfs:subClassOf ext:WaterIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/SustainedWindSpeed
+ext:SustainedWindSpeed rdf:type owl:Class ;
+                       rdfs:subClassOf ext:WindIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/TemperatureAnomaly
+ext:TemperatureAnomaly rdf:type owl:Class ;
+                       rdfs:subClassOf ext:TemperatureIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/TemperatureExtreme
+ext:TemperatureExtreme rdf:type owl:Class ;
+                       rdfs:subClassOf ext:AtmosphericPhenomena .
+
+
+###  http://meteo_onto.org/meteo_extreame/TemperatureIndicator
+ext:TemperatureIndicator rdf:type owl:Class ;
+                         rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/ThunderstormScale
+ext:ThunderstormScale rdf:type owl:Class ;
+                      rdfs:subClassOf ext:SeverityScale .
+
+
+###  http://meteo_onto.org/meteo_extreame/Tornado
+ext:Tornado rdf:type owl:Class ;
+            rdfs:subClassOf ext:ConvectiveStorm .
+
+
+###  http://meteo_onto.org/meteo_extreame/TropicalCyclone
+ext:TropicalCyclone rdf:type owl:Class ;
+                    rdfs:subClassOf ext:AtmosphericPrecipitation .
+
+
+###  http://meteo_onto.org/meteo_extreame/VisibilityReduction
+ext:VisibilityReduction rdf:type owl:Class ;
+                        rdfs:subClassOf ext:SnowIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/WaterIndicator
+ext:WaterIndicator rdf:type owl:Class ;
+                   rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/Weakening
+ext:Weakening rdf:type owl:Class ;
+              rdfs:subClassOf ext:EventLifecycle .
+
+
+###  http://meteo_onto.org/meteo_extreame/WindChill
+ext:WindChill rdf:type owl:Class ;
+              rdfs:subClassOf ext:TemperatureIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/WindGust
+ext:WindGust rdf:type owl:Class ;
+             rdfs:subClassOf ext:WindIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/WindIndicator
+ext:WindIndicator rdf:type owl:Class ;
+                  rdfs:subClassOf ext:SeverityIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/WindShear
+ext:WindShear rdf:type owl:Class ;
+              rdfs:subClassOf ext:WindIndicator .
+
+
+###  http://meteo_onto.org/meteo_extreame/Windstorm
+ext:Windstorm rdf:type owl:Class ;
+              rdfs:subClassOf ext:AtmosphericPhenomena .
+
+
+###  http://meteo_onto.org/meteo_geo/AdminLocation
+geo:AdminLocation rdf:type owl:Class ;
+                  rdfs:subClassOf geo:AdminLocation .
+
+
+###  http://meteo_onto.org/meteo_geo/GeoFeature
+geo:GeoFeature rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_geo/Geography
+geo:Geography rdf:type owl:Class ;
+              rdfs:subClassOf owl:Thing .
+
+
+###  http://meteo_onto.org/meteo_geo/LocationType
+geo:LocationType rdf:type owl:Class ;
+                 rdfs:subClassOf geo:LocationType .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/ob1
+meteo_core:ob1 rdf:type owl:NamedIndividual ,
+                        meteo_core:Observation ;
+               meteo_core:hasResult meteo_core:or1 .
+
+
+###  http://meteo_onto.org/meteo_core/or1
+meteo_core:or1 rdf:type owl:NamedIndividual ,
+                        meteo_core:Result ;
+               meteo_core:hasUnit meteo_core:Celsius ;
+               meteo_core:isResultOf meteo_core:ob1 ;
+               meteo_core:hasValue "6.2"^^xsd:float .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:AtmosphericPhenomena
+                ext:GeomorphologicalProcess
+                ext:HydrologicalPhenomena
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:AtmosphericPrecipitation
+                ext:ConvectiveStorm
+                ext:DustStorm
+                ext:Lightning
+                ext:TemperatureExtreme
+                ext:Windstorm
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:Blizzard
+                ext:Hailstorm
+                ext:HeavyRainfall
+                ext:IceStorm
+                ext:TropicalCyclone
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:ColdWave
+                ext:FrostEvent
+                ext:Heatwave
+                ext:MarineHeatwave
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:ConsecutiveColdDays
+                ext:ConsecutiveHotDays
+                ext:HeatIndex
+                ext:TemperatureAnomaly
+                ext:WindChill
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:ConsecutiveDryDays
+                ext:ConsecutiveWetDays
+                ext:RainfallAccumulation
+                ext:RainfallIntensity
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:CycloneScale
+                ext:DroughtScale
+                ext:FloodScale
+                ext:HeatWaveScale
+                ext:SnowSeverityScale
+                ext:ThunderstormScale
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:DebrisFlow
+                ext:Landslide
+                ext:Mudslide
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:Dissipation
+                ext:Formation
+                ext:Intensification
+                ext:Mature
+                ext:Weakening
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:Drought
+                ext:Flood
+                ext:StormSurge
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:DroughtIndicator
+                ext:PressureIndicator
+                ext:RainfallIndicator
+                ext:SnowIndicator
+                ext:TemperatureIndicator
+                ext:WaterIndicator
+                ext:WindIndicator
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:EventLifecycle
+                ext:EventProperty
+                ext:EventStatus
+                ext:ExtreameEvent
+                ext:Observation
+                ext:Severity
+                ext:SeverityIndicator
+                ext:SeverityScale
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:ExtremeSeverity
+                ext:HighSeverity
+                ext:LowSeverity
+                ext:ModerateSeverity
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:IceAccumulation
+                ext:SnowfallAccumulation
+                ext:SnowfallRate
+                ext:VisibilityReduction
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:PDSI
+                ext:SPEI
+                ext:SPI
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( ext:SustainedWindSpeed
+                ext:WindGust
+                ext:WindShear
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
