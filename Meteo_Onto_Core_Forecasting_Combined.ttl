@@ -1,0 +1,1044 @@
+@prefix : <http://meteo_onto.org/meteo_forecasting/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://meteo_onto.org/meteo_core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix forecasting: <http://meteo_onto.org/meteo_forecasting/> .
+@base <http://meteo_onto.org/meteo_forecasting/> .
+
+<http://meteo_onto.org/meteo_forecasting/> rdf:type owl:Ontology ;
+                                            owl:versionIRI forecasting:ForecatingV_1 ;
+                                            owl:imports <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core.ttl> ;
+                                            dc:contributor "Prof. Dulani Meedeniya"@en ;
+                                            dc:creator "H. K. Pasan Gunasekara"@en ;
+                                            dc:description "This ontology represents a meteorological domain ontology designed to semantically model and manage forecasting weather and climate observations. The ontology supports metadata-driven semantic integration, interoperability, and scalable environmental data management for enterprise knowledge graph systems."@en ;
+                                            dc:title "Meteo_Onto_Forcasting_Data"@en ;
+                                            terms:license "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                            owl:versionInfo "http://meteo_onto.org/meteo_forecasting/ForecatingV_1"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_forecasting/hasValue
+forecasting:hasValue rdf:type owl:AnnotationProperty ;
+                     rdfs:range xsd:string .
+
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+terms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/hasAdminLocation
+core:hasAdminLocation rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasData
+core:hasData rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasDataAttributeOf
+core:hasDataAttributeOf rdf:type owl:ObjectProperty ;
+                        rdfs:domain core:MeteoCore .
+
+
+###  http://meteo_onto.org/meteo_core/hasDeployment
+core:hasDeployment rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasLocation
+core:hasLocation rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasMember
+core:hasMember rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasObservationTime
+core:hasObservationTime rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasProcedure
+core:hasProcedure rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/hasResult
+core:hasResult rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/implement
+core:implement rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isAdminLocationOf
+core:isAdminLocationOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isDataAttributeOf
+core:isDataAttributeOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isDataOf
+core:isDataOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isDeploymentOf
+core:isDeploymentOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isImplementedBy
+core:isImplementedBy rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isObservationTimeOf
+core:isObservationTimeOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isProcedureOf
+core:isProcedureOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isProducedBy
+core:isProducedBy rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/isResultOf
+core:isResultOf rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/produce
+core:produce rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/provide
+core:provide rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_core/use
+core:use rdf:type owl:ObjectProperty .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasAdminLocation
+forecasting:hasAdminLocation rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf core:hasAdminLocation ,
+                                                forecasting:hasForecastDataAttributeOf ;
+                             owl:inverseOf forecasting:isAdminLocationOf ;
+                             rdf:type owl:FunctionalProperty ;
+                             rdfs:domain [ rdf:type owl:Class ;
+                                           owl:unionOf ( forecasting:ForecastPrediction
+                                                         forecasting:TrainingObservation
+                                                       )
+                                         ] ;
+                             rdfs:range core:AdminLocation .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasDeployment
+forecasting:hasDeployment rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf core:hasDeployment ,
+                                             forecasting:hasForecastDataAttributeOf ;
+                          owl:inverseOf forecasting:isDeploymentOf ;
+                          rdf:type owl:IrreflexiveProperty ;
+                          rdfs:domain forecasting:ForecastModel ;
+                          rdfs:range core:Deployment .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasForecastData
+forecasting:hasForecastData rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf core:hasData ,
+                                               forecasting:hasForecastDataAttributeOf ;
+                            owl:inverseOf forecasting:isForecastDataOf ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain forecasting:ForecastResult ;
+                            rdfs:range forecasting:ForecastData ;
+                            rdfs:label "has Data"@en ;
+                            skos:definition "Defines relationship between Result and its Data type"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasForecastDataAttributeOf
+forecasting:hasForecastDataAttributeOf rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf core:hasDataAttributeOf ;
+                                       owl:inverseOf forecasting:isForecastDataAttributeOf ;
+                                       rdf:type owl:TransitiveProperty ;
+                                       rdfs:domain forecasting:MeteoForecasting ;
+                                       rdfs:range forecasting:MeteoForecasting ;
+                                       rdfs:label "has Data Attribute Of (Forecasting)"@en ;
+                                       skos:definition "Define relationship between classes in general"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasForecastResult
+forecasting:hasForecastResult rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf core:hasResult ,
+                                                 forecasting:hasForecastDataAttributeOf ;
+                              owl:inverseOf forecasting:isForecastResultOf ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain forecasting:ForecastPrediction ;
+                              rdfs:range forecasting:ForecastResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasForecastTime
+forecasting:hasForecastTime rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf core:hasObservationTime ,
+                                               forecasting:hasForecastDataAttributeOf ;
+                            owl:inverseOf forecasting:isForecastTimeOf ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain forecasting:ForecastPrediction ;
+                            rdfs:range core:Time ;
+                            rdfs:label "has Prediction Time"@en ;
+                            skos:definition "Defines relationship between Observation and Time Instant or Time Interval"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasLocation
+forecasting:hasLocation rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf core:hasLocation ,
+                                           forecasting:hasForecastDataAttributeOf ;
+                        owl:inverseOf forecasting:isLocationOf ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain [ rdf:type owl:Class ;
+                                      owl:unionOf ( forecasting:ForecastPrediction
+                                                    forecasting:TrainingObservation
+                                                  )
+                                    ] ;
+                        rdfs:range core:LocationType ;
+                        rdfs:label "has Location"@en ;
+                        skos:definition "Defines relationship  between Observation and Location Type based on geographical features"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasMember
+forecasting:hasMember rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf core:hasMember ,
+                                         forecasting:hasForecastDataAttributeOf ;
+                      owl:inverseOf forecasting:isMemberOf ;
+                      rdfs:domain forecasting:ForecastDataCollection ;
+                      rdfs:range forecasting:ForecastPrediction ;
+                      rdfs:label "has Member"@en ;
+                      skos:definition "Defines relationship between Data Collection and Predictions belongs to that Data Collection"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasProcedure
+forecasting:hasProcedure rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf core:hasProcedure ,
+                                            forecasting:hasForecastDataAttributeOf ;
+                         owl:inverseOf forecasting:isProcedureOf ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain forecasting:ForecastModel ;
+                         rdfs:range core:Procedure ;
+                         rdfs:label "has Procedure"@en ;
+                         skos:definition "Defines relationship between Forecasting System and it Forecassting Algorithm/ Method/ Procedure"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasTime
+forecasting:hasTime rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf core:hasObservationTime ,
+                                       forecasting:hasForecastDataAttributeOf ;
+                    owl:inverseOf forecasting:isTimeOf ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain forecasting:TrainingObservation ;
+                    rdfs:range core:Time .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasTrainingData
+forecasting:hasTrainingData rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf core:hasData ,
+                                               forecasting:hasForecastDataAttributeOf ;
+                            owl:inverseOf forecasting:isTrainingDataOf ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain forecasting:TrainingResult ;
+                            rdfs:range forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasTrainingMember
+forecasting:hasTrainingMember rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf core:hasMember ,
+                                                 forecasting:hasForecastDataAttributeOf ;
+                              owl:inverseOf forecasting:isTrainingMemberOf ;
+                              rdfs:domain forecasting:TrainingDataCollection ;
+                              rdfs:range forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasTrainingResult
+forecasting:hasTrainingResult rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf core:hasResult ,
+                                                 forecasting:hasForecastDataAttributeOf ;
+                              owl:inverseOf forecasting:isTrainingResultOf ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain forecasting:TrainingObservation ;
+                              rdfs:range forecasting:TrainingResult ;
+                              rdfs:label "has Result"@en ;
+                              skos:definition "Defines relationship between Prediction and Forecast Result"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/implement
+forecasting:implement rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf core:implement ,
+                                         forecasting:hasForecastDataAttributeOf ;
+                      owl:inverseOf forecasting:isImplementedBY ;
+                      rdfs:domain forecasting:ForecastModel ;
+                      rdfs:range core:Procedure ;
+                      rdfs:label "Implements"@en ;
+                      skos:definition "Defines relationship between Forecasting Models and Its Forecasting Procedure"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isAdminLocationOf
+forecasting:isAdminLocationOf rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf core:isAdminLocationOf ,
+                                                 forecasting:isForecastDataAttributeOf ;
+                              rdfs:domain core:AdminLocation ;
+                              rdfs:range [ rdf:type owl:Class ;
+                                           owl:unionOf ( forecasting:ForecastPrediction
+                                                         forecasting:TrainingObservation
+                                                       )
+                                         ] .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isDeploymentOf
+forecasting:isDeploymentOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf core:isDeploymentOf ,
+                                              forecasting:isForecastDataAttributeOf ;
+                           rdf:type owl:FunctionalProperty ;
+                           rdfs:domain core:Deployment ;
+                           rdfs:range forecasting:ForecastModel .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isForecastDataAttributeOf
+forecasting:isForecastDataAttributeOf rdf:type owl:ObjectProperty ;
+                                      rdfs:subPropertyOf core:isDataAttributeOf ;
+                                      rdf:type owl:TransitiveProperty ;
+                                      rdfs:domain forecasting:MeteoForecasting ;
+                                      rdfs:range forecasting:MeteoForecasting ;
+                                      rdfs:label "is Data Attribute Of (Forecasting)" ;
+                                      skos:definition "Define inverse relationship between classes in general"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isForecastDataOf
+forecasting:isForecastDataOf rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf core:isDataOf ,
+                                                forecasting:isForecastDataAttributeOf ;
+                             rdfs:domain forecasting:ForecastData ;
+                             rdfs:range forecasting:ForecastResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isForecastResultOf
+forecasting:isForecastResultOf rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf core:isResultOf ,
+                                                  forecasting:isForecastDataAttributeOf ;
+                               rdf:type owl:FunctionalProperty ;
+                               rdfs:domain forecasting:ForecastResult ;
+                               rdfs:range forecasting:ForecastPrediction .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isForecastTimeOf
+forecasting:isForecastTimeOf rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf core:isObservationTimeOf ,
+                                                forecasting:isForecastDataAttributeOf ;
+                             rdfs:domain core:Time ;
+                             rdfs:range forecasting:ForecastPrediction .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isImplementedBY
+forecasting:isImplementedBY rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf core:isImplementedBy ,
+                                               forecasting:isForecastDataAttributeOf ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain core:Procedure ;
+                            rdfs:range forecasting:ForecastModel .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isLocationOf
+forecasting:isLocationOf rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf core:isLocationOf ,
+                                            forecasting:isForecastDataAttributeOf ;
+                         rdfs:domain core:LocationType ;
+                         rdfs:range [ rdf:type owl:Class ;
+                                      owl:unionOf ( forecasting:ForecastPrediction
+                                                    forecasting:TrainingObservation
+                                                  )
+                                    ] .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isMemberOf
+forecasting:isMemberOf rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf core:isMemberOf ,
+                                          forecasting:isForecastDataAttributeOf ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain forecasting:ForecastPrediction ;
+                       rdfs:range forecasting:ForecastDataCollection .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isObservedPropertyOf
+forecasting:isObservedPropertyOf rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf core:isObservedPropertyOf ,
+                                                    forecasting:isForecastDataAttributeOf ;
+                                 owl:inverseOf forecasting:observedProperty ;
+                                 rdfs:domain core:ObservableProperty ;
+                                 rdfs:range forecasting:ForecastPrediction .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isProcedureOf
+forecasting:isProcedureOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf core:isProcedureOf ,
+                                             forecasting:isForecastDataAttributeOf ;
+                          rdfs:domain core:Procedure ;
+                          rdfs:range forecasting:ForecastModel .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isProducedBy
+forecasting:isProducedBy rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf core:isProducedBy ,
+                                            forecasting:isForecastDataAttributeOf ;
+                         owl:inverseOf forecasting:produce ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain forecasting:ForecastPrediction ;
+                         rdfs:range core:Procedure .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isProvidedBy
+forecasting:isProvidedBy rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf core:isProvidedBy ,
+                                            forecasting:isForecastDataAttributeOf ;
+                         owl:inverseOf forecasting:provide ;
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( forecasting:ForecastDataCollection
+                                                     forecasting:TrainingDataCollection
+                                                   )
+                                     ] ;
+                         rdfs:range core:DataProvider .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isTimeOf
+forecasting:isTimeOf rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf core:isObservationTimeOf ,
+                                        forecasting:isForecastDataAttributeOf ;
+                     rdfs:domain core:Time ;
+                     rdfs:range forecasting:TrainingObservation .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isTrainingDataOf
+forecasting:isTrainingDataOf rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf forecasting:isForecastDataAttributeOf ;
+                             rdfs:domain forecasting:TrainingData ;
+                             rdfs:range forecasting:TrainingResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isTrainingMemberOf
+forecasting:isTrainingMemberOf rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf forecasting:isForecastDataAttributeOf ;
+                               rdfs:domain forecasting:TrainingData ;
+                               rdfs:range forecasting:TrainingDataCollection .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isTrainingResultOf
+forecasting:isTrainingResultOf rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf forecasting:isForecastDataAttributeOf ;
+                               rdfs:domain forecasting:TrainingResult ;
+                               rdfs:range forecasting:TrainingObservation .
+
+
+###  http://meteo_onto.org/meteo_forecasting/isUsedBy
+forecasting:isUsedBy rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf core:isUsedBy ,
+                                        forecasting:isForecastDataAttributeOf ;
+                     owl:inverseOf forecasting:use ;
+                     rdfs:domain forecasting:TrainingObservation ;
+                     rdfs:range forecasting:Procedure .
+
+
+###  http://meteo_onto.org/meteo_forecasting/observedProperty
+forecasting:observedProperty rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf core:observedProperty ,
+                                                forecasting:hasForecastDataAttributeOf ;
+                             rdf:type owl:FunctionalProperty ;
+                             rdfs:domain forecasting:ForecastPrediction ;
+                             rdfs:range core:ObservableProperty ;
+                             rdfs:label "Observation"@en ;
+                             skos:definition "Defines Relationship between Prediction and Its Predicting Variable/Observable Property"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/produce
+forecasting:produce rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf core:produce ,
+                                       forecasting:hasForecastDataAttributeOf ;
+                    rdfs:domain core:Procedure ;
+                    rdfs:range forecasting:ForecastPrediction ;
+                    rdfs:label "Produce"@en ;
+                    skos:definition "Defines relationship between forecasting Procedure and forecasting Prediction"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/provide
+forecasting:provide rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf core:provide ,
+                                       forecasting:hasForecastDataAttributeOf ;
+                    rdfs:domain core:DataProvider ;
+                    rdfs:range [ rdf:type owl:Class ;
+                                 owl:unionOf ( forecasting:ForecastDataCollection
+                                               forecasting:TrainingDataCollection
+                                             )
+                               ] ;
+                    rdfs:label "Provide"@en ;
+                    skos:definition "Defines relationship between Data Provider and Data"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/use
+forecasting:use rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf core:use ,
+                                   forecasting:hasForecastDataAttributeOf ;
+                rdfs:domain forecasting:Procedure ;
+                rdfs:range forecasting:TrainingObservation ;
+                rdfs:label "Use"@en ;
+                skos:definition "Define relationship between Observations and Prediction Procedure about  Observations use to generate Predictions"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_forecasting/hasProbability
+forecasting:hasProbability rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf core:hasValue ,
+                                              owl:topDataProperty ;
+                           rdfs:domain forecasting:TrainingResult ;
+                           rdfs:range xsd:float .
+
+
+###  http://meteo_onto.org/meteo_forecasting/hasValue
+forecasting:hasValue rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf core:hasValue ,
+                                        owl:topDataProperty ;
+                     rdfs:domain forecasting:TrainingResult .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/AdminLocation
+core:AdminLocation rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Data
+core:Data rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/DataCollection
+core:DataCollection rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/DataProvider
+core:DataProvider rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Deployment
+core:Deployment rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/LocationType
+core:LocationType rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/MeteoCore
+core:MeteoCore rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/MeteorologicalModel
+core:MeteorologicalModel rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Observation
+core:Observation rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Procedure
+core:Procedure rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Result
+core:Result rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Time
+core:Time rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/TimeDuration
+core:TimeDuration rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/TimeInstant
+core:TimeInstant rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ClimateModel
+forecasting:ClimateModel rdf:type owl:Class ;
+                         rdfs:subClassOf forecasting:ForecastModel ;
+                         rdfs:label "Climate Model"@en ;
+                         skos:definition "Represents a forecasting model designed to simulate and predict long-term climate patterns, trends, and environmental changes over extended periods"@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ClimateReport
+forecasting:ClimateReport rdf:type owl:Class ;
+                          rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/CrowdsourcedImageData
+forecasting:CrowdsourcedImageData rdf:type owl:Class ;
+                                  rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/CrowdsourcedVideoData
+forecasting:CrowdsourcedVideoData rdf:type owl:Class ;
+                                  rdfs:subClassOf forecasting:VideoData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/EmergencyNotice
+forecasting:EmergencyNotice rdf:type owl:Class ;
+                            rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/EventSummaryReport
+forecasting:EventSummaryReport rdf:type owl:Class ;
+                               rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastData
+forecasting:ForecastData rdf:type owl:Class ;
+                         rdfs:subClassOf core:Data ,
+                                         forecasting:MeteoForecasting ;
+                         rdfs:label "Forecast Data"@en ;
+                         skos:definition "Data generated as part of forecast outputs."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastDataCollection
+forecasting:ForecastDataCollection rdf:type owl:Class ;
+                                   rdfs:subClassOf core:DataCollection ,
+                                                   forecasting:MeteoForecasting ;
+                                   rdfs:label "Forecast Data Collection"@en ;
+                                   skos:definition "Represents an organized collection of forecast predictions or forecast datasets grouped together for storage, distribution, analysis, or retrieval purposes."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastMapData
+forecasting:ForecastMapData rdf:type owl:Class ;
+                            rdfs:subClassOf forecasting:ForecastData ;
+                            rdfs:label "Forecast Map Data"@en ;
+                            skos:definition "Represents forecast information presented in map form, showing the spatial distribution of predicted meteorological conditions."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastMapResults
+forecasting:ForecastMapResults rdf:type owl:Class ;
+                               rdfs:subClassOf forecasting:ForecastResult ;
+                               skos:definition "Forecast Map Results"@en ,
+                                               "Represents forecast results presented as maps, illustrating the spatial distribution of predicted weather or climate conditions."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastModel
+forecasting:ForecastModel rdf:type owl:Class ;
+                          rdfs:subClassOf core:MeteorologicalModel ,
+                                          forecasting:MeteoForecasting ;
+                          rdfs:label "Forecast Model"@en ;
+                          skos:definition "Computational model implementing a forecasting procedure."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastNumericData
+forecasting:ForecastNumericData rdf:type owl:Class ;
+                                rdfs:subClassOf forecasting:ForecastData ;
+                                rdfs:label "Forecast Numeric Data"@en ;
+                                skos:definition "Represents forecast information expressed as numerical values, such as predicted temperature, rainfall, humidity, or wind speed."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastNumericResults
+forecasting:ForecastNumericResults rdf:type owl:Class ;
+                                   rdfs:subClassOf forecasting:ForecastResult ;
+                                   rdfs:label "Forecast Numeric Results"@en ;
+                                   skos:definition "Represents forecast results expressed as numerical values, such as predicted temperature, rainfall, pressure, humidity, or wind speed."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastPrediction
+forecasting:ForecastPrediction rdf:type owl:Class ;
+                               rdfs:subClassOf core:Observation ,
+                                               forecasting:MeteoForecasting ;
+                               rdfs:label "Forecast Prediction"@en ;
+                               skos:definition "A predicted weather or climate condition generated by a forecasting procedure."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastReport
+forecasting:ForecastReport rdf:type owl:Class ;
+                           rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastResult
+forecasting:ForecastResult rdf:type owl:Class ;
+                           rdfs:subClassOf core:Result ,
+                                           forecasting:MeteoForecasting ;
+                           rdfs:label "Forecast Result"@en ;
+                           skos:definition "The outcome or value produced by a forecast prediction."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastTextData
+forecasting:ForecastTextData rdf:type owl:Class ;
+                             rdfs:subClassOf forecasting:ForecastData ;
+                             rdfs:label "Forecast Text Data"@en ;
+                             skos:definition "Represents forecast information expressed in textual form, including forecast summaries, advisories, and descriptive weather reports."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ForecastTextResults
+forecasting:ForecastTextResults rdf:type owl:Class ;
+                                rdfs:subClassOf forecasting:ForecastResult ;
+                                rdfs:label "Forecast Text Results"@en ;
+                                skos:definition "Represents forecast results expressed in textual form, including forecast summaries, advisories, warnings, and descriptive weather information."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/GroundCameraImageData
+forecasting:GroundCameraImageData rdf:type owl:Class ;
+                                  rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/GroundCameraVideoData
+forecasting:GroundCameraVideoData rdf:type owl:Class ;
+                                  rdfs:subClassOf forecasting:VideoData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/GroundSensorNumericData
+forecasting:GroundSensorNumericData rdf:type owl:Class ;
+                                    rdfs:subClassOf forecasting:NumericData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/GuidelineDocument
+forecasting:GuidelineDocument rdf:type owl:Class ;
+                              rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ImageData
+forecasting:ImageData rdf:type owl:Class ;
+                      rdfs:subClassOf forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ImageResult
+forecasting:ImageResult rdf:type owl:Class ;
+                        rdfs:subClassOf forecasting:TrainingResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/MapData
+forecasting:MapData rdf:type owl:Class ;
+                    rdfs:subClassOf forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/MapResult
+forecasting:MapResult rdf:type owl:Class ;
+                      rdfs:subClassOf forecasting:TrainingResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/MeteoForecasting
+forecasting:MeteoForecasting rdf:type owl:Class ;
+                             rdfs:label "Meteorological Forecasting Entity"@en ,
+                                        "Root class representing all concepts in the meteorological forecasting domain."@en .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ModelGeneratedImageData
+forecasting:ModelGeneratedImageData rdf:type owl:Class ;
+                                    rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ModelGeneratedVideoData
+forecasting:ModelGeneratedVideoData rdf:type owl:Class ;
+                                    rdfs:subClassOf forecasting:VideoData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/NumericData
+forecasting:NumericData rdf:type owl:Class ;
+                        rdfs:subClassOf forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/NumericResult
+forecasting:NumericResult rdf:type owl:Class ;
+                          rdfs:subClassOf forecasting:TrainingResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/PolicyDocument
+forecasting:PolicyDocument rdf:type owl:Class ;
+                           rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/PressRelease
+forecasting:PressRelease rdf:type owl:Class ;
+                         rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/Procedure
+forecasting:Procedure rdf:type owl:Class ;
+                      rdfs:subClassOf core:Procedure ,
+                                      forecasting:MeteoForecasting .
+
+
+###  http://meteo_onto.org/meteo_forecasting/RadarImageData
+forecasting:RadarImageData rdf:type owl:Class ;
+                           rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/RadarNumericData
+forecasting:RadarNumericData rdf:type owl:Class ;
+                             rdfs:subClassOf forecasting:NumericData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ReanalysisNumericData
+forecasting:ReanalysisNumericData rdf:type owl:Class ;
+                                  rdfs:subClassOf forecasting:NumericData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/ResearchPublication
+forecasting:ResearchPublication rdf:type owl:Class ;
+                                rdfs:subClassOf forecasting:TextualData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/SateliteNumericData
+forecasting:SateliteNumericData rdf:type owl:Class ;
+                                rdfs:subClassOf forecasting:NumericData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/SatelliteImageData
+forecasting:SatelliteImageData rdf:type owl:Class ;
+                               rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/SurveyImageData
+forecasting:SurveyImageData rdf:type owl:Class ;
+                            rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/SurveyVideoData
+forecasting:SurveyVideoData rdf:type owl:Class ;
+                            rdfs:subClassOf forecasting:VideoData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/TextResult
+forecasting:TextResult rdf:type owl:Class ;
+                       rdfs:subClassOf forecasting:TrainingResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/TextualData
+forecasting:TextualData rdf:type owl:Class ;
+                        rdfs:subClassOf forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/TrainingData
+forecasting:TrainingData rdf:type owl:Class ;
+                         rdfs:subClassOf core:Data ,
+                                         forecasting:MeteoForecasting .
+
+
+###  http://meteo_onto.org/meteo_forecasting/TrainingDataCollection
+forecasting:TrainingDataCollection rdf:type owl:Class ;
+                                   rdfs:subClassOf core:DataCollection ,
+                                                   forecasting:MeteoForecasting .
+
+
+###  http://meteo_onto.org/meteo_forecasting/TrainingObservation
+forecasting:TrainingObservation rdf:type owl:Class ;
+                                rdfs:subClassOf core:Observation ,
+                                                forecasting:MeteoForecasting .
+
+
+###  http://meteo_onto.org/meteo_forecasting/TrainingResult
+forecasting:TrainingResult rdf:type owl:Class ;
+                           rdfs:subClassOf core:Result ,
+                                           forecasting:MeteoForecasting .
+
+
+###  http://meteo_onto.org/meteo_forecasting/UAVImageData
+forecasting:UAVImageData rdf:type owl:Class ;
+                         rdfs:subClassOf forecasting:ImageData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/UAVVideoData
+forecasting:UAVVideoData rdf:type owl:Class ;
+                         rdfs:subClassOf forecasting:VideoData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/VideoData
+forecasting:VideoData rdf:type owl:Class ;
+                      rdfs:subClassOf forecasting:TrainingData .
+
+
+###  http://meteo_onto.org/meteo_forecasting/VideoResult
+forecasting:VideoResult rdf:type owl:Class ;
+                        rdfs:subClassOf forecasting:TrainingResult .
+
+
+###  http://meteo_onto.org/meteo_forecasting/WeatherModel
+forecasting:WeatherModel rdf:type owl:Class ;
+                         rdfs:subClassOf forecasting:ForecastModel ;
+                         rdfs:label "Weather Model"@en ;
+                         skos:definition "Represents a forecasting model designed to predict short-term atmospheric conditions such as temperature, precipitation, humidity, and wind."@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://meteo_onto.org/meteo_forecasting/Celsius
+forecasting:Celsius rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/DeciBels
+forecasting:DeciBels rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/Fraction
+forecasting:Fraction rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/Kelvin
+forecasting:Kelvin rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/MeterPerSecond
+forecasting:MeterPerSecond rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/Millimeter
+forecasting:Millimeter rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/Percent
+forecasting:Percent rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/Unitless
+forecasting:Unitless rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/WattPerSquareMeter
+forecasting:WattPerSquareMeter rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/air_pressure
+forecasting:air_pressure rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/air_temperature
+forecasting:air_temperature rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/brightness_temperature
+forecasting:brightness_temperature rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/precipitation_amount
+forecasting:precipitation_amount rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/precipitation_flux
+forecasting:precipitation_flux rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/sea_surface_temperature
+forecasting:sea_surface_temperature rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_forecasting/wind_speed
+forecasting:wind_speed rdf:type owl:NamedIndividual .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:ClimateReport
+                forecasting:EmergencyNotice
+                forecasting:EventSummaryReport
+                forecasting:ForecastReport
+                forecasting:GuidelineDocument
+                forecasting:PolicyDocument
+                forecasting:PressRelease
+                forecasting:ResearchPublication
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:CrowdsourcedImageData
+                forecasting:GroundCameraImageData
+                forecasting:ModelGeneratedImageData
+                forecasting:RadarImageData
+                forecasting:SatelliteImageData
+                forecasting:SurveyImageData
+                forecasting:UAVImageData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:CrowdsourcedVideoData
+                forecasting:GroundCameraVideoData
+                forecasting:ModelGeneratedVideoData
+                forecasting:SurveyVideoData
+                forecasting:UAVVideoData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:GroundSensorNumericData
+                forecasting:RadarNumericData
+                forecasting:ReanalysisNumericData
+                forecasting:SateliteNumericData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:ImageData
+                forecasting:MapData
+                forecasting:NumericData
+                forecasting:TextualData
+                forecasting:VideoData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:ImageResult
+                forecasting:MapResult
+                forecasting:NumericResult
+                forecasting:TextResult
+                forecasting:VideoResult
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( forecasting:MapResult
+                forecasting:NumericResult
+                forecasting:TextResult
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
