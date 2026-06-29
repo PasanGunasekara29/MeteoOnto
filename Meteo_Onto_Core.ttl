@@ -1,0 +1,2206 @@
+@prefix : <http://meteo_onto.org/meteo_core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix meteo_core: <http://meteo_onto.org/meteo_core/> .
+@prefix meteo_data: <http://meteo_onto.org/meteo_data/> .
+@base <http://meteo_onto.org/meteo_core#> .
+
+<http://meteo_onto.org/meteo_core> rdf:type owl:Ontology ;
+                                    owl:versionIRI meteo_core:Core1_0 ;
+                                    terms:contributor "Prof. Dulani Meedeniya"@en ;
+                                    terms:creator "H. K. Pasan Gunasekara"@en ;
+                                    terms:description "This ontology represents a meteorological domain ontology designed to semantically model and manage real-time weather observations, historical climate observations, and reanalysis datasets. The ontology supports metadata-driven semantic integration, interoperability, and scalable environmental data management for enterprise knowledge graph systems."@en ;
+                                    terms:license "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                    terms:title "Meteo_Onto_Core"@en ;
+                                    owl:versionInfo "http://meteo_onto.org/meteo_core/Core1_0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/hasURI
+meteo_core:hasURI rdf:type owl:AnnotationProperty ;
+                  rdfs:range xsd:anyURI ,
+                             xsd:string .
+
+
+###  http://meteo_onto.org/meteo_core/hasValue
+meteo_core:hasValue rdf:type owl:AnnotationProperty ;
+                    rdfs:range xsd:float ;
+                    rdfs:domain meteo_core:Result .
+
+
+###  http://purl.org/dc/terms/contributor
+terms:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+terms:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+terms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+terms:issued rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+terms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+terms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/publisher
+terms:publisher rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+terms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/wktLiteral
+meteo_core:wktLiteral rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/deploy
+meteo_core:deploy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                  owl:inverseOf meteo_core:isDeployedBy ;
+                  rdfs:domain meteo_core:Platform ;
+                  rdfs:range meteo_core:Deployment ;
+                  rdfs:label "Deploy"@en ;
+                  skos:definition "Defines the relationship between a Platform and the Forecast Model Deployment Platform on which the forecast model is deployed"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasAdminLocation
+meteo_core:hasAdminLocation rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                            owl:inverseOf meteo_core:isAdminLocationOf ;
+                            rdfs:domain meteo_core:Observation ;
+                            rdfs:range meteo_core:AdminLocation ;
+                            rdfs:label "has Admin Location"@en ;
+                            skos:definition "Defines relationship between Observation and its related Administrative Loaction"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasBeginTime
+meteo_core:hasBeginTime rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                        owl:inverseOf meteo_core:isBeginTimeOf ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain meteo_core:TimeInterval ;
+                        rdfs:range meteo_core:TimeInstant ;
+                        rdfs:label "has Begin Location"@en ;
+                        skos:definition "Defines relationship betwen Time Instant and  Time Interval to define begining time of the Time Interval"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasData
+meteo_core:hasData rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                   owl:inverseOf meteo_core:isDataOf ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain meteo_core:Result ;
+                   rdfs:range meteo_core:Data ;
+                   rdfs:label "has Data"@en ;
+                   skos:definition "Define relationship between Results and its Data form"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDataAttributeOf
+meteo_core:hasDataAttributeOf rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              owl:inverseOf meteo_core:isDataAttributeOf ;
+                              rdf:type owl:TransitiveProperty ;
+                              rdfs:domain meteo_core:MeteoCore ;
+                              rdfs:range meteo_core:MeteoCore ;
+                              rdfs:label "has Data Attribute Of"@en ;
+                              skos:definition "Define relationship between classes in general"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDataMember
+meteo_core:hasDataMember rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                         owl:inverseOf meteo_core:isDataMemberOf ;
+                         rdfs:domain meteo_core:DataCollection ;
+                         rdfs:range meteo_core:Data ;
+                         rdfs:label "has Data Member"@en ;
+                         skos:definition "Defines relationship between Data points and it related Dataset"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDataProvider
+meteo_core:hasDataProvider rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                           owl:inverseOf meteo_core:isDataProviderOf ;
+                           rdf:type owl:FunctionalProperty ;
+                           rdfs:domain meteo_core:Platform ;
+                           rdfs:range meteo_core:DataProvider ;
+                           rdfs:label "has Data Provider"@en ;
+                           skos:definition "Defines relationship between Platform and its Data Provider/Data Authoritive institute"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDeployment
+meteo_core:hasDeployment rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                         owl:inverseOf meteo_core:isDeploymentOf ;
+                         rdfs:domain meteo_core:MeteorologicalModel ;
+                         rdfs:range meteo_core:Deployment ;
+                         rdfs:label "has Deployment" ;
+                         skos:definition "A forecast model has Deployment version"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasEndTime
+meteo_core:hasEndTime rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                      owl:inverseOf meteo_core:isEndTimeOf ;
+                      rdf:type owl:FunctionalProperty ;
+                      rdfs:domain meteo_core:TimeInterval ;
+                      rdfs:range meteo_core:TimeInstant ;
+                      rdfs:label "has End Time"@en ;
+                      skos:definition "Defines relationship between Time Interval and Time Instant to define End Time of the Time Interval"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasLocation
+meteo_core:hasLocation rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                       owl:inverseOf meteo_core:isLocationOf ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain meteo_core:Observation ;
+                       rdfs:range meteo_core:LocationType ;
+                       rdfs:label "has Location"@en ;
+                       skos:definition "Defines relationship between Observation and its Location Type based on geographical features"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasMember
+meteo_core:hasMember rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                     owl:inverseOf meteo_core:isMemberOf ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain meteo_core:DataCollection ;
+                     rdfs:range meteo_core:Observation ;
+                     rdfs:label "has Member"@en ;
+                     skos:definition "Defines relationship between Data Sets/Data Collection  and Observation belong to Data Set/Data Collection"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasObservationRange
+meteo_core:hasObservationRange rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                               owl:inverseOf meteo_core:isObservationRangeOf ;
+                               rdfs:domain meteo_core:Platform ;
+                               rdfs:range [ rdf:type owl:Class ;
+                                            owl:unionOf ( meteo_core:AdminLocation
+                                                          meteo_core:LocationType
+                                                        )
+                                          ] .
+
+
+###  http://meteo_onto.org/meteo_core/hasObservationTime
+meteo_core:hasObservationTime rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                              owl:inverseOf meteo_core:isObservationTimeOf ;
+                              rdf:type owl:FunctionalProperty ;
+                              rdfs:domain meteo_core:Observation ;
+                              rdfs:range [ rdf:type owl:Class ;
+                                           owl:unionOf ( meteo_core:TimeInstant
+                                                         meteo_core:TimeInterval
+                                                       )
+                                         ] ;
+                              rdfs:label "has Observation Time"@en ;
+                              skos:definition "Defines relationship between Observation and Time Instant or Time Interval"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasProcedure
+meteo_core:hasProcedure rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                        owl:inverseOf meteo_core:isProcedureOf ;
+                        rdfs:domain meteo_core:MeteorologicalModel ;
+                        rdfs:range meteo_core:Procedure .
+
+
+###  http://meteo_onto.org/meteo_core/hasResult
+meteo_core:hasResult rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                     owl:inverseOf meteo_core:isResultOf ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain meteo_core:Observation ;
+                     rdfs:range meteo_core:Result ;
+                     rdfs:label "has Result"@en ;
+                     skos:definition "Define relationship between Observation and its Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasSensorObservationDuration
+meteo_core:hasSensorObservationDuration rdf:type owl:ObjectProperty ;
+                                        rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                                        owl:inverseOf meteo_core:isSensorObservationDurationOf ;
+                                        rdf:type owl:FunctionalProperty ;
+                                        rdfs:domain meteo_core:Sensor ;
+                                        rdfs:range meteo_core:TimeDuration ;
+                                        rdfs:label "has Sensor Observation"@en ;
+                                        skos:definition "Defines relation between Sensor and its Time Duration of making an Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasSensorRevisitInterval
+meteo_core:hasSensorRevisitInterval rdf:type owl:ObjectProperty ;
+                                    rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                                    owl:inverseOf meteo_core:isSensorRevisitIntervalOf ;
+                                    rdf:type owl:FunctionalProperty ;
+                                    rdfs:domain meteo_core:Sensor ;
+                                    rdfs:range meteo_core:TimeDuration ;
+                                    rdfs:label "has sensor observation duration"@en ;
+                                    skos:definition "Define relationship between Sensor an its relation to Sensor Revisit Interval to make an Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasTemporalResolution
+meteo_core:hasTemporalResolution rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                                 owl:inverseOf meteo_core:isTemporalResolutionOf ;
+                                 rdf:type owl:FunctionalProperty ;
+                                 rdfs:domain meteo_core:Data ;
+                                 rdfs:range meteo_core:TimeResolution .
+
+
+###  http://meteo_onto.org/meteo_core/hasTimeZone
+meteo_core:hasTimeZone rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                       owl:inverseOf meteo_core:isTimeZoneOf ;
+                       rdfs:domain meteo_core:TimeInstant ;
+                       rdfs:range meteo_core:TimeZone .
+
+
+###  http://meteo_onto.org/meteo_core/hasUnit
+meteo_core:hasUnit rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                   owl:inverseOf meteo_core:isUnitOf ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( meteo_core:Result
+                                               meteo_core:TimeDuration
+                                               meteo_core:TimeInstant
+                                             )
+                               ] ;
+                   rdfs:range meteo_core:Unit ;
+                   rdfs:label "has Unit"@en ;
+                   skos:definition "Defines relation between Results obtained and Temporal entities to standard measurement units."@en .
+
+
+###  http://meteo_onto.org/meteo_core/hosts
+meteo_core:hosts rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                 owl:inverseOf meteo_core:isHostedBy ;
+                 rdfs:domain meteo_core:Platform ;
+                 rdfs:range meteo_core:Sensor ;
+                 rdfs:label "Hosts"@en ;
+                 skos:definition "Define relationship between Platform and Sensor about its hosting"@en .
+
+
+###  http://meteo_onto.org/meteo_core/implement
+meteo_core:implement rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                     owl:inverseOf meteo_core:isImplementedBy ;
+                     rdfs:domain meteo_core:MeteorologicalModel ;
+                     rdfs:range meteo_core:Procedure ;
+                     rdfs:label "Implements"@en ;
+                     skos:definition "Defines relationship between Weather/Climate Models and Algorithm/Procedure it used to generate observations"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isAdminLocationOf
+meteo_core:isAdminLocationOf rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                             rdfs:domain meteo_core:AdminLocation ;
+                             rdfs:range meteo_core:Observation ;
+                             rdfs:label "is Admin Location Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isBeginTimeOf
+meteo_core:isBeginTimeOf rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain meteo_core:TimeInstant ;
+                         rdfs:range meteo_core:TimeInterval ;
+                         rdfs:label "Is Begining Time Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isDataAttributeOf
+meteo_core:isDataAttributeOf rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf owl:topObjectProperty ;
+                             rdf:type owl:TransitiveProperty ;
+                             rdfs:domain meteo_core:MeteoCore ;
+                             rdfs:range meteo_core:MeteoCore ;
+                             rdfs:label "is Data Attribute Of"@en ;
+                             skos:definition "Define inverse relationship between classes in general"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isDataMemberOf
+meteo_core:isDataMemberOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                          rdfs:domain meteo_core:Data ;
+                          rdfs:range meteo_core:DataCollection ;
+                          rdfs:label "is Data Member Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isDataOf
+meteo_core:isDataOf rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                    rdfs:domain meteo_core:Data ;
+                    rdfs:range meteo_core:Result ;
+                    rdfs:label "is Data Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isDataProviderOf
+meteo_core:isDataProviderOf rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                            rdfs:domain meteo_core:DataProvider ;
+                            rdfs:range meteo_core:Platform ;
+                            rdfs:label "is Data Provider Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isDeployedBy
+meteo_core:isDeployedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                        rdf:type owl:FunctionalProperty ;
+                        rdfs:domain meteo_core:Deployment ;
+                        rdfs:range meteo_core:Platform ;
+                        rdfs:label "is Deployed By"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isDeploymentOf
+meteo_core:isDeploymentOf rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain meteo_core:Deployment ;
+                          rdfs:range meteo_core:MeteorologicalModel ;
+                          rdfs:label "is Deployment Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isEndTimeOf
+meteo_core:isEndTimeOf rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain meteo_core:TimeInstant ;
+                       rdfs:range meteo_core:TimeInterval ;
+                       rdfs:label "is End Time Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isHostedBy
+meteo_core:isHostedBy rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                      rdfs:domain meteo_core:Sensor ;
+                      rdfs:range meteo_core:Platform ;
+                      rdfs:label "is Hosted By"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isImplementedBy
+meteo_core:isImplementedBy rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                           rdfs:domain meteo_core:Procedure ;
+                           rdfs:range meteo_core:MeteorologicalModel ;
+                           rdfs:label "is Implemented By"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isLocationOf
+meteo_core:isLocationOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                        rdfs:domain meteo_core:LocationType ;
+                        rdfs:range meteo_core:Observation ;
+                        rdfs:label "is Location Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isMemberOf
+meteo_core:isMemberOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                      rdfs:domain meteo_core:Observation ;
+                      rdfs:range meteo_core:DataCollection ;
+                      rdfs:label "is Member Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isObservationRangeOf
+meteo_core:isObservationRangeOf rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                                rdfs:domain [ rdf:type owl:Class ;
+                                              owl:unionOf ( meteo_core:AdminLocation
+                                                            meteo_core:LocationType
+                                                          )
+                                            ] ;
+                                rdfs:range meteo_core:Platform .
+
+
+###  http://meteo_onto.org/meteo_core/isObservationTimeOf
+meteo_core:isObservationTimeOf rdf:type owl:ObjectProperty ;
+                               rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                               rdf:type owl:FunctionalProperty ;
+                               rdfs:domain [ rdf:type owl:Class ;
+                                             owl:unionOf ( meteo_core:TimeInstant
+                                                           meteo_core:TimeInterval
+                                                         )
+                                           ] ;
+                               rdfs:range meteo_core:Observation ;
+                               rdfs:label "is Observation Time Of"@en .
+
+
+###  http://meteo_onto.org/meteo_core/isObservedBy
+meteo_core:isObservedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                        owl:inverseOf meteo_core:observe ;
+                        rdfs:domain meteo_core:ObservableProperty ;
+                        rdfs:range meteo_core:Sensor .
+
+
+###  http://meteo_onto.org/meteo_core/isObservedPropertyOf
+meteo_core:isObservedPropertyOf rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                                owl:inverseOf meteo_core:observedProperty ;
+                                rdfs:domain meteo_core:ObservableProperty ;
+                                rdfs:range meteo_core:Observation .
+
+
+###  http://meteo_onto.org/meteo_core/isProcedureOf
+meteo_core:isProcedureOf rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                         rdfs:domain meteo_core:Procedure ;
+                         rdfs:range meteo_core:MeteorologicalModel .
+
+
+###  http://meteo_onto.org/meteo_core/isProducedBy
+meteo_core:isProducedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                        owl:inverseOf meteo_core:produce ;
+                        rdfs:domain meteo_core:Observation ;
+                        rdfs:range meteo_core:Procedure .
+
+
+###  http://meteo_onto.org/meteo_core/isProvidedBy
+meteo_core:isProvidedBy rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                        owl:inverseOf meteo_core:provide ;
+                        rdfs:domain meteo_core:DataCollection ;
+                        rdfs:range meteo_core:DataProvider .
+
+
+###  http://meteo_onto.org/meteo_core/isResultOf
+meteo_core:isResultOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                      rdfs:domain meteo_core:Result ;
+                      rdfs:range meteo_core:Observation .
+
+
+###  http://meteo_onto.org/meteo_core/isSensorObservationDurationOf
+meteo_core:isSensorObservationDurationOf rdf:type owl:ObjectProperty ;
+                                         rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                                         rdf:type owl:FunctionalProperty ;
+                                         rdfs:domain meteo_core:TimeDuration ;
+                                         rdfs:range meteo_core:Sensor .
+
+
+###  http://meteo_onto.org/meteo_core/isSensorRevisitIntervalOf
+meteo_core:isSensorRevisitIntervalOf rdf:type owl:ObjectProperty ;
+                                     rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                                     rdf:type owl:FunctionalProperty ;
+                                     rdfs:domain meteo_core:TimeDuration ;
+                                     rdfs:range meteo_core:Sensor .
+
+
+###  http://meteo_onto.org/meteo_core/isTemporalResolutionOf
+meteo_core:isTemporalResolutionOf rdf:type owl:ObjectProperty ;
+                                  rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                                  rdfs:domain meteo_core:TimeResolution ;
+                                  rdfs:range meteo_core:Data .
+
+
+###  http://meteo_onto.org/meteo_core/isTimeZoneOf
+meteo_core:isTimeZoneOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                        rdfs:domain meteo_core:TimeZone ;
+                        rdfs:range meteo_core:TimeInstant .
+
+
+###  http://meteo_onto.org/meteo_core/isUnitOf
+meteo_core:isUnitOf rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                    rdfs:domain meteo_core:Unit ;
+                    rdfs:range [ rdf:type owl:Class ;
+                                 owl:unionOf ( meteo_core:Result
+                                               meteo_core:TimeDuration
+                                               meteo_core:TimeInstant
+                                             )
+                               ] .
+
+
+###  http://meteo_onto.org/meteo_core/isUsedBy
+meteo_core:isUsedBy rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                    owl:inverseOf meteo_core:use ;
+                    rdfs:domain meteo_core:Observation ;
+                    rdfs:range meteo_core:Procedure .
+
+
+###  http://meteo_onto.org/meteo_core/madeBySensor
+meteo_core:madeBySensor rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                        owl:inverseOf meteo_core:madeObservation ;
+                        rdfs:domain meteo_core:Observation ;
+                        rdfs:range meteo_core:Sensor ;
+                        rdfs:label "Made By Sensor"@en ;
+                        skos:definition "Define relationshp between Observation and Sensor making the Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/madeObservation
+meteo_core:madeObservation rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf meteo_core:isDataAttributeOf ;
+                           rdfs:domain meteo_core:Sensor ;
+                           rdfs:range meteo_core:Observation .
+
+
+###  http://meteo_onto.org/meteo_core/observe
+meteo_core:observe rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                   rdfs:domain meteo_core:Sensor ;
+                   rdfs:range meteo_core:ObservableProperty ;
+                   rdfs:label "Observe"@en ;
+                   skos:definition "Defines relationship between Sensor and its Observable Properties"@en .
+
+
+###  http://meteo_onto.org/meteo_core/observedProperty
+meteo_core:observedProperty rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain meteo_core:Observation ;
+                            rdfs:range meteo_core:ObservableProperty ;
+                            rdfs:label "Observable Property"@en ;
+                            skos:definition "Define relationship between Observation and Observable Property of Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/produce
+meteo_core:produce rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                   rdfs:domain meteo_core:Procedure ;
+                   rdfs:range meteo_core:Observation ;
+                   rdfs:label "Produce"@en ;
+                   skos:definition "Defines relationship between Procedure and its generated Observations"@en .
+
+
+###  http://meteo_onto.org/meteo_core/provide
+meteo_core:provide rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+                   rdfs:domain meteo_core:DataProvider ;
+                   rdfs:range meteo_core:DataCollection ;
+                   rdfs:label "Provide"@en ;
+                   skos:definition "Defines relationship between Data Provide and provider's Data Type"@en .
+
+
+###  http://meteo_onto.org/meteo_core/use
+meteo_core:use rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf meteo_core:hasDataAttributeOf ;
+               rdfs:domain meteo_core:Procedure ;
+               rdfs:range meteo_core:Observation ;
+               rdfs:comment "Use"@en ;
+               skos:definition "Defines relationship between Procedure and Observation used for the Procedure"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/hasArea
+meteo_core:hasArea rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( meteo_core:AdminLocation
+                                               meteo_core:LocationType
+                                             )
+                               ] ;
+                   rdfs:range xsd:float ;
+                   rdfs:label "has Area"@en ;
+                   skos:definition "Defines geographical area of a geographic entity"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasCoordinates
+meteo_core:hasCoordinates rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( meteo_core:AdminLocation
+                                                      meteo_core:LocationType
+                                                    )
+                                      ] ;
+                          rdfs:range meteo_core:wktLiteral ;
+                          rdfs:label "has Coordinates"@en ;
+                          skos:definition "Defines relation between Geographical entities and its coordinates"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDataFormat
+meteo_core:hasDataFormat rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain meteo_core:Data ;
+                         rdfs:range xsd:string ;
+                         rdfs:label "has Data Format"@en ;
+                         skos:definition "Define relation between Data and its type"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDeploymentDate
+meteo_core:hasDeploymentDate rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
+                             rdfs:domain meteo_core:Deployment ;
+                             rdfs:range xsd:dateTime ;
+                             rdfs:label "has Deployment Date"@en ;
+                             skos:definition "Defines deployment date of a Model deployment platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDescription
+meteo_core:hasDescription rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain meteo_core:MeteoCore ;
+                          rdfs:range xsd:string ;
+                          rdfs:label "has Description"@en ;
+                          skos:definition "Defines relationship between an entity and its descriptive detail"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasDuration
+meteo_core:hasDuration rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:domain meteo_core:TimeDuration ;
+                       rdfs:range xsd:decimal ;
+                       rdfs:label "has Duration"@en ;
+                       skos:definition "Defines relation between time duration and duration"@en .
+
+
+###  http://meteo_onto.org/meteo_core/hasElevation
+meteo_core:hasElevation rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:domain meteo_core:Sensor ;
+                        rdfs:range xsd:float .
+
+
+###  http://meteo_onto.org/meteo_core/hasFormat
+meteo_core:hasFormat rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain meteo_core:Data ;
+                     rdfs:range xsd:string .
+
+
+###  http://meteo_onto.org/meteo_core/hasID
+meteo_core:hasID rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:complementOf meteo_core:Time
+                             ] ;
+                 rdfs:range xsd:string .
+
+
+###  http://meteo_onto.org/meteo_core/hasIssuedDate
+meteo_core:hasIssuedDate rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain [ rdf:type owl:Class ;
+                                       owl:unionOf ( meteo_core:Data
+                                                     meteo_core:DataCollection
+                                                     meteo_core:MeteorologicalModel
+                                                     meteo_core:Result
+                                                   )
+                                     ] ;
+                         rdfs:range xsd:float .
+
+
+###  http://meteo_onto.org/meteo_core/hasName
+meteo_core:hasName rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:complementOf meteo_core:Time
+                               ] ;
+                   rdfs:range xsd:string .
+
+
+###  http://meteo_onto.org/meteo_core/hasPopulation
+meteo_core:hasPopulation rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdf:type owl:FunctionalProperty ;
+                         rdfs:domain meteo_core:AdminLocation ;
+                         rdfs:range xsd:decimal .
+
+
+###  http://meteo_onto.org/meteo_core/hasResultTime
+meteo_core:hasResultTime rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain meteo_core:Result ;
+                         rdfs:range xsd:float .
+
+
+###  http://meteo_onto.org/meteo_core/hasStorageSize
+meteo_core:hasStorageSize rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain [ rdf:type owl:Class ;
+                                        owl:unionOf ( meteo_core:Data
+                                                      meteo_core:DataCollection
+                                                    )
+                                      ] ;
+                          rdfs:range xsd:float .
+
+
+###  http://meteo_onto.org/meteo_core/hasTime
+meteo_core:hasTime rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain [ rdf:type owl:Class ;
+                                 owl:unionOf ( meteo_core:TimeInstant
+                                               meteo_core:TimeResolution
+                                             )
+                               ] ;
+                   rdfs:range xsd:dateTime .
+
+
+###  http://meteo_onto.org/meteo_core/hasTitle
+meteo_core:hasTitle rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain meteo_core:TextualData ;
+                    rdfs:range xsd:string .
+
+
+###  http://meteo_onto.org/meteo_core/hasURL
+meteo_core:hasURL rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain meteo_core:MeteoCore ;
+                  rdfs:range xsd:anyURI .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/AcademicDataProvider
+meteo_core:AcademicDataProvider rdf:type owl:Class ;
+                                rdfs:subClassOf meteo_core:DataProvider ;
+                                terms:description "A data provider affiliated with educational or research institutions that offers datasets for academic, scientific, or educational purposes."@en ;
+                                terms:title "Academic Data Provider"@en .
+
+
+###  http://meteo_onto.org/meteo_core/AdminLocation
+meteo_core:AdminLocation rdf:type owl:Class ;
+                         rdfs:subClassOf meteo_core:MeteoCore ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty meteo_core:isAdminLocationOf ;
+                                           owl:someValuesFrom meteo_core:Observation
+                                         ] ;
+                         rdfs:label "Administrative Location"@en ;
+                         skos:definition "Represents an administrative or geopolitical geographic area used to organize, classify, or associate meteorological information. Examples include countries, states, provinces, districts, municipalities, or other officially defined regions used for reporting and analysis."@en .
+
+
+###  http://meteo_onto.org/meteo_core/AdministrativeArea
+meteo_core:AdministrativeArea rdf:type owl:Class ;
+                              rdfs:subClassOf meteo_core:AdminLocation .
+
+
+###  http://meteo_onto.org/meteo_core/Buoy
+meteo_core:Buoy rdf:type owl:Class ;
+                rdfs:subClassOf meteo_core:Platform ;
+                terms:description "Represents a floating observation platform deployed in oceans, lakes, rivers, or coastal environments for collecting meteorological and hydrological data. Buoys may measure temperature, wave conditions, wind, pressure, and water properties."@en ;
+                rdfs:label "Observation Buoy"@en .
+
+
+###  http://meteo_onto.org/meteo_core/BuoyObsevation
+meteo_core:BuoyObsevation rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:Observation ;
+                          rdfs:label "Represents a meteorological or environmental observation collected using buoy-based monitoring platforms deployed in marine, coastal, or inland water environments."@en ,
+                                     "Buoy Observation" .
+
+
+###  http://meteo_onto.org/meteo_core/ClimateGrid
+meteo_core:ClimateGrid rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:LocationType ;
+                       terms:description "Represents a structured spatial grid used for organizing climate-related data across geographic regions. Climate grids are commonly used in climate models and long-term environmental analyses to represent variables across regularly defined spatial areas."@en ;
+                       rdfs:label "Climate Grid"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ClimateModel
+meteo_core:ClimateModel rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:MeteorologicalModel ;
+                        terms:description "Represents a computational platform or simulation system used to model and analyze long-term climate processes and environmental changes using historical and predictive datasets."@en ;
+                        rdfs:label "Climate Modeling Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ClimateModelObsevation
+meteo_core:ClimateModelObsevation rdf:type owl:Class ;
+                                  rdfs:subClassOf meteo_core:Observation ;
+                                  terms:description "Represents an observation or generated output produced by climate modeling systems through simulation of long-term atmospheric and environmental processes."@en ;
+                                  rdfs:label "Climate Model Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ClimateReport
+meteo_core:ClimateReport rdf:type owl:Class ;
+                         rdfs:subClassOf meteo_core:TextualData ;
+                         terms:description "Represents a textual report describing long-term climate conditions, trends, variability, and environmental assessments. Climate reports may include historical analyses, projections, and climate-related indicators."@en ;
+                         rdfs:label "Climate Report"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ClimateReportResult
+meteo_core:ClimateReportResult rdf:type owl:Class ;
+                               rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/CommercialDataProvider
+meteo_core:CommercialDataProvider rdf:type owl:Class ;
+                                  rdfs:subClassOf meteo_core:DataProvider ;
+                                  terms:description "A data provider operated by a business organization that supplies data as a commercial product or service, often for profit."@en ;
+                                  terms:title "Commercial Data Provider"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Continent
+meteo_core:Continent rdf:type owl:Class ;
+                     rdfs:subClassOf meteo_core:AdministrativeArea ;
+                     terms:description "Represents a large geographic landmass consisting of multiple countries or regions used for broad-scale environmental, climatological, and geographic categorization."@en ;
+                     rdfs:label "Continent"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Country
+meteo_core:Country rdf:type owl:Class ;
+                   rdfs:subClassOf meteo_core:AdministrativeArea ;
+                   terms:description "Country"@en ,
+                                     "Represents a sovereign geopolitical entity with officially recognized boundaries and governance. Countries serve as major administrative units for organizing meteorological and environmental datasets."@en .
+
+
+###  http://meteo_onto.org/meteo_core/CrowdsourcedImageData
+meteo_core:CrowdsourcedImageData rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:ImageData ;
+                                 terms:description "Crowdsourced Image Data"@en ,
+                                                   "Represents image data contributed by individuals, citizen science initiatives, or community-based observation systems. Such images may provide localized visual evidence of weather events, environmental conditions, or disaster impacts."@en .
+
+
+###  http://meteo_onto.org/meteo_core/CrowdsourcedImageResult
+meteo_core:CrowdsourcedImageResult rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/CrowdsourcedVideoData
+meteo_core:CrowdsourcedVideoData rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:VideoData ;
+                                 terms:description "Represents video data contributed by individuals, community participants, or citizen science initiatives. Such content may provide localized evidence of weather conditions, environmental events, or disaster impacts."@en ;
+                                 rdfs:label "Crowdsourced Video Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/CrowdsourcedVideoResult
+meteo_core:CrowdsourcedVideoResult rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:VideoResult .
+
+
+###  http://meteo_onto.org/meteo_core/CrowedSourced
+meteo_core:CrowedSourced rdf:type owl:Class ;
+                         rdfs:subClassOf meteo_core:Platform ;
+                         terms:description "Represents a platform that gathers meteorological information from distributed contributors or community-based observation sources. Data may originate from personal weather stations, mobile applications, or citizen science initiatives."@en ;
+                         rdfs:label "Crowdsourced Observation Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/CrowedSourcedObsevation
+meteo_core:CrowedSourcedObsevation rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:Observation ;
+                                   terms:description "Represents an observation collected from distributed community contributors, citizen science initiatives, mobile applications, or personal monitoring systems."@en ;
+                                   rdfs:label "Crowdsourced Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Data
+meteo_core:Data rdf:type owl:Class ;
+                rdfs:subClassOf meteo_core:MeteoCore ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty meteo_core:isDataOf ;
+                                  owl:someValuesFrom meteo_core:Result
+                                ] ;
+                terms:description "Represents the classification of meteorological information according to its content, purpose, or structure. This class identifies categories such as various multimodal data dtypes including image, numeric, video, Text, and Mapped data"@en ;
+                rdfs:label "Meteorological Data Type"@en .
+
+
+###  http://meteo_onto.org/meteo_core/DataCollection
+meteo_core:DataCollection rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:MeteoCore ;
+                          rdfs:comment "A structured collection of meteorological observations gathered from official meteorological resources and implemented sensing environments. This collection organizes weather-related observational data, including measurements such as temperature, humidity, rainfall, wind speed, and atmospheric conditions, to support consistent representation, integration, and management of meteorological information."@en ;
+                          rdfs:label "Data Collection" .
+
+
+###  http://meteo_onto.org/meteo_core/DataProvider
+meteo_core:DataProvider rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:MeteoCore ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty meteo_core:isDataProviderOf ;
+                                          owl:someValuesFrom meteo_core:Platform
+                                        ] ;
+                        terms:description "An entity or organization that supplies, publishes, or distributes data for use by individuals, systems, or applications."@en ;
+                        rdfs:label "Data Provider"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Deployment
+meteo_core:Deployment rdf:type owl:Class ;
+                      rdfs:subClassOf meteo_core:MeteoCore ;
+                      rdfs:label "Deployment"@en ;
+                      skos:definition "Platform or environment where a forecast model is deployed."@en .
+
+
+###  http://meteo_onto.org/meteo_core/District
+meteo_core:District rdf:type owl:Class ;
+                    rdfs:subClassOf meteo_core:AdministrativeArea ;
+                    terms:description "Represents a subnational administrative division used to organize geographic regions within larger administrative entities such as states, provinces, or municipalities."@en ;
+                    rdfs:label "District"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Drone
+meteo_core:Drone rdf:type owl:Class ;
+                 rdfs:subClassOf meteo_core:Platform ;
+                 terms:description "Represents an unmanned aerial platform equipped with sensors for collecting meteorological or environmental observations. Drones support flexible and mobile monitoring in areas difficult to access using fixed infrastructure."@en ;
+                 rdfs:label "Drone Observation Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/DroneObsevation
+meteo_core:DroneObsevation rdf:type owl:Class ;
+                           rdfs:subClassOf meteo_core:Observation ;
+                           terms:description "Represents an observation collected using unmanned aerial platforms equipped with meteorological or environmental sensing instruments."@en ;
+                           rdfs:label "Drone Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/EmergencyNotice
+meteo_core:EmergencyNotice rdf:type owl:Class ;
+                           rdfs:subClassOf meteo_core:TextualData ;
+                           terms:description "Represents an urgent communication issued to inform individuals, organizations, or authorities about hazardous weather conditions, environmental threats, or emergency situations requiring attention or action."@en ;
+                           rdfs:label "Emergency Notice"@en .
+
+
+###  http://meteo_onto.org/meteo_core/EmergencyNoticeResult
+meteo_core:EmergencyNoticeResult rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/EventSummaryReport
+meteo_core:EventSummaryReport rdf:type owl:Class ;
+                              rdfs:subClassOf meteo_core:TextualData ;
+                              terms:description "Represents a report summarizing meteorological events, observed conditions, impacts, and related findings after an environmental or weather-related occurrence."@en ;
+                              rdfs:label "Event Summary Report"@en .
+
+
+###  http://meteo_onto.org/meteo_core/EventSummaryReportResult
+meteo_core:EventSummaryReportResult rdf:type owl:Class ;
+                                    rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/ForecastGrid
+meteo_core:ForecastGrid rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:LocationType ;
+                        terms:description "Represents a spatial grid used to organize and represent weather prediction or forecast data generated by meteorological models. Forecast grids divide geographic areas into cells for storing forecasted atmospheric conditions."@en ;
+                        rdfs:label "Forecast Grid"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ForecastReport
+meteo_core:ForecastReport rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:TextualData ;
+                          terms:description "Represents a report containing predictions and analyses of future atmospheric or environmental conditions generated through observational and forecasting processes."@en ;
+                          rdfs:label "Forecast Report"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ForecastReportResult
+meteo_core:ForecastReportResult rdf:type owl:Class ;
+                                rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/FreeOpenSourceDataProvider
+meteo_core:FreeOpenSourceDataProvider rdf:type owl:Class ;
+                                      rdfs:subClassOf meteo_core:DataProvider ;
+                                      terms:description "A data provider that distributes data freely and openly, allowing public access, use, modification, and sharing with minimal restrictions."@en ;
+                                      terms:title "Free Open Source Data Provider"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GovernmentalDataProvider
+meteo_core:GovernmentalDataProvider rdf:type owl:Class ;
+                                    rdfs:subClassOf meteo_core:DataProvider ;
+                                    terms:description "A data provider managed by a government agency or public institution that publishes official data for public administration, policy, or civic use."@en ;
+                                    terms:title "Governmental Data Provider"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GridCell
+meteo_core:GridCell rdf:type owl:Class ;
+                    rdfs:subClassOf meteo_core:LocationType ;
+                    terms:description "Represents an individual spatial unit within a larger grid structure. A grid cell defines a bounded geographic area associated with observational or modeled meteorological values."@en ;
+                    rdfs:label "Grid Cell"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GroundCameraImageData
+meteo_core:GroundCameraImageData rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:ImageData ;
+                                 terms:description "Represents image data captured by fixed or ground-based camera systems deployed for environmental and meteorological monitoring. Examples include weather cameras and surface observation imaging systems."@en ;
+                                 rdfs:label "Ground Camera Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GroundCameraImageResult
+meteo_core:GroundCameraImageResult rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/GroundCameraVideoData
+meteo_core:GroundCameraVideoData rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:VideoData ;
+                                 terms:description "Represents video recordings captured by stationary or ground-based camera systems used for environmental and meteorological monitoring. Examples include weather surveillance cameras and fixed observation systems."@en ;
+                                 rdfs:label "Ground Camera Video Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GroundCameraVideoResult
+meteo_core:GroundCameraVideoResult rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:VideoResult .
+
+
+###  http://meteo_onto.org/meteo_core/GroundSensor
+meteo_core:GroundSensor rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:Sensor ;
+                        terms:description "Represents a meteorological sensor installed at a fixed location on or near the Earth's surface for collecting local environmental observations. Examples include weather station instruments, rain gauges, thermometers, and surface monitoring devices."@en ;
+                        rdfs:label "Ground-Based Sensor"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GroundSensorNumericData
+meteo_core:GroundSensorNumericData rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:NumericData ;
+                                   terms:description "Represents numerical measurements collected from fixed or surface-based meteorological sensors deployed at observation stations or monitoring sites. Examples include temperature readings, humidity values, pressure measurements, and precipitation records."@en ;
+                                   rdfs:label "Ground Sensor Numeric Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GroundSensorNumericResult
+meteo_core:GroundSensorNumericResult rdf:type owl:Class ;
+                                     rdfs:subClassOf meteo_core:NumericResult .
+
+
+###  http://meteo_onto.org/meteo_core/GuidelineDocument
+meteo_core:GuidelineDocument rdf:type owl:Class ;
+                             rdfs:subClassOf meteo_core:TextualData ;
+                             terms:description "Represents a document providing recommendations, operational procedures, best practices, or instructions related to meteorological observations, environmental monitoring, or emergency response activities."@en ;
+                             rdfs:label "Guideline Document"@en .
+
+
+###  http://meteo_onto.org/meteo_core/GuidelineDocumentResult
+meteo_core:GuidelineDocumentResult rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/ImageData
+meteo_core:ImageData rdf:type owl:Class ;
+                     rdfs:subClassOf meteo_core:Data ;
+                     terms:description "Represents meteorological or environmental data encoded in image form, including observational imagery, remote sensing outputs, and generated visual products."@en ;
+                     rdfs:label "Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ImageResult
+meteo_core:ImageResult rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:Result ;
+                       terms:description "Represents an observation result in image format generated from meteorological sensing or processing activities. Examples include satellite imagery, weather radar images, cloud visualizations, and environmental photographs."@en ;
+                       rdfs:label "Image Observation Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Locality
+meteo_core:Locality rdf:type owl:Class ;
+                    rdfs:subClassOf meteo_core:AdministrativeArea ;
+                    terms:description "Represents a named geographic area or place of local significance that may not correspond to a formal administrative boundary. Examples include neighborhoods, villages, settlements, or communities."@en ;
+                    rdfs:label "Locality"@en .
+
+
+###  http://meteo_onto.org/meteo_core/LocationType
+meteo_core:LocationType rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:MeteoCore ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty meteo_core:isLocationOf ;
+                                          owl:someValuesFrom meteo_core:Observation
+                                        ] ;
+                        terms:description "Represents the category or characterization of a location where meteorological observations are collected. Examples include grid cells, or other observation environments."@en ;
+                        rdfs:label "Observable Meteorological Property"@en .
+
+
+###  http://meteo_onto.org/meteo_core/MapData
+meteo_core:MapData rdf:type owl:Class ;
+                   rdfs:subClassOf meteo_core:Data ;
+                   terms:description "Represents meteorological information presented in geospatial or cartographic form to visualize spatial patterns and environmental conditions."@en ;
+                   rdfs:label "Map Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/MapResult
+meteo_core:MapResult rdf:type owl:Class ;
+                     rdfs:subClassOf meteo_core:Result ;
+                     terms:description "Represents an observation result presented as a geographic or spatial map. Examples include weather forecast maps, precipitation distribution maps, temperature contour maps, wind field maps, and spatial environmental visualizations.."@en ;
+                     rdfs:label "Map Observation Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/MarineObsevation
+meteo_core:MarineObsevation rdf:type owl:Class ;
+                            rdfs:subClassOf meteo_core:Observation ;
+                            terms:description "Represents an observation collected within marine or ocean environments involving atmospheric, oceanographic, or environmental measurements."@en ;
+                            rdfs:label "Marine Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/MeteoCore
+meteo_core:MeteoCore rdf:type owl:Class ;
+                     rdfs:subClassOf owl:Thing ;
+                     rdfs:label "Meteorological Data"@en ;
+                     skos:definition "Top-level class representing meteorological and environmental data entities used in the ontology."@en .
+
+
+###  http://meteo_onto.org/meteo_core/MeteorologicalModel
+meteo_core:MeteorologicalModel rdf:type owl:Class ;
+                               rdfs:subClassOf meteo_core:MeteoCore ;
+                               rdfs:label "Meteorological Model"@en ;
+                               skos:definition "Defines climate and weather models used to simulate meteorological data."@en .
+
+
+###  http://meteo_onto.org/meteo_core/MobileSensor
+meteo_core:MobileSensor rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:Sensor ;
+                        terms:description "Represents a meteorological sensor deployed on a moving platform that collects environmental data while changing location. Examples include sensors mounted on vehicles, ships, aircraft, drones, or mobile monitoring systems."@en ;
+                        rdfs:label "Mobile Observation Sensor"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ModelGeneratedImageData
+meteo_core:ModelGeneratedImageData rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:ImageData ;
+                                   terms:description "Represents image products generated by computational weather or climate models. Examples include forecast visualizations, simulation outputs, and predictive atmospheric imagery."@en ;
+                                   rdfs:label "Model-Generated Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ModelGeneratedImageResult
+meteo_core:ModelGeneratedImageResult rdf:type owl:Class ;
+                                     rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/ModelGeneratedVideoData
+meteo_core:ModelGeneratedVideoData rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:VideoData ;
+                                   terms:description "Represents video content generated from computational weather or climate models. Examples include forecast animations, simulation outputs, and visual representations of predicted environmental conditions."@en ;
+                                   rdfs:label "Model-Generated Video Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ModelGeneratedVideoResult
+meteo_core:ModelGeneratedVideoResult rdf:type owl:Class ;
+                                     rdfs:subClassOf meteo_core:VideoResult .
+
+
+###  http://meteo_onto.org/meteo_core/Municipality
+meteo_core:Municipality rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:AdministrativeArea ;
+                        terms:description "Represents a local administrative unit governed by a municipal authority and responsible for managing a defined geographic area, often including  local communities."@en ;
+                        rdfs:label "Municipality"@en .
+
+
+###  http://meteo_onto.org/meteo_core/NumericData
+meteo_core:NumericData rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:Data ;
+                       terms:description "Represents meteorological data expressed as numerical measurements, observations, computed values, or quantitative datasets."@en ;
+                       rdfs:label "Numeric Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/NumericResult
+meteo_core:NumericResult rdf:type owl:Class ;
+                         rdfs:subClassOf meteo_core:Result ;
+                         terms:description "Represents an observation result expressed as numerical values associated with measured meteorological properties. Examples include temperature values, humidity percentages, rainfall amounts, atmospheric pressure readings, and wind speed measurements."@en ;
+                         rdfs:label "Numeric Observation Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty
+meteo_core:ObservableProperty rdf:type owl:Class ;
+                              rdfs:subClassOf meteo_core:MeteoCore ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty meteo_core:isObservedBy ;
+                                                owl:someValuesFrom meteo_core:Sensor
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty meteo_core:isObservedPropertyOf ;
+                                                owl:someValuesFrom meteo_core:Observation
+                                              ] ;
+                              terms:description "Represents a measurable environmental or atmospheric phenomenon that can be observed or monitored by sensors or observation systems. Examples include air temperature, atmospheric pressure, wind speed, precipitation, humidity, solar radiation, and wind direction."@en ;
+                              terms:title "Observable Meteorological Property"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Observation
+meteo_core:Observation rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:MeteoCore ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:hasLocation ;
+                                         owl:someValuesFrom meteo_core:LocationType
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:hasObservationTime ;
+                                         owl:someValuesFrom [ rdf:type owl:Class ;
+                                                              owl:unionOf ( meteo_core:TimeInstant
+                                                                            meteo_core:TimeInterval
+                                                                          )
+                                                            ]
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:hasResult ;
+                                         owl:someValuesFrom meteo_core:Result
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:isMemberOf ;
+                                         owl:someValuesFrom meteo_core:DataCollection
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:madeBySensor ;
+                                         owl:someValuesFrom meteo_core:Sensor
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:observedProperty ;
+                                         owl:someValuesFrom meteo_core:ObservableProperty
+                                       ] ;
+                       terms:description "Represents an observation event in which one or more environmental properties are measured at a specific location and time. An observation links the observed property, sensor, platform, result, and contextual metadata."@en ;
+                       terms:title "Meteorological Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ObservationGrid
+meteo_core:ObservationGrid rdf:type owl:Class ;
+                           rdfs:subClassOf meteo_core:LocationType ;
+                           terms:description "Represents a structured spatial framework used to organize observational data collected across multiple geographic regions or monitoring locations. Observation grids support systematic storage and analysis of distributed measurements."@en ;
+                           rdfs:label "Observation Grid"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Platform
+meteo_core:Platform rdf:type owl:Class ;
+                    rdfs:subClassOf meteo_core:MeteoCore ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty meteo_core:hasDataProvider ;
+                                      owl:someValuesFrom meteo_core:DataProvider
+                                    ] ;
+                    terms:description "Represents the infrastructure or system that hosts sensors and supports the collection of meteorological observations. Examples include weather stations, satellites, aircraft, ocean buoys, mobile monitoring units, and remote sensing platforms."@en ;
+                    rdfs:label "Observation Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Point
+meteo_core:Point rdf:type owl:Class ;
+                 rdfs:subClassOf meteo_core:LocationType ;
+                 terms:description "Represents a specific geographic position defined by coordinates such as latitude and longitude. Point locations are commonly used to identify weather stations, sensor locations, or precise observation sites."@en ;
+                 rdfs:label "Point Location"@en .
+
+
+###  http://meteo_onto.org/meteo_core/PolicyDocument
+meteo_core:PolicyDocument rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:TextualData ;
+                          terms:description "Represents an official document defining regulations, governance principles, policies, or institutional frameworks relevant to meteorological and environmental management activities."@en ;
+                          rdfs:label "Policy Document"@en .
+
+
+###  http://meteo_onto.org/meteo_core/PolicyDocumentResult
+meteo_core:PolicyDocumentResult rdf:type owl:Class ;
+                                rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/PressRelease
+meteo_core:PressRelease rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:TextualData ;
+                        terms:description "Represents an official communication intended for public dissemination regarding weather events, environmental findings, institutional announcements, or emergency information."@en ;
+                        rdfs:label "Press Release"@en .
+
+
+###  http://meteo_onto.org/meteo_core/PressReleaseResult
+meteo_core:PressReleaseResult rdf:type owl:Class ;
+                              rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/Procedure
+meteo_core:Procedure rdf:type owl:Class ;
+                     rdfs:subClassOf meteo_core:MeteoCore ;
+                     rdfs:label "Procedure"@en ;
+                     skos:definition "Defines Algorithms/Procedures used by Weather/Climate Model"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Radar
+meteo_core:Radar rdf:type owl:Class ;
+                 rdfs:subClassOf meteo_core:Platform ;
+                 terms:description "Represents a radar-based observation platform used to remotely detect and monitor atmospheric phenomena such as precipitation, storm movement, cloud structures, and wind patterns."@en ;
+                 rdfs:label "Weather Radar Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/RadarImageData
+meteo_core:RadarImageData rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:ImageData ;
+                          terms:description "Represents image data produced by radar observation systems used to visualize atmospheric conditions such as precipitation intensity, storm structures, and weather system movement."@en ;
+                          rdfs:label "Radar Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/RadarImageResult
+meteo_core:RadarImageResult rdf:type owl:Class ;
+                            rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/RadarNumericData
+meteo_core:RadarNumericData rdf:type owl:Class ;
+                            rdfs:subClassOf meteo_core:NumericData ;
+                            terms:description "Represents quantitative meteorological information derived from radar observation systems. Examples include reflectivity values, precipitation intensity estimates, radial velocity measurements, and storm-related parameters."@en ;
+                            rdfs:label "Radar Numeric Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/RadarNumericResult
+meteo_core:RadarNumericResult rdf:type owl:Class ;
+                              rdfs:subClassOf meteo_core:NumericResult .
+
+
+###  http://meteo_onto.org/meteo_core/RadarObsevation
+meteo_core:RadarObsevation rdf:type owl:Class ;
+                           rdfs:subClassOf meteo_core:Observation ;
+                           terms:description "Represents an observation produced through radar sensing technologies used to monitor precipitation, storm systems, atmospheric structures, or wind patterns."@en ;
+                           rdfs:label "Radar Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/RasterTile
+meteo_core:RasterTile rdf:type owl:Class ;
+                      rdfs:subClassOf meteo_core:LocationType ;
+                      terms:description "Represents a spatially partitioned section of raster-based geospatial data used to efficiently store, process, and visualize meteorological or environmental information. Raster tiles are commonly used for satellite imagery, weather maps, and large-scale environmental datasets."@en ;
+                      rdfs:label "Raster Tile"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ReanalysisNumericData
+meteo_core:ReanalysisNumericData rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:NumericData ;
+                                 terms:description "Represents numerical datasets generated through reanalysis systems that combine historical observations with numerical model outputs to produce consistent reconstructions of past environmental and atmospheric conditions."@en ;
+                                 rdfs:label "Reanalysis Numeric Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ReanalysisNumericResult
+meteo_core:ReanalysisNumericResult rdf:type owl:Class ;
+                                   rdfs:subClassOf meteo_core:NumericResult .
+
+
+###  http://meteo_onto.org/meteo_core/ReanalysisSystem
+meteo_core:ReanalysisSystem rdf:type owl:Class ;
+                            rdfs:subClassOf meteo_core:Platform ;
+                            terms:description "Represents a computational system that integrates historical observations and model outputs to generate consistent retrospective datasets describing past atmospheric and environmental conditions."@en ;
+                            rdfs:label "Reanalysis Data Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ReanalysisSystemObsevation
+meteo_core:ReanalysisSystemObsevation rdf:type owl:Class ;
+                                      rdfs:subClassOf meteo_core:Observation ;
+                                      terms:description "Represents an observation or derived dataset generated through reanalysis systems that integrate historical observations with model outputs to reconstruct environmental conditions."@en ;
+                                      rdfs:label "Reanalysis System Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/RemoteSenor
+meteo_core:RemoteSenor rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:Sensor ;
+                       terms:description "Represents a sensor that observes and measures environmental properties from a distance without direct physical contact with the observed phenomenon. Examples include satellite sensors, weather radar systems, lidar systems, and airborne remote sensing instruments."@en ;
+                       rdfs:label "Remote Sensing Sensor"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ResearchPublication
+meteo_core:ResearchPublication rdf:type owl:Class ;
+                               rdfs:subClassOf meteo_core:TextualData ;
+                               terms:description "Represents a scientific or scholarly document presenting meteorological or environmental research findings, methodologies, analyses, and conclusions."@en ;
+                               rdfs:label "Research Publication"@en .
+
+
+###  http://meteo_onto.org/meteo_core/ResearchPublicationResult
+meteo_core:ResearchPublicationResult rdf:type owl:Class ;
+                                     rdfs:subClassOf meteo_core:TextResult .
+
+
+###  http://meteo_onto.org/meteo_core/Result
+meteo_core:Result rdf:type owl:Class ;
+                  rdfs:subClassOf meteo_core:MeteoCore ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty meteo_core:hasData ;
+                                    owl:someValuesFrom meteo_core:Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty meteo_core:hasUnit ;
+                                    owl:someValuesFrom meteo_core:Unit
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty meteo_core:isResultOf ;
+                                    owl:someValuesFrom meteo_core:Observation
+                                  ] ;
+                  terms:description "Represents the outcome produced by a meteorological observation process. This may include measured values, units of measurement, timestamps, quality indicators, or processed outputs generated from sensor observations."@en ;
+                  rdfs:label "Observation Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/RiverGauge
+meteo_core:RiverGauge rdf:type owl:Class ;
+                      rdfs:subClassOf meteo_core:Platform ;
+                      terms:description "Represents a monitoring platform installed along rivers or water bodies for measuring hydrological and environmental variables such as water level, flow rate, precipitation, and related observations."@en ;
+                      rdfs:label "River Gauge Platform" .
+
+
+###  http://meteo_onto.org/meteo_core/RiverGaugeObsevation
+meteo_core:RiverGaugeObsevation rdf:type owl:Class ;
+                                rdfs:subClassOf meteo_core:Observation ;
+                                terms:description "Represents an observation collected through river gauge monitoring systems measuring hydrological and environmental conditions such as water level, discharge, or related variables."@en ;
+                                rdfs:label "River Gauge Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SateliteNumericData
+meteo_core:SateliteNumericData rdf:type owl:Class ;
+                               rdfs:subClassOf meteo_core:NumericData ;
+                               terms:description "Represents quantitative data derived from satellite observation systems and remote sensing instruments. Examples include atmospheric measurements, surface temperature estimates, cloud properties, and environmental indicators collected across large geographic areas."@en ;
+                               rdfs:label "Satellite Numeric Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SateliteNumericResult
+meteo_core:SateliteNumericResult rdf:type owl:Class ;
+                                 rdfs:subClassOf meteo_core:NumericResult .
+
+
+###  http://meteo_onto.org/meteo_core/Satellite
+meteo_core:Satellite rdf:type owl:Class ;
+                     rdfs:subClassOf meteo_core:Platform ;
+                     terms:description "Represents a space-based observation platform equipped with remote sensing instruments for monitoring atmospheric, oceanic, and terrestrial conditions across large geographic regions."@en ;
+                     rdfs:label "Satellite Observation Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SatelliteImageData
+meteo_core:SatelliteImageData rdf:type owl:Class ;
+                              rdfs:subClassOf meteo_core:ImageData ;
+                              terms:description "Represents image data acquired through satellite-based remote sensing systems for observing atmospheric, terrestrial, and oceanic conditions over large geographic regions."@en ;
+                              rdfs:label "Satellite Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SatelliteImageResult
+meteo_core:SatelliteImageResult rdf:type owl:Class ;
+                                rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/SatelliteObsevation
+meteo_core:SatelliteObsevation rdf:type owl:Class ;
+                               rdfs:subClassOf meteo_core:Observation ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty meteo_core:madeBySensor ;
+                                                 owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty meteo_core:isHostedBy ;
+                                                                      owl:someValuesFrom meteo_core:Satellite
+                                                                    ]
+                                               ] ;
+                               terms:description "Represents an observation collected through satellite-based remote sensing systems monitoring atmospheric, terrestrial, or oceanic conditions across large geographic regions."@en ;
+                               rdfs:label "Satellite Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Sensor
+meteo_core:Sensor rdf:type owl:Class ;
+                  rdfs:subClassOf meteo_core:MeteoCore ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty meteo_core:isHostedBy ;
+                                    owl:someValuesFrom meteo_core:Platform
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty meteo_core:madeObservation ;
+                                    owl:someValuesFrom meteo_core:Observation
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty meteo_core:observe ;
+                                    owl:someValuesFrom meteo_core:ObservableProperty
+                                  ] ;
+                  terms:description "Represents an instrument or device used to detect, measure, and collect environmental or atmospheric data. Examples include thermometers, rain gauges, barometers, anemometers, radar systems, and humidity sensors."@en ;
+                  rdfs:label "Meteorological Sensor"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Server
+meteo_core:Server rdf:type owl:Class ;
+                  rdfs:subClassOf meteo_core:Platform ;
+                  rdfs:label "Server" ;
+                  skos:definition "Server host in local or Internet/Remote platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Settlement
+meteo_core:Settlement rdf:type owl:Class ;
+                      rdfs:subClassOf meteo_core:AdminLocation ;
+                      terms:description "Represents an incorporated urban administrative area characterized by defined boundaries, population concentration, and local governance structures. Cities are commonly used as reference locations for meteorological observations and reporting."@en ;
+                      rdfs:label "Settlement"@en .
+
+
+###  http://meteo_onto.org/meteo_core/StateProvince
+meteo_core:StateProvince rdf:type owl:Class ;
+                         rdfs:subClassOf meteo_core:AdministrativeArea ;
+                         terms:description "Represents a primary subnational administrative division within a country. Examples include states, provinces, territories, or equivalent regional administrative units."@en ;
+                         rdfs:label "State or Province"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SubContinent
+meteo_core:SubContinent rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:AdministrativeArea ;
+                        terms:description "Represents a large geographic region forming a subdivision of a continent based on geographic, cultural, climatic, or geopolitical characteristics."@en ;
+                        rdfs:label "Subcontinent"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SurveyImageData
+meteo_core:SurveyImageData rdf:type owl:Class ;
+                           rdfs:subClassOf meteo_core:ImageData ;
+                           terms:description "Represents image data collected during field surveys, environmental assessments, or observation campaigns used for analysis and documentation purposes."@en ;
+                           rdfs:label "Survey Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SurveyImageResult
+meteo_core:SurveyImageResult rdf:type owl:Class ;
+                             rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/SurveyVideoData
+meteo_core:SurveyVideoData rdf:type owl:Class ;
+                           rdfs:subClassOf meteo_core:VideoData ;
+                           terms:description "Represents video recordings collected during field surveys, environmental assessments, or observation campaigns for documentation and analysis purposes."@en ;
+                           rdfs:label "Survey Video Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/SurveyVideoResult
+meteo_core:SurveyVideoResult rdf:type owl:Class ;
+                             rdfs:subClassOf meteo_core:VideoResult .
+
+
+###  http://meteo_onto.org/meteo_core/TextResult
+meteo_core:TextResult rdf:type owl:Class ;
+                      rdfs:subClassOf meteo_core:Result ;
+                      terms:description "Represents an observation result expressed in textual form. Examples include weather summaries, alerts, forecasts, reports, warnings, annotations, or descriptive observation notes."@en ;
+                      rdfs:label "Textual Observation Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/TextualData
+meteo_core:TextualData rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:Data ;
+                       rdfs:label "Represents meteorological or environmental information encoded in textual form, including reports, notices, publications, and descriptive records."@en ,
+                                  "Textual Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Time
+meteo_core:Time rdf:type owl:Class ;
+                rdfs:subClassOf meteo_core:MeteoCore ;
+                terms:description "Represents temporal concepts including instants, intervals, and durations used in meteorological observations and data."@en ;
+                rdfs:label "Time"@en .
+
+
+###  http://meteo_onto.org/meteo_core/TimeDuration
+meteo_core:TimeDuration rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:Time ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty meteo_core:hasUnit ;
+                                          owl:someValuesFrom meteo_core:Unit
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty meteo_core:hasDuration ;
+                                          owl:someValuesFrom xsd:decimal
+                                        ] ;
+                        terms:description "Represents the amount or length of time between two temporal points."@en ;
+                        rdfs:label "Time Duration"@en .
+
+
+###  http://meteo_onto.org/meteo_core/TimeInstant
+meteo_core:TimeInstant rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:Time ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:hasUnit ;
+                                         owl:someValuesFrom meteo_core:Unit
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty meteo_core:hasTime ;
+                                         owl:someValuesFrom xsd:dateTime
+                                       ] ;
+                       terms:description "Represents a specific point in time at which an observation or event occurs."@en ;
+                       rdfs:label "Time Instant"@en .
+
+
+###  http://meteo_onto.org/meteo_core/TimeInterval
+meteo_core:TimeInterval rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:Time ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty meteo_core:hasBeginTime ;
+                                          owl:someValuesFrom meteo_core:TimeInstant
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty meteo_core:hasEndTime ;
+                                          owl:someValuesFrom meteo_core:TimeInstant
+                                        ] ;
+                        rdfs:label "Represents a continuous temporal interval defined by a start and end time."@en ,
+                                   "Time Interval"@en .
+
+
+###  http://meteo_onto.org/meteo_core/TimeResolution
+meteo_core:TimeResolution rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:Time .
+
+
+###  http://meteo_onto.org/meteo_core/TimeZone
+meteo_core:TimeZone rdf:type owl:Class ;
+                    rdfs:subClassOf meteo_core:Time .
+
+
+###  http://meteo_onto.org/meteo_core/UAVImageData
+meteo_core:UAVImageData rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:ImageData ;
+                        terms:description "Represents image data collected using unmanned aerial vehicles equipped with imaging sensors or environmental monitoring instruments. UAV image data supports flexible and localized observation activities."@en ;
+                        rdfs:label "UAV Image Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/UAVImageResult
+meteo_core:UAVImageResult rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:ImageResult .
+
+
+###  http://meteo_onto.org/meteo_core/UAVVideoData
+meteo_core:UAVVideoData rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:VideoData ;
+                        rdfs:label "Represents video data collected using unmanned aerial vehicles equipped with imaging or environmental monitoring systems. UAV video supports localized and flexible observation activities."@en ,
+                                   "UAV Video Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/UAVVideoResult
+meteo_core:UAVVideoResult rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:VideoResult .
+
+
+###  http://meteo_onto.org/meteo_core/Unit
+meteo_core:Unit rdf:type owl:Class ;
+                rdfs:subClassOf meteo_core:MeteoCore ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty meteo_core:isUnitOf ;
+                                  owl:someValuesFrom [ rdf:type owl:Class ;
+                                                       owl:unionOf ( meteo_core:Result
+                                                                     meteo_core:TimeDuration
+                                                                     meteo_core:TimeInstant
+                                                                   )
+                                                     ]
+                                ] ;
+                terms:description "Represents a standardized unit used to express the value of a meteorological observation or result. Units provide meaning and scale to measured data and enable consistent interpretation and comparison across datasets. Examples include degrees Celsius (°C) for temperature, hectopascals (hPa) for atmospheric pressure, millimeters (mm) for precipitation, meters per second (m/s) for wind speed, and percent (%) for humidity."@en ;
+                rdfs:label "Measurement Unit"@en .
+
+
+###  http://meteo_onto.org/meteo_core/Vessel
+meteo_core:Vessel rdf:type owl:Class ;
+                  rdfs:subClassOf meteo_core:Platform ;
+                  terms:description "Represents a mobile water-based platform used to collect meteorological, oceanographic, or environmental observations. Examples include research ships and instrumented vessels."@en ;
+                  rdfs:label "Marine Observation Vessel"@en .
+
+
+###  http://meteo_onto.org/meteo_core/VesselObsevation
+meteo_core:VesselObsevation rdf:type owl:Class ;
+                            rdfs:subClassOf meteo_core:Observation ;
+                            terms:description "Represents an observation collected from marine vessels or research ships equipped with meteorological or oceanographic sensors during movement or field operations."@en ;
+                            rdfs:label "Vessel Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/VideoData
+meteo_core:VideoData rdf:type owl:Class ;
+                     rdfs:subClassOf meteo_core:Data ;
+                     terms:description "Represents meteorological or environmental information represented as moving visual media collected, observed, or generated from monitoring systems."@en ;
+                     rdfs:label "Video Data"@en .
+
+
+###  http://meteo_onto.org/meteo_core/VideoResult
+meteo_core:VideoResult rdf:type owl:Class ;
+                       rdfs:subClassOf meteo_core:Result ;
+                       terms:description "Represents an observation result provided as video content generated from meteorological observations or monitoring systems. Examples include weather surveillance recordings, animated radar sequences, satellite time-lapse imagery, and environmental monitoring footage."@en ;
+                       rdfs:label "Video Observation Result"@en .
+
+
+###  http://meteo_onto.org/meteo_core/VirtualSensor
+meteo_core:VirtualSensor rdf:type owl:Class ;
+                         rdfs:subClassOf meteo_core:Sensor .
+
+
+###  http://meteo_onto.org/meteo_core/WeatherModel
+meteo_core:WeatherModel rdf:type owl:Class ;
+                        rdfs:subClassOf meteo_core:MeteorologicalModel ;
+                        terms:description "Represents a computational system used to simulate atmospheric processes and generate weather predictions using observational inputs and numerical forecasting techniques."@en ;
+                        rdfs:label "Weather Forecast Model Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/WeatherModelObsevation
+meteo_core:WeatherModelObsevation rdf:type owl:Class ;
+                                  rdfs:subClassOf meteo_core:Observation ;
+                                  terms:description "Represents an observation or output generated by numerical weather prediction systems through computational simulation and forecasting processes."@en ;
+                                  rdfs:label "Weather Model Observation"@en .
+
+
+###  http://meteo_onto.org/meteo_core/WeatherStation
+meteo_core:WeatherStation rdf:type owl:Class ;
+                          rdfs:subClassOf meteo_core:Platform ;
+                          terms:description "Represents a fixed observation platform equipped with meteorological sensors for collecting local atmospheric and environmental measurements such as temperature, humidity, pressure, and wind conditions."@en ;
+                          rdfs:label "Weather Station Platform"@en .
+
+
+###  http://meteo_onto.org/meteo_core/WeatherStationObsevation
+meteo_core:WeatherStationObsevation rdf:type owl:Class ;
+                                    rdfs:subClassOf meteo_core:Observation ;
+                                    terms:description "Represents an observation collected from a fixed weather station equipped with sensors that monitor local atmospheric conditions such as temperature, humidity, pressure, and wind characteristics."@en ;
+                                    rdfs:label "Weather Station Observation"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/Celsius
+meteo_core:Celsius rdf:type owl:NamedIndividual ,
+                            meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/DeciBels
+meteo_core:DeciBels rdf:type owl:NamedIndividual ,
+                             meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/DeciBelsRelativeToZ
+meteo_core:DeciBelsRelativeToZ rdf:type owl:NamedIndividual ,
+                                        meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/Fraction
+meteo_core:Fraction rdf:type owl:NamedIndividual ,
+                             meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/Kelvin
+meteo_core:Kelvin rdf:type owl:NamedIndividual ,
+                           meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/MeterPerSecond
+meteo_core:MeterPerSecond rdf:type owl:NamedIndividual ,
+                                   meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/Millimeter
+meteo_core:Millimeter rdf:type owl:NamedIndividual ,
+                               meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/PartsPerMillion
+meteo_core:PartsPerMillion rdf:type owl:NamedIndividual ,
+                                    meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/Percent
+meteo_core:Percent rdf:type owl:NamedIndividual ,
+                            meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/Unitless
+meteo_core:Unitless rdf:type owl:NamedIndividual ,
+                             meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/WattPerSquareMeter
+meteo_core:WattPerSquareMeter rdf:type owl:NamedIndividual ,
+                                       meteo_core:Unit .
+
+
+###  http://meteo_onto.org/meteo_core/ob1
+meteo_core:ob1 rdf:type owl:NamedIndividual ,
+                        meteo_core:Observation .
+
+
+###  http://meteo_onto.org/meteo_core/r1
+meteo_core:r1 rdf:type owl:NamedIndividual ,
+                       meteo_core:Result ;
+              meteo_core:isResultOf meteo_core:ob1 .
+
+
+###  http://meteo_onto.org/meteo_core/DataCollection/copernicus/sentinel2_l2a
+<http://meteo_onto.org/meteo_core/DataCollection/copernicus/sentinel2_l2a> rdf:type owl:NamedIndividual ,
+                                                                                    meteo_core:DataCollection ;
+                                                                           meteo_core:isProvidedBy <http://meteo_onto.org/meteo_core/DataProvider/GovernmentalDataProvider/copernicus> ;
+                                                                           meteo_core:hasDescription "Copernicus Sentinel-2 Level-2A dataset provides orthorectified Bottom-Of-Atmosphere surface reflectance imagery from the Sentinel-2 Multispectral Instrument. The dataset supports vegetation, agriculture, soil, water, coastal, land cover, disaster, and environmental monitoring applications using multispectral optical satellite observations." ;
+                                                                           meteo_core:hasName "Sentinel-2 L2A" ;
+                                                                           meteo_core:hasURL "https://sentinels.copernicus.eu/sentinel-data-access/sentinel-products/sentinel-2-data-products"^^xsd:anyURI .
+
+
+###  http://meteo_onto.org/meteo_core/DataProvider/GovernmentalDataProvider/copernicus
+<http://meteo_onto.org/meteo_core/DataProvider/GovernmentalDataProvider/copernicus> rdf:type owl:NamedIndividual ,
+                                                                                             meteo_core:GovernmentalDataProvider ;
+                                                                                    meteo_core:isDataProviderOf <http://meteo_onto.org/meteo_core/Platform/Satellite/sentinel2> ;
+                                                                                    meteo_core:provide <http://meteo_onto.org/meteo_core/DataCollection/copernicus/sentinel2_l2a> ;
+                                                                                    meteo_core:hasDescription "European Earth observation programme." ;
+                                                                                    meteo_core:hasName "Copernicus Programme" ;
+                                                                                    meteo_core:hasURL "https://www.copernicus.eu"^^xsd:anyURI .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/air_temperature
+<http://meteo_onto.org/meteo_core/ObservableProperty/air_temperature> rdf:type owl:NamedIndividual ,
+                                                                               meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/atmosphoric_pressure
+<http://meteo_onto.org/meteo_core/ObservableProperty/atmosphoric_pressure> rdf:type owl:NamedIndividual ,
+                                                                                    meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/brightness_temperature
+<http://meteo_onto.org/meteo_core/ObservableProperty/brightness_temperature> rdf:type owl:NamedIndividual ,
+                                                                                      meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/carbon_dioxide_content
+<http://meteo_onto.org/meteo_core/ObservableProperty/carbon_dioxide_content> rdf:type owl:NamedIndividual ,
+                                                                                      meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/drought_index
+<http://meteo_onto.org/meteo_core/ObservableProperty/drought_index> rdf:type owl:NamedIndividual ,
+                                                                             meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/normalized_difference_vegetation_index
+<http://meteo_onto.org/meteo_core/ObservableProperty/normalized_difference_vegetation_index> rdf:type owl:NamedIndividual ,
+                                                                                                      meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/precipitation_amount
+<http://meteo_onto.org/meteo_core/ObservableProperty/precipitation_amount> rdf:type owl:NamedIndividual ,
+                                                                                    meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/pressure_msl
+<http://meteo_onto.org/meteo_core/ObservableProperty/pressure_msl> rdf:type owl:NamedIndividual ,
+                                                                            meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/radar_reflectivity
+<http://meteo_onto.org/meteo_core/ObservableProperty/radar_reflectivity> rdf:type owl:NamedIndividual ,
+                                                                                  meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/relative_humidity
+<http://meteo_onto.org/meteo_core/ObservableProperty/relative_humidity> rdf:type owl:NamedIndividual ,
+                                                                                 meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/sea_surface_temperature
+<http://meteo_onto.org/meteo_core/ObservableProperty/sea_surface_temperature> rdf:type owl:NamedIndividual ,
+                                                                                       meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/solar_irradiance
+<http://meteo_onto.org/meteo_core/ObservableProperty/solar_irradiance> rdf:type owl:NamedIndividual ,
+                                                                                meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/surface_backwards_scattering_coefficient
+<http://meteo_onto.org/meteo_core/ObservableProperty/surface_backwards_scattering_coefficient> rdf:type owl:NamedIndividual ,
+                                                                                                        meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/surface_pressure
+<http://meteo_onto.org/meteo_core/ObservableProperty/surface_pressure> rdf:type owl:NamedIndividual ,
+                                                                                meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/wind_direction
+<http://meteo_onto.org/meteo_core/ObservableProperty/wind_direction> rdf:type owl:NamedIndividual ,
+                                                                              meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty/wind_speed
+<http://meteo_onto.org/meteo_core/ObservableProperty/wind_speed> rdf:type owl:NamedIndividual ,
+                                                                          meteo_core:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/Platform/Satellite/sentinel2
+<http://meteo_onto.org/meteo_core/Platform/Satellite/sentinel2> rdf:type owl:NamedIndividual ,
+                                                                         meteo_core:Satellite ;
+                                                                meteo_core:hasDataProvider <http://meteo_onto.org/meteo_core/DataProvider/GovernmentalDataProvider/copernicus> ;
+                                                                meteo_core:hasDescription "Sentinel-2 Satellite Platform provides multispectral optical Earth observation imagery for vegetation, agriculture, soil, water, coastal, land cover, disaster, and environmental monitoring." ;
+                                                                meteo_core:hasName "Sentinel-2 Satellite Platform" ;
+                                                                meteo_core:hasURL "https://sentinels.copernicus.eu/sentinel-data-access/sentinel-products/sentinel-2-data-products"^^xsd:anyURI .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://purl.org/dc/elements/1.1/> terms:modified "2012-06-14"^^xsd:date ;
+                                   terms:publisher <http://purl.org/dc/aboutdcmi#DCMI> ;
+                                   terms:title "Dublin Core Metadata Element Set, Version 1.1"@en .
+
+
+<http://purl.org/dc/elements/1.1/contributor> terms:description "The guidelines for using names of persons or organizations as creators also apply to contributors.  Typically, the name of a Contributor should be used to indicate the entity."@en ;
+                                              terms:issued "1999-07-02"^^xsd:date ;
+                                              rdfs:comment "An entity responsible for making contributions to the resource."@en ;
+                                              rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                              rdfs:label "Contributor"@en ;
+                                              skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/contributor) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/coverage> terms:description "Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. Temporal topic may be a named period, date, or date range. A jurisdiction may be a named administrative entity or a geographic place to which the resource applies. Recommended practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names [[TGN](https://www.getty.edu/research/tools/vocabulary/tgn/index.html)]. Where appropriate, named places or time periods may be used in preference to numeric identifiers such as sets of coordinates or date ranges."@en ;
+                                           terms:issued "1999-07-02"^^xsd:date ;
+                                           rdfs:comment "The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                           rdfs:label "Coverage"@en ;
+                                           skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/coverage) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/creator> terms:description "Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity."@en ;
+                                          terms:issued "1999-07-02"^^xsd:date ;
+                                          rdfs:comment "An entity primarily responsible for making the resource."@en ;
+                                          rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                          rdfs:label "Creator"@en ;
+                                          skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/date> terms:description "Date may be used to express temporal information at any level of granularity.  Recommended practice is to express the date, date/time, or period of time according to ISO 8601-1 [[ISO 8601-1](https://www.iso.org/iso-8601-date-and-time-format.html)] or a published profile of the ISO standard, such as the W3C Note on Date and Time Formats [[W3CDTF](https://www.w3.org/TR/NOTE-datetime)] or the Extended Date/Time Format Specification [[EDTF](http://www.loc.gov/standards/datetime/)].  If the full date is unknown, month and year (YYYY-MM) or just year (YYYY) may be used. Date ranges may be specified using ISO 8601 period of time specification in which start and end dates are separated by a '/' (slash) character.  Either the start or end date may be missing."@en ;
+                                       terms:issued "1999-07-02"^^xsd:date ;
+                                       rdfs:comment "A point or period of time associated with an event in the lifecycle of the resource."@en ;
+                                       rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                       rdfs:label "Date"@en ;
+                                       skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/date) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/description> terms:description "Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."@en ;
+                                              terms:issued "1999-07-02"^^xsd:date ;
+                                              rdfs:comment "An account of the resource."@en ;
+                                              rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                              rdfs:label "Description"@en ;
+                                              skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/description) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/format> terms:description "Recommended practice is to use a controlled vocabulary where available. For example, for file formats one could use the list of Internet Media Types [[MIME](https://www.iana.org/assignments/media-types/media-types.xhtml)]."@en ;
+                                         terms:issued "1999-07-02"^^xsd:date ;
+                                         rdfs:comment "The file format, physical medium, or dimensions of the resource."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         rdfs:label "Format"@en ;
+                                         skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/format) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/identifier> terms:description "Recommended practice is to identify the resource by means of a string conforming to an identification system."@en ;
+                                             terms:issued "1999-07-02"^^xsd:date ;
+                                             rdfs:comment "An unambiguous reference to the resource within a given context."@en ;
+                                             rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                             rdfs:label "Identifier"@en ;
+                                             skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/identifier) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/language> terms:description "Recommended practice is to use either a non-literal value representing a language from a controlled vocabulary such as ISO 639-2 or ISO 639-3, or a literal value consisting of an IETF Best Current Practice 47 [[IETF-BCP47](https://tools.ietf.org/html/bcp47)] language tag."@en ;
+                                           terms:issued "1999-07-02"^^xsd:date ;
+                                           rdfs:comment "A language of the resource."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                           rdfs:label "Language"@en ;
+                                           skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/language) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/publisher> terms:description "Examples of a Publisher include a person, an organization, or a service. Typically, the name of a Publisher should be used to indicate the entity."@en ;
+                                            terms:issued "1999-07-02"^^xsd:date ;
+                                            rdfs:comment "An entity responsible for making the resource available."@en ;
+                                            rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                            rdfs:label "Publisher"@en ;
+                                            skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/relation> terms:description "Recommended practice is to identify the related resource by means of a URI. If this is not possible or feasible, a string conforming to a formal identification system may be provided."@en ;
+                                           terms:issued "1999-07-02"^^xsd:date ;
+                                           rdfs:comment "A related resource."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                           rdfs:label "Relation"@en ;
+                                           skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/rights> terms:description "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights."@en ;
+                                         terms:issued "1999-07-02"^^xsd:date ;
+                                         rdfs:comment "Information about rights held in and over the resource."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         rdfs:label "Rights"@en ;
+                                         skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rights) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/source> terms:description "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
+                                         terms:issued "1999-07-02"^^xsd:date ;
+                                         rdfs:comment "A related resource from which the described resource is derived."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         rdfs:label "Source"@en ;
+                                         skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/source) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/subject> terms:description "Typically, the subject will be represented using keywords, key phrases, or classification codes.  Recommended best practice is to use a controlled vocabulary."@en ;
+                                          terms:issued "1999-07-02"^^xsd:date ;
+                                          rdfs:comment "The topic of the resource."@en ;
+                                          rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                          rdfs:label "Subject"@en ;
+                                          skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/subject) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/title> terms:issued "1999-07-02"^^xsd:date ;
+                                        rdfs:comment "A name given to the resource."@en ;
+                                        rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                        rdfs:label "Title"@en ;
+                                        skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/title) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/type> terms:description "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [[DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/)]. To describe the file format, physical medium, or dimensions of the resource, use the Format element."@en ;
+                                       terms:issued "1999-07-02"^^xsd:date ;
+                                       rdfs:comment "The nature or genre of the resource."@en ;
+                                       rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                       rdfs:label "Type"@en ;
+                                       skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/type) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:AcademicDataProvider
+                meteo_core:CommercialDataProvider
+                meteo_core:FreeOpenSourceDataProvider
+                meteo_core:GovernmentalDataProvider
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:AdminLocation
+                meteo_core:Data
+                meteo_core:DataCollection
+                meteo_core:DataProvider
+                meteo_core:LocationType
+                meteo_core:ObservableProperty
+                meteo_core:Observation
+                meteo_core:Platform
+                meteo_core:Result
+                meteo_core:Sensor
+                meteo_core:Time
+                meteo_core:Unit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:BuoyObsevation
+                meteo_core:ClimateModelObsevation
+                meteo_core:CrowedSourcedObsevation
+                meteo_core:DroneObsevation
+                meteo_core:MarineObsevation
+                meteo_core:RadarObsevation
+                meteo_core:ReanalysisSystemObsevation
+                meteo_core:RiverGaugeObsevation
+                meteo_core:SatelliteObsevation
+                meteo_core:VesselObsevation
+                meteo_core:WeatherModelObsevation
+                meteo_core:WeatherStationObsevation
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:ClimateGrid
+                meteo_core:ForecastGrid
+                meteo_core:GridCell
+                meteo_core:ObservationGrid
+                meteo_core:Point
+                meteo_core:RasterTile
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:ClimateReportResult
+                meteo_core:EmergencyNoticeResult
+                meteo_core:EventSummaryReportResult
+                meteo_core:ForecastReportResult
+                meteo_core:GuidelineDocumentResult
+                meteo_core:PolicyDocumentResult
+                meteo_core:PressReleaseResult
+                meteo_core:ResearchPublicationResult
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:CrowdsourcedImageData
+                meteo_core:GroundCameraImageData
+                meteo_core:ModelGeneratedImageData
+                meteo_core:RadarImageData
+                meteo_core:SatelliteImageData
+                meteo_core:SurveyImageData
+                meteo_core:UAVImageData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:CrowdsourcedVideoResult
+                meteo_core:GroundCameraVideoResult
+                meteo_core:ModelGeneratedVideoResult
+                meteo_core:SurveyVideoResult
+                meteo_core:UAVVideoResult
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:GroundCameraImageResult
+                meteo_core:ModelGeneratedImageResult
+                meteo_core:RadarImageResult
+                meteo_core:SatelliteImageResult
+                meteo_core:SurveyImageResult
+                meteo_core:UAVImageResult
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:GroundSensorNumericData
+                meteo_core:RadarNumericData
+                meteo_core:ReanalysisNumericData
+                meteo_core:SateliteNumericData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:GroundSensorNumericResult
+                meteo_core:RadarNumericResult
+                meteo_core:ReanalysisNumericResult
+                meteo_core:SateliteNumericResult
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:ImageData
+                meteo_core:MapData
+                meteo_core:NumericData
+                meteo_core:TextualData
+                meteo_core:VideoData
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:ImageResult
+                meteo_core:MapResult
+                meteo_core:NumericResult
+                meteo_core:TextResult
+                meteo_core:VideoResult
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:ObservableProperty
+                meteo_core:Observation
+                meteo_core:Platform
+                meteo_core:Result
+                meteo_core:Sensor
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( meteo_core:TimeDuration
+                meteo_core:TimeInstant
+                meteo_core:TimeInterval
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
