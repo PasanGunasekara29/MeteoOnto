@@ -1,0 +1,536 @@
+@prefix : <http://meteo_onto.org/meteo_core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix meteo_core: <http://meteo_onto.org/meteo_core/> .
+@prefix meteo_data: <http://meteo_onto.org/meteo_data/> .
+@base <http://meteo_onto.org/meteo_core#> .
+
+<http://meteo_onto.org/meteo_core_sosa_ssn_align> rdf:type owl:Ontology ;
+                                                   owl:versionIRI meteo_core:SOSA_SSN_ALIGN_1 ;
+                                                   owl:imports <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core.ttl> ;
+                                                   terms:contributor "Prof. Dulani Meedeniya"@en ;
+                                                   terms:creator "H. K. Pasan Gunasekara"@en ;
+                                                   terms:description "This ontology represents a meteorological domain ontology designed to semantically model and manage real-time weather observations, historical climate observations, and reanalysis datasets. The ontology supports metadata-driven semantic integration, interoperability, and scalable environmental data management for enterprise knowledge graph systems."@en ;
+                                                   terms:license "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                                   terms:title "Meteo_Onto_Core"@en ;
+                                                   owl:versionInfo "http://meteo_onto.org/meteo_core/SOSA_SSN_ALIGN_1"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/contributor
+terms:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+terms:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+terms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/issued
+terms:issued rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+terms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/modified
+terms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/publisher
+terms:publisher rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+terms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#note
+skos:note rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/wktLiteral
+meteo_core:wktLiteral rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/deploy
+meteo_core:deploy rdfs:subPropertyOf ssn:inDeployment .
+
+
+###  http://meteo_onto.org/meteo_core/hasDeployment
+meteo_core:hasDeployment rdfs:subPropertyOf ssn:hasDeployment .
+
+
+###  http://meteo_onto.org/meteo_core/hasMember
+meteo_core:hasMember rdfs:subPropertyOf sosa:hasMember .
+
+
+###  http://meteo_onto.org/meteo_core/hasObservationTime
+meteo_core:hasObservationTime rdfs:subPropertyOf sosa:phenomenonTime .
+
+
+###  http://meteo_onto.org/meteo_core/hasResult
+meteo_core:hasResult rdfs:subPropertyOf sosa:hasResult .
+
+
+###  http://meteo_onto.org/meteo_core/hosts
+meteo_core:hosts rdfs:subPropertyOf sosa:hosts .
+
+
+###  http://meteo_onto.org/meteo_core/implement
+meteo_core:implement rdfs:subPropertyOf ssn:implements .
+
+
+###  http://meteo_onto.org/meteo_core/isDeployedBy
+meteo_core:isDeployedBy rdfs:subPropertyOf ssn:deployedOnPlatform .
+
+
+###  http://meteo_onto.org/meteo_core/isDeploymentOf
+meteo_core:isDeploymentOf rdfs:subPropertyOf ssn:deployedSystem .
+
+
+###  http://meteo_onto.org/meteo_core/isHostedBy
+meteo_core:isHostedBy rdfs:subPropertyOf sosa:isHostedBy .
+
+
+###  http://meteo_onto.org/meteo_core/isImplementedBy
+meteo_core:isImplementedBy rdfs:subPropertyOf ssn:implementedBy .
+
+
+###  http://meteo_onto.org/meteo_core/isResultOf
+meteo_core:isResultOf rdfs:subPropertyOf sosa:isResultOf .
+
+
+###  http://meteo_onto.org/meteo_core/isUsedBy
+meteo_core:isUsedBy rdfs:subPropertyOf sosa:usedProcedure .
+
+
+###  http://meteo_onto.org/meteo_core/madeBySensor
+meteo_core:madeBySensor rdfs:subPropertyOf meteo_core:hasDataAttributeOf ,
+                                           sosa:madeBySensor .
+
+
+###  http://meteo_onto.org/meteo_core/observedProperty
+meteo_core:observedProperty rdfs:subPropertyOf sosa:observedProperty .
+
+
+###  http://meteo_onto.org/meteo_core/observes
+meteo_core:observes rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf sosa:observes .
+
+
+###  http://www.w3.org/ns/sosa/hasMember
+sosa:hasMember rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/hasResult
+sosa:hasResult rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/hosts
+sosa:hosts rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/isHostedBy
+sosa:isHostedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/isResultOf
+sosa:isResultOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/madeBySensor
+sosa:madeBySensor rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/observedProperty
+sosa:observedProperty rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/observes
+sosa:observes rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/phenomenonTime
+sosa:phenomenonTime rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/sosa/usedProcedure
+sosa:usedProcedure rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/ssn/deployedOnPlatform
+ssn:deployedOnPlatform rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/ssn/deployedSystem
+ssn:deployedSystem rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/ssn/hasDeployment
+ssn:hasDeployment rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/ssn/implementedBy
+ssn:implementedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/ssn/implements
+ssn:implements rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/ns/ssn/inDeployment
+ssn:inDeployment rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/hasResultTime
+meteo_core:hasResultTime rdfs:subPropertyOf sosa:hasSimpleResult .
+
+
+###  http://www.w3.org/ns/sosa/hasSimpleResult
+sosa:hasSimpleResult rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/DataCollection
+meteo_core:DataCollection rdfs:subClassOf sosa:ObservationCollection .
+
+
+###  http://meteo_onto.org/meteo_core/Deployment
+meteo_core:Deployment rdfs:subClassOf ssn:Deployment .
+
+
+###  http://meteo_onto.org/meteo_core/MeteorologicalModel
+meteo_core:MeteorologicalModel rdf:type owl:Class ;
+                               rdfs:subClassOf ssn:System .
+
+
+###  http://meteo_onto.org/meteo_core/ObservableProperty
+meteo_core:ObservableProperty rdfs:subClassOf sosa:ObservableProperty .
+
+
+###  http://meteo_onto.org/meteo_core/Observation
+meteo_core:Observation rdfs:subClassOf sosa:Observation .
+
+
+###  http://meteo_onto.org/meteo_core/Platform
+meteo_core:Platform rdfs:subClassOf sosa:Platform .
+
+
+###  http://meteo_onto.org/meteo_core/Procedure
+meteo_core:Procedure rdfs:subClassOf sosa:Procedure .
+
+
+###  http://meteo_onto.org/meteo_core/Result
+meteo_core:Result rdfs:subClassOf sosa:Result .
+
+
+###  http://meteo_onto.org/meteo_core/Sensor
+meteo_core:Sensor rdfs:subClassOf sosa:Sensor .
+
+
+###  http://www.w3.org/ns/sosa/ObservableProperty
+sosa:ObservableProperty rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/Observation
+sosa:Observation rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/ObservationCollection
+sosa:ObservationCollection rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/Platform
+sosa:Platform rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/Procedure
+sosa:Procedure rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/Result
+sosa:Result rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/Sensor
+sosa:Sensor rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/ssn/Deployment
+ssn:Deployment rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/ssn/System
+ssn:System rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/Celsius
+meteo_core:Celsius rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/DeciBels
+meteo_core:DeciBels rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/DeciBelsRelativeToZ
+meteo_core:DeciBelsRelativeToZ rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/Fraction
+meteo_core:Fraction rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/Kelvin
+meteo_core:Kelvin rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/MeterPerSecond
+meteo_core:MeterPerSecond rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/Millimeter
+meteo_core:Millimeter rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/PartsPerMillion
+meteo_core:PartsPerMillion rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/Percent
+meteo_core:Percent rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/Unitless
+meteo_core:Unitless rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/WattPerSquareMeter
+meteo_core:WattPerSquareMeter rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/air_temperature
+meteo_core:air_temperature rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/brightness_temperature
+meteo_core:brightness_temperature rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/carbon_dioxide_content
+meteo_core:carbon_dioxide_content rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/drought_index
+meteo_core:drought_index rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/normalized_difference_vegetation_index
+meteo_core:normalized_difference_vegetation_index rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/precipitation_amount
+meteo_core:precipitation_amount rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/radar_reflectivity
+meteo_core:radar_reflectivity rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/relative_humidity
+meteo_core:relative_humidity rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/sea_ice_area_fraction
+meteo_core:sea_ice_area_fraction rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/sea_surface_temperature
+meteo_core:sea_surface_temperature rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/solar_irradiance
+meteo_core:solar_irradiance rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/surface_backwards_scattering_coefficient
+meteo_core:surface_backwards_scattering_coefficient rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/surface_temperature_anomaly
+meteo_core:surface_temperature_anomaly rdf:type owl:NamedIndividual .
+
+
+###  http://meteo_onto.org/meteo_core/wind_speed
+meteo_core:wind_speed rdf:type owl:NamedIndividual .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://purl.org/dc/elements/1.1/> terms:modified "2012-06-14"^^xsd:date ;
+                                   terms:publisher <http://purl.org/dc/aboutdcmi#DCMI> ;
+                                   terms:title "Dublin Core Metadata Element Set, Version 1.1"@en .
+
+
+<http://purl.org/dc/elements/1.1/contributor> terms:description "The guidelines for using names of persons or organizations as creators also apply to contributors.  Typically, the name of a Contributor should be used to indicate the entity."@en ;
+                                              terms:issued "1999-07-02"^^xsd:date ;
+                                              rdfs:comment "An entity responsible for making contributions to the resource."@en ;
+                                              rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                              rdfs:label "Contributor"@en ;
+                                              skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/contributor) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/coverage> terms:description "Spatial topic and spatial applicability may be a named place or a location specified by its geographic coordinates. Temporal topic may be a named period, date, or date range. A jurisdiction may be a named administrative entity or a geographic place to which the resource applies. Recommended practice is to use a controlled vocabulary such as the Getty Thesaurus of Geographic Names [[TGN](https://www.getty.edu/research/tools/vocabulary/tgn/index.html)]. Where appropriate, named places or time periods may be used in preference to numeric identifiers such as sets of coordinates or date ranges."@en ;
+                                           terms:issued "1999-07-02"^^xsd:date ;
+                                           rdfs:comment "The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                           rdfs:label "Coverage"@en ;
+                                           skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/coverage) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/creator> terms:description "Examples of a Creator include a person, an organization, or a service. Typically, the name of a Creator should be used to indicate the entity."@en ;
+                                          terms:issued "1999-07-02"^^xsd:date ;
+                                          rdfs:comment "An entity primarily responsible for making the resource."@en ;
+                                          rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                          rdfs:label "Creator"@en ;
+                                          skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/date> terms:description "Date may be used to express temporal information at any level of granularity.  Recommended practice is to express the date, date/time, or period of time according to ISO 8601-1 [[ISO 8601-1](https://www.iso.org/iso-8601-date-and-time-format.html)] or a published profile of the ISO standard, such as the W3C Note on Date and Time Formats [[W3CDTF](https://www.w3.org/TR/NOTE-datetime)] or the Extended Date/Time Format Specification [[EDTF](http://www.loc.gov/standards/datetime/)].  If the full date is unknown, month and year (YYYY-MM) or just year (YYYY) may be used. Date ranges may be specified using ISO 8601 period of time specification in which start and end dates are separated by a '/' (slash) character.  Either the start or end date may be missing."@en ;
+                                       terms:issued "1999-07-02"^^xsd:date ;
+                                       rdfs:comment "A point or period of time associated with an event in the lifecycle of the resource."@en ;
+                                       rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                       rdfs:label "Date"@en ;
+                                       skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/date) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/description> terms:description "Description may include but is not limited to: an abstract, a table of contents, a graphical representation, or a free-text account of the resource."@en ;
+                                              terms:issued "1999-07-02"^^xsd:date ;
+                                              rdfs:comment "An account of the resource."@en ;
+                                              rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                              rdfs:label "Description"@en ;
+                                              skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/description) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/format> terms:description "Recommended practice is to use a controlled vocabulary where available. For example, for file formats one could use the list of Internet Media Types [[MIME](https://www.iana.org/assignments/media-types/media-types.xhtml)]."@en ;
+                                         terms:issued "1999-07-02"^^xsd:date ;
+                                         rdfs:comment "The file format, physical medium, or dimensions of the resource."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         rdfs:label "Format"@en ;
+                                         skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/format) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/identifier> terms:description "Recommended practice is to identify the resource by means of a string conforming to an identification system."@en ;
+                                             terms:issued "1999-07-02"^^xsd:date ;
+                                             rdfs:comment "An unambiguous reference to the resource within a given context."@en ;
+                                             rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                             rdfs:label "Identifier"@en ;
+                                             skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/identifier) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/language> terms:description "Recommended practice is to use either a non-literal value representing a language from a controlled vocabulary such as ISO 639-2 or ISO 639-3, or a literal value consisting of an IETF Best Current Practice 47 [[IETF-BCP47](https://tools.ietf.org/html/bcp47)] language tag."@en ;
+                                           terms:issued "1999-07-02"^^xsd:date ;
+                                           rdfs:comment "A language of the resource."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                           rdfs:label "Language"@en ;
+                                           skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/language) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/publisher> terms:description "Examples of a Publisher include a person, an organization, or a service. Typically, the name of a Publisher should be used to indicate the entity."@en ;
+                                            terms:issued "1999-07-02"^^xsd:date ;
+                                            rdfs:comment "An entity responsible for making the resource available."@en ;
+                                            rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                            rdfs:label "Publisher"@en ;
+                                            skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/publisher) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/relation> terms:description "Recommended practice is to identify the related resource by means of a URI. If this is not possible or feasible, a string conforming to a formal identification system may be provided."@en ;
+                                           terms:issued "1999-07-02"^^xsd:date ;
+                                           rdfs:comment "A related resource."@en ;
+                                           rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                           rdfs:label "Relation"@en ;
+                                           skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/relation) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/rights> terms:description "Typically, rights information includes a statement about various property rights associated with the resource, including intellectual property rights."@en ;
+                                         terms:issued "1999-07-02"^^xsd:date ;
+                                         rdfs:comment "Information about rights held in and over the resource."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         rdfs:label "Rights"@en ;
+                                         skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rights) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/source> terms:description "The described resource may be derived from the related resource in whole or in part. Recommended best practice is to identify the related resource by means of a string conforming to a formal identification system."@en ;
+                                         terms:issued "1999-07-02"^^xsd:date ;
+                                         rdfs:comment "A related resource from which the described resource is derived."@en ;
+                                         rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                         rdfs:label "Source"@en ;
+                                         skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/source) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/subject> terms:description "Typically, the subject will be represented using keywords, key phrases, or classification codes.  Recommended best practice is to use a controlled vocabulary."@en ;
+                                          terms:issued "1999-07-02"^^xsd:date ;
+                                          rdfs:comment "The topic of the resource."@en ;
+                                          rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                          rdfs:label "Subject"@en ;
+                                          skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/subject) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/title> terms:issued "1999-07-02"^^xsd:date ;
+                                        rdfs:comment "A name given to the resource."@en ;
+                                        rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                        rdfs:label "Title"@en ;
+                                        skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/title) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+<http://purl.org/dc/elements/1.1/type> terms:description "Recommended practice is to use a controlled vocabulary such as the DCMI Type Vocabulary [[DCMI-TYPE](http://dublincore.org/documents/dcmi-type-vocabulary/)]. To describe the file format, physical medium, or dimensions of the resource, use the Format element."@en ;
+                                       terms:issued "1999-07-02"^^xsd:date ;
+                                       rdfs:comment "The nature or genre of the resource."@en ;
+                                       rdfs:isDefinedBy <http://purl.org/dc/elements/1.1/> ;
+                                       rdfs:label "Type"@en ;
+                                       skos:note "A [second property](/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/type) with the same name as this property has been declared in the [dcterms: namespace](http://purl.org/dc/terms/).  See the Introduction to the document [DCMI Metadata Terms](/specifications/dublin-core/dcmi-terms/) for an explanation."@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
