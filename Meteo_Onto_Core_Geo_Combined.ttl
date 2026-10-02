@@ -1,0 +1,944 @@
+@prefix : <http://meteo_onto.org/meteo_geo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix Geo: <http://meteo_onto.org/meteo_geo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix Core: <http://meteo_onto.org/meteo_core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@base <http://meteo_onto.org/meteo_geo#> .
+
+<http://meteo_onto.org/meteo_geo> rdf:type owl:Ontology ;
+                                   owl:versionIRI Geo:GEO1_0 ;
+                                   owl:imports <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core.ttl> ;
+                                   dc:contributor "Prof. Dulani Meedeniya"@en ;
+                                   dc:creator "H. K. Pasan Gunasekara"@en ;
+                                   dc:description "This ontology represents Geo Graphical Features with respect meteorological data"@en ;
+                                   dc:title "MeteoOnto_Geo"@en ;
+                                   terms:license "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                   rdfs:comment "An ontology for geographic features, locations, geometries, administrative areas, and spatial relations used with meteorological data."@en ;
+                                   rdfs:label "Meteorological Geospatial Ontology"@en ;
+                                   owl:versionInfo "http://meteo_onto.org/meteo_geo/GEO1_0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+terms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://meteo_onto.org/meteo_geo/WKTLiteral
+Geo:WKTLiteral rdf:type rdfs:Datatype ;
+               rdfs:comment "A datatype for geometry values represented as Well-Known Text (WKT)."@en ;
+               rdfs:label "Geo WKT Literal"@en ;
+               owl:equivalentClass Core:wktLiteral .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_geo/hasAdmin
+Geo:hasAdmin rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf Geo:hasContain ;
+             owl:inverseOf Geo:isAdminOf ;
+             rdf:type owl:TransitiveProperty ;
+             rdfs:domain Core:AdminLocation ;
+             rdfs:range Core:AdminLocation ;
+             owl:propertyChainAxiom ( Geo:hasAdmin
+                                      Geo:hasAdmin
+                                    ) ;
+             rdfs:comment "Links a geographic entity to an administrative area associated with it."@en ;
+             rdfs:label "has administrative area"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasContain
+Geo:hasContain rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf Geo:hasGeoPropertyOf ;
+               owl:inverseOf Geo:isWithIn ;
+               rdf:type owl:TransitiveProperty ;
+               rdfs:domain Geo:GeoFeature ;
+               rdfs:range Geo:GeoFeature ;
+               rdfs:comment "Relates a geographic feature to a feature or area that it contains."@en ;
+               rdfs:label "has containment relation"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasCountry
+Geo:hasCountry rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf Geo:hasAdmin ;
+               owl:inverseOf Geo:isCountryOf ;
+               rdfs:domain Core:SubContinent ;
+               rdfs:range Core:Country ;
+               rdfs:comment "Links a subcontinent or geographic entity to its country."@en ;
+               rdfs:label "has country"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasDistrict
+Geo:hasDistrict rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf Geo:hasAdmin ;
+                owl:inverseOf Geo:isDistrictOf ;
+                rdfs:domain Core:StateProvince ;
+                rdfs:range Core:District ;
+                rdfs:comment "Links a state or province to a district within it."@en ;
+                rdfs:label "has district"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasGeoPropertyOf
+Geo:hasGeoPropertyOf rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     owl:inverseOf Geo:isGeoPropertyOf ;
+                     rdf:type owl:TransitiveProperty ;
+                     rdfs:domain Geo:Geography ;
+                     rdfs:range Geo:Geography ;
+                     rdfs:comment "Links a geographic property to the geographic entity it describes."@en ;
+                     rdfs:label "has geographic property of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasGeometry
+Geo:hasGeometry rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf Geo:hasGeoPropertyOf ;
+                owl:inverseOf Geo:isGeometryOf ;
+                rdfs:domain Geo:GeoFeature ;
+                rdfs:range Geo:GeoGeometry ;
+                rdfs:comment "Links a geographic feature to a geometry representing its shape or spatial extent."@en ;
+                rdfs:label "has geometry"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasInstitue
+Geo:hasInstitue rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf Geo:hasGeoPropertyOf ;
+                owl:inverseOf Geo:isLocatedIn ;
+                rdfs:domain Geo:GeoFeature ;
+                rdfs:range Geo:AdminInstitute ;
+                owl:propertyChainAxiom ( Geo:hasAdmin
+                                         Geo:hasInstitue
+                                       ) ;
+                rdfs:comment "Links a geographic entity to an associated institute; the property IRI retains the original spelling."@en ;
+                rdfs:label "has institute"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasIntersection
+Geo:hasIntersection rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf Geo:hasGeoPropertyOf ;
+                    rdf:type owl:SymmetricProperty ;
+                    rdfs:domain Geo:GeoFeature ;
+                    rdfs:range Geo:GeoFeature ;
+                    rdfs:comment "Relates geographic features that intersect spatially."@en ;
+                    rdfs:label "has intersection"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasLocality
+Geo:hasLocality rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf Geo:hasAdmin ;
+                owl:inverseOf Geo:isLocalityOf ;
+                rdfs:domain Core:Municipality ;
+                rdfs:range Core:Locality ;
+                rdfs:comment "Links a municipality to a locality within it."@en ;
+                rdfs:label "has locality"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasMunicipality
+Geo:hasMunicipality rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf Geo:hasAdmin ;
+                    owl:inverseOf Geo:isMunicipalityOf ;
+                    rdfs:domain Core:District ;
+                    rdfs:range Core:Municipality ;
+                    rdfs:comment "Links a district or administrative area to a municipality within it."@en ;
+                    rdfs:label "has municipality"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasOverlap
+Geo:hasOverlap rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf Geo:hasGeoPropertyOf ;
+               rdf:type owl:SymmetricProperty ;
+               rdfs:domain Geo:GeoFeature ;
+               rdfs:range Geo:GeoFeature ;
+               rdfs:comment "Relates geographic features whose spatial extents overlap."@en ;
+               rdfs:label "has overlap"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasSettlement
+Geo:hasSettlement rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf Geo:hasAdmin ;
+                  owl:inverseOf Geo:isSettlementOf ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( Core:Locality
+                                              Core:Municipality
+                                            )
+                              ] ;
+                  rdfs:range Core:Settlement ;
+                  rdfs:comment "Links an administrative area to a settlement, such as a locality or municipality."@en ;
+                  rdfs:label "has settlement"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasStateProvince
+Geo:hasStateProvince rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf Geo:hasAdmin ;
+                     owl:inverseOf Geo:isProvinceOf ;
+                     rdfs:domain Core:Country ;
+                     rdfs:range Core:StateProvince ;
+                     rdfs:comment "Links a country to one of its state or province divisions."@en ;
+                     rdfs:label "has state or province"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasSubContinent
+Geo:hasSubContinent rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf Geo:hasAdmin ;
+                    owl:inverseOf Geo:isSubContinentOf ;
+                    rdfs:domain Core:Continent ;
+                    rdfs:range Core:SubContinent ;
+                    rdfs:comment "Links a continent to a subcontinental region within it."@en ;
+                    rdfs:label "has subcontinent"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasTouch
+Geo:hasTouch rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf Geo:hasGeoPropertyOf ;
+             rdf:type owl:SymmetricProperty ;
+             rdfs:domain Geo:GeoFeature ;
+             rdfs:range Geo:GeoFeature ;
+             rdfs:comment "Relates geographic features whose boundaries touch."@en ;
+             rdfs:label "has touching feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isAdminOf
+Geo:isAdminOf rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf Geo:isWithIn ;
+              rdf:type owl:TransitiveProperty ;
+              rdfs:domain Core:AdminLocation ;
+              rdfs:range Core:AdminLocation ;
+              rdfs:comment "Links an administrative area to the geographic entity or area it administers."@en ;
+              rdfs:label "is administrative area of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isCountryOf
+Geo:isCountryOf rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf Geo:isAdminOf ;
+                rdfs:domain Core:Country ;
+                rdfs:range Core:SubContinent ;
+                rdfs:comment "Links a country to a geographic entity or region associated with it."@en ;
+                rdfs:label "is country of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isDistrictOf
+Geo:isDistrictOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf Geo:isAdminOf ;
+                 rdfs:domain Core:District ;
+                 rdfs:range Core:StateProvince ;
+                 rdfs:comment "Links a district to the larger administrative area to which it belongs."@en ;
+                 rdfs:label "is district of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isGeoPropertyOf
+Geo:isGeoPropertyOf rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdf:type owl:TransitiveProperty ;
+                    rdfs:domain Geo:Geography ;
+                    rdfs:range Geo:Geography ;
+                    rdfs:comment "Links a geographic property to the geographic entity it describes."@en ;
+                    rdfs:label "is geographic property of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isGeometryOf
+Geo:isGeometryOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf Geo:isGeoPropertyOf ;
+                 rdfs:domain Geo:GeoGeometry ;
+                 rdfs:range Geo:GeoFeature ;
+                 rdfs:comment "Links a geometry to the geographic feature whose shape or extent it represents."@en ;
+                 rdfs:label "is geometry of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isLocalityOf
+Geo:isLocalityOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf Geo:isAdminOf ;
+                 rdfs:domain Core:Locality ;
+                 rdfs:range Core:Municipality ;
+                 rdfs:comment "Links a locality to the municipality or larger area in which it is located."@en ;
+                 rdfs:label "is locality of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isLocatedIn
+Geo:isLocatedIn rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf Geo:isGeoPropertyOf ;
+                rdfs:domain Geo:AdminInstitute ;
+                rdfs:range Geo:GeoFeature ;
+                rdfs:comment "Links a geographic feature to the larger place or area containing it."@en ;
+                rdfs:label "is located in"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isMunicipalityOf
+Geo:isMunicipalityOf rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf Geo:isAdminOf ;
+                     rdfs:domain Core:Municipality ;
+                     rdfs:range Core:District ;
+                     rdfs:comment "Links a municipality to the district or larger administrative area to which it belongs."@en ;
+                     rdfs:label "is municipality of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isProvinceOf
+Geo:isProvinceOf rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf Geo:isAdminOf ;
+                 rdfs:domain Core:StateProvince ;
+                 rdfs:range Core:Country ;
+                 rdfs:comment "Links a state or province to the country to which it belongs."@en ;
+                 rdfs:label "is state or province of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isSettlementOf
+Geo:isSettlementOf rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf Geo:isAdminOf ;
+                   rdfs:domain Core:Settlement ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( Core:Locality
+                                              Core:Municipality
+                                            )
+                              ] ;
+                   rdfs:comment "Links a settlement to the larger administrative area in which it is located."@en ;
+                   rdfs:label "is settlement of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isSubContinentOf
+Geo:isSubContinentOf rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf Geo:isAdminOf ;
+                     rdfs:domain Core:SubContinent ;
+                     rdfs:range Core:Continent ;
+                     rdfs:comment "Links a subcontinent to its containing continent."@en ;
+                     rdfs:label "is subcontinent of"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/isWithIn
+Geo:isWithIn rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf Geo:isGeoPropertyOf ;
+             rdf:type owl:TransitiveProperty ;
+             rdfs:domain Geo:GeoFeature ;
+             rdfs:range Geo:GeoFeature ;
+             rdfs:comment "Links a geographic feature to a larger geographic feature or area that contains it; the IRI retains the original spelling."@en ;
+             rdfs:label "is within"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_geo/hasAsWKT
+Geo:hasAsWKT rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain Geo:GeoGeometry ;
+             rdfs:range Core:wktLiteral ;
+             rdfs:comment "Associates a geometry with its representation in Well-Known Text (WKT) format."@en ;
+             rdfs:label "has WKT representation"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/hasName
+Geo:hasName rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf Core:hasName ,
+                               owl:topDataProperty ;
+            rdfs:domain Geo:GeoFeature ;
+            rdfs:range xsd:string ;
+            rdfs:comment "Associates a geographic feature with its name as a text value."@en ;
+            rdfs:label "has name"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/AdminLocation
+Core:AdminLocation rdfs:subClassOf Geo:GeoFeature .
+
+
+###  http://meteo_onto.org/meteo_core/LocationType
+Core:LocationType rdfs:subClassOf Geo:GeoFeature .
+
+
+###  http://meteo_onto.org/meteo_geo/AdminInstitute
+Geo:AdminInstitute rdf:type owl:Class ;
+                   rdfs:subClassOf Geo:GeoFeature ;
+                   rdfs:comment "An administrative or service institution represented as a geographic feature or location."@en ;
+                   rdfs:label "Administrative Institute"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/AgriculturalLand
+Geo:AgriculturalLand rdf:type owl:Class ;
+                     rdfs:subClassOf Geo:LandCoverFeature ;
+                     rdfs:comment "Land used for crop production, grazing, or other agricultural activity, represented as a geographic feature."@en ;
+                     rdfs:label "Agricultural Land"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Airport
+Geo:Airport rdf:type owl:Class ;
+            rdfs:subClassOf Geo:TransportFeature ;
+            rdfs:comment "A facility with runways or landing areas used for aircraft operations."@en ;
+            rdfs:label "Airport"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Beach
+Geo:Beach rdf:type owl:Class ;
+          rdfs:subClassOf Geo:CoastlineFeature ;
+          rdfs:comment "A natural area of shore along a sea, lake, or other body of water, typically covered by sand or gravel."@en ;
+          rdfs:label "Beach"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Bridge
+Geo:Bridge rdf:type owl:Class ;
+           rdfs:subClassOf Geo:TransportFeature ;
+           rdfs:comment "A structure carrying a road, railway, or other route across an obstacle such as a river or valley."@en ;
+           rdfs:label "Bridge"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/BusTerminal
+Geo:BusTerminal rdf:type owl:Class ;
+                rdfs:subClassOf Geo:TransportFeature ;
+                rdfs:comment "A facility where bus routes begin, end, or connect and passengers board or transfer."@en ;
+                rdfs:label "Bus Terminal"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Coastline
+Geo:Coastline rdf:type owl:Class ;
+              rdfs:subClassOf Geo:CoastlineFeature ;
+              rdfs:comment "The boundary where land meets a sea or ocean."@en ;
+              rdfs:label "Coastline"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/CoastlineFeature
+Geo:CoastlineFeature rdf:type owl:Class ;
+                     rdfs:subClassOf Geo:NaturalFeature ;
+                     rdfs:comment "A geographic feature associated with a coastal boundary or coastal environment."@en ;
+                     rdfs:label "Coastline Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/CommunicationCenter
+Geo:CommunicationCenter rdf:type owl:Class ;
+                        rdfs:subClassOf Geo:AdminInstitute ;
+                        rdfs:comment "A facility used to coordinate communications, including during emergencies."@en ;
+                        rdfs:label "Communication Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/CommunityCenter
+Geo:CommunityCenter rdf:type owl:Class ;
+                    rdfs:subClassOf Geo:AdminInstitute ;
+                    rdfs:comment "A facility providing services, activities, or meeting space for a local community."@en ;
+                    rdfs:label "Community Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/DisasterManagementCenter
+Geo:DisasterManagementCenter rdf:type owl:Class ;
+                             rdfs:subClassOf Geo:AdminInstitute ;
+                             rdfs:comment "A facility responsible for coordinating disaster preparedness, response, or recovery."@en ;
+                             rdfs:label "Disaster Management Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/DroughtArea
+Geo:DroughtArea rdf:type owl:Class ;
+                rdfs:subClassOf Geo:HazardFeature ;
+                rdfs:comment "A geographic area identified as affected by drought conditions."@en ;
+                rdfs:label "Drought Area"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/ElectricalSubstation
+Geo:ElectricalSubstation rdf:type owl:Class ;
+                         rdfs:subClassOf Geo:AdminInstitute ;
+                         rdfs:comment "A facility in an electrical power network where voltage is transformed or electricity is switched or distributed."@en ;
+                         rdfs:label "Electrical Substation"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Estuary
+Geo:Estuary rdf:type owl:Class ;
+            rdfs:subClassOf Geo:CoastlineFeature ;
+            rdfs:comment "A coastal water body where freshwater from rivers mixes with seawater."@en ;
+            rdfs:label "Estuary"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/EvacuationCenter
+Geo:EvacuationCenter rdf:type owl:Class ;
+                     rdfs:subClassOf Geo:AdminInstitute ;
+                     rdfs:comment "A designated facility where people can gather or receive assistance during an evacuation."@en ;
+                     rdfs:label "Evacuation Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/EvacuationZone
+Geo:EvacuationZone rdf:type owl:Class ;
+                   rdfs:subClassOf Geo:HazardFeature ;
+                   rdfs:comment "A geographic area designated for evacuation under specified hazard conditions."@en ;
+                   rdfs:label "Evacuation Zone"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/FireStation
+Geo:FireStation rdf:type owl:Class ;
+                rdfs:subClassOf Geo:AdminInstitute ;
+                rdfs:comment "A facility from which firefighters and fire-response equipment are dispatched."@en ;
+                rdfs:label "Fire Station"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/FloodZone
+Geo:FloodZone rdf:type owl:Class ;
+              rdfs:subClassOf Geo:HazardFeature ;
+              rdfs:comment "A geographic area identified as subject to flooding under specified conditions."@en ;
+              rdfs:label "Flood Zone"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Flyover
+Geo:Flyover rdf:type owl:Class ;
+            rdfs:subClassOf Geo:TransportFeature ;
+            rdfs:comment "An elevated road structure that carries traffic over another road, railway, or obstacle."@en ;
+            rdfs:label "Flyover"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Forest
+Geo:Forest rdf:type owl:Class ;
+           rdfs:subClassOf Geo:LandCoverFeature ;
+           rdfs:comment "An area dominated by trees and associated vegetation, represented as a natural geographic feature."@en ;
+           rdfs:label "Forest"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/GeoFeature
+Geo:GeoFeature rdf:type owl:Class ;
+               rdfs:subClassOf Geo:Geography ;
+               rdfs:comment "A general class for geographic entities, including natural features, administrative areas, and built places."@en ;
+               rdfs:label "Geographic Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/GeoGeometry
+Geo:GeoGeometry rdf:type owl:Class ;
+                rdfs:subClassOf Geo:Geography ;
+                rdfs:comment "A geometric representation of the shape or spatial extent of a geographic feature."@en ;
+                rdfs:label "Geographic Geometry"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Geography
+Geo:Geography rdf:type owl:Class ;
+              rdfs:comment "The general spatial and geographic concepts represented by this ontology."@en ;
+              rdfs:label "Geography"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/GovernmentAdministrativeOffice
+Geo:GovernmentAdministrativeOffice rdf:type owl:Class ;
+                                   rdfs:subClassOf Geo:AdminInstitute ;
+                                   rdfs:comment "An office that provides government or public administrative services."@en ;
+                                   rdfs:label "Government Administrative Office"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Grassland
+Geo:Grassland rdf:type owl:Class ;
+              rdfs:subClassOf Geo:LandCoverFeature ;
+              rdfs:comment "A land area dominated by grasses and other non-woody vegetation."@en ;
+              rdfs:label "Grassland"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/HazardFeature
+Geo:HazardFeature rdf:type owl:Class ;
+                  rdfs:subClassOf Geo:NaturalFeature ;
+                  rdfs:comment "A geographic feature that represents or is associated with a hazard."@en ;
+                  rdfs:label "Hazard Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/HighRiskArea
+Geo:HighRiskArea rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:HazardFeature ;
+                 rdfs:comment "A geographic area classified as having elevated risk from one or more hazards."@en ;
+                 rdfs:label "High-Risk Area"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Hill
+Geo:Hill rdf:type owl:Class ;
+         rdfs:subClassOf Geo:TerrainFeature ;
+         rdfs:comment "A raised area of land, generally smaller or lower than a mountain."@en ;
+         rdfs:label "Hill"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Hospital
+Geo:Hospital rdf:type owl:Class ;
+             rdfs:subClassOf Geo:AdminInstitute ;
+             rdfs:comment "A healthcare facility providing medical treatment and related services."@en ;
+             rdfs:label "Hospital"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/HydrologicalFeature
+Geo:HydrologicalFeature rdf:type owl:Class ;
+                        rdfs:subClassOf Geo:NaturalFeature ;
+                        rdfs:comment "A geographic feature associated with surface water, groundwater, or water movement."@en ;
+                        rdfs:label "Hydrological Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Lagoon
+Geo:Lagoon rdf:type owl:Class ;
+           rdfs:subClassOf Geo:CoastlineFeature ;
+           rdfs:comment "A shallow body of water separated from a larger body of water by a barrier such as a reef or sandbar."@en ;
+           rdfs:label "Lagoon"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Lake
+Geo:Lake rdf:type owl:Class ;
+         rdfs:subClassOf Geo:HydrologicalFeature ;
+         rdfs:comment "An inland body of standing water surrounded by land."@en ;
+         rdfs:label "Lake"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/LandCoverFeature
+Geo:LandCoverFeature rdf:type owl:Class ;
+                     rdfs:subClassOf Geo:NaturalFeature ;
+                     rdfs:comment "A geographic area classified by the physical material or vegetation covering the land."@en ;
+                     rdfs:label "Land Cover Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/LandslideZone
+Geo:LandslideZone rdf:type owl:Class ;
+                  rdfs:subClassOf Geo:HazardFeature ;
+                  rdfs:comment "A geographic area identified as susceptible to or affected by landslides."@en ;
+                  rdfs:label "Landslide Zone"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/LineString
+Geo:LineString rdf:type owl:Class ;
+               rdfs:subClassOf Geo:GeoGeometry ;
+               rdfs:comment "A geometry represented by a connected sequence of line segments joining ordered points."@en ;
+               rdfs:label "Line String"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Mangrove
+Geo:Mangrove rdf:type owl:Class ;
+             rdfs:subClassOf Geo:LandCoverFeature ;
+             rdfs:comment "A coastal wetland or forest dominated by salt-tolerant trees and shrubs."@en ;
+             rdfs:label "Mangrove"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/MedicalCenter
+Geo:MedicalCenter rdf:type owl:Class ;
+                  rdfs:subClassOf Geo:AdminInstitute ;
+                  rdfs:comment "A facility providing healthcare, diagnostic, or medical support services."@en ;
+                  rdfs:label "Medical Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/MeteorologyDepartment
+Geo:MeteorologyDepartment rdf:type owl:Class ;
+                          rdfs:subClassOf Geo:AdminInstitute ;
+                          rdfs:comment "An organization or office responsible for meteorological monitoring, forecasting, or services."@en ;
+                          rdfs:label "Meteorology Department"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/MilitaryCamp
+Geo:MilitaryCamp rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:AdminInstitute ;
+                 rdfs:comment "A geographic site used as a base or camp for military personnel."@en ;
+                 rdfs:label "Military Camp"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/MultiLineString
+Geo:MultiLineString rdf:type owl:Class ;
+                    rdfs:subClassOf Geo:GeoGeometry ;
+                    rdfs:comment "A geometry consisting of multiple line strings."@en ;
+                    rdfs:label "Multi-Line String"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/MultiPoint
+Geo:MultiPoint rdf:type owl:Class ;
+               rdfs:subClassOf Geo:GeoGeometry ;
+               rdfs:comment "A geometry consisting of multiple points."@en ;
+               rdfs:label "Multi-Point"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/MultiPolygon
+Geo:MultiPolygon rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:GeoGeometry ;
+                 rdfs:comment "A geometry consisting of multiple polygonal areas."@en ;
+                 rdfs:label "Multi-Polygon"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/NaturalFeature
+Geo:NaturalFeature rdf:type owl:Class ;
+                   rdfs:subClassOf Geo:GeoFeature ;
+                   rdfs:comment "A geographic feature formed by natural processes rather than constructed by people."@en ;
+                   rdfs:label "Natural Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Plain
+Geo:Plain rdf:type owl:Class ;
+          rdfs:subClassOf Geo:TerrainFeature ;
+          rdfs:comment "A broad area of relatively flat or gently rolling land."@en ;
+          rdfs:label "Plain"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Point
+Geo:Point rdf:type owl:Class ;
+          rdfs:subClassOf Geo:GeoGeometry ;
+          rdfs:comment "Represent cinsisnting point location" ;
+          rdfs:label "Point" .
+
+
+###  http://meteo_onto.org/meteo_geo/PoliceStation
+Geo:PoliceStation rdf:type owl:Class ;
+                  rdfs:subClassOf Geo:AdminInstitute ;
+                  rdfs:comment "A facility used by a police service for administration, operations, or public assistance."@en ;
+                  rdfs:label "Police Station"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Polygon
+Geo:Polygon rdf:type owl:Class ;
+            rdfs:subClassOf Geo:GeoGeometry ;
+            rdfs:comment "A geometry representing a closed area bounded by a sequence of connected line segments."@en ;
+            rdfs:label "Polygon"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/PowerStation
+Geo:PowerStation rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:AdminInstitute ;
+                 rdfs:comment "A facility that generates electrical power."@en ;
+                 rdfs:label "Power Station"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/ReliefCenter
+Geo:ReliefCenter rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:AdminInstitute ;
+                 rdfs:comment "A facility used to coordinate or distribute humanitarian assistance during or after an emergency."@en ;
+                 rdfs:label "Relief Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/RescueCenter
+Geo:RescueCenter rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:AdminInstitute ;
+                 rdfs:comment "A facility used to coordinate rescue operations or provide rescue support."@en ;
+                 rdfs:label "Rescue Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Reservior
+Geo:Reservior rdf:type owl:Class ;
+              rdfs:subClassOf Geo:TerrainFeature ;
+              rdfs:comment "A class named with the legacy spelling “Reservior” and classified as a terrain feature in this ontology. It is modeled separately from the hydrological Reservoir class; verify whether that distinction is intended."@en ;
+              rdfs:label "Reservior (terrain feature)"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Reservoir
+Geo:Reservoir rdf:type owl:Class ;
+              rdfs:subClassOf Geo:HydrologicalFeature ;
+              rdfs:comment "A natural or artificial body of water used to store water, represented as a hydrological feature."@en ;
+              rdfs:label "Reservoir (hydrological feature)"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/ReservoirControlCenter
+Geo:ReservoirControlCenter rdf:type owl:Class ;
+                           rdfs:subClassOf Geo:AdminInstitute ;
+                           rdfs:comment "A facility used to monitor or control reservoir operations."@en ;
+                           rdfs:label "Reservoir Control Center"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/River
+Geo:River rdf:type owl:Class ;
+          rdfs:subClassOf Geo:HydrologicalFeature ;
+          rdfs:comment "A natural flowing watercourse that typically drains toward a lake, sea, or another river."@en ;
+          rdfs:label "River"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Road
+Geo:Road rdf:type owl:Class ;
+         rdfs:subClassOf Geo:TransportFeature ;
+         rdfs:comment "A route or transportation corridor used by vehicles or other road traffic."@en ;
+         rdfs:label "Road"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/SafeZone
+Geo:SafeZone rdf:type owl:Class ;
+             rdfs:subClassOf Geo:HazardFeature ;
+             rdfs:comment "A geographic area designated as relatively safe or as a protected area during a hazard or emergency."@en ;
+             rdfs:label "Safe Zone"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/School
+Geo:School rdf:type owl:Class ;
+           rdfs:subClassOf Geo:AdminInstitute ;
+           rdfs:comment "An educational institution represented as a geographic location."@en ;
+           rdfs:label "School"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Seaport
+Geo:Seaport rdf:type owl:Class ;
+            rdfs:subClassOf Geo:TransportFeature ;
+            rdfs:comment "A coastal port facility where ships can load, unload, or transfer people and goods."@en ;
+            rdfs:label "Seaport"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Shelter
+Geo:Shelter rdf:type owl:Class ;
+            rdfs:subClassOf Geo:AdminInstitute ;
+            rdfs:comment "A facility or designated place that provides temporary protection or accommodation."@en ;
+            rdfs:label "Shelter"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Steam
+Geo:Steam rdf:type owl:Class ;
+          rdfs:subClassOf Geo:TerrainFeature ;
+          rdfs:comment "Water in its gaseous state, represented as a geographic or environmental feature in this ontology."@en ;
+          rdfs:label "Steam"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/StormSurgeArea
+Geo:StormSurgeArea rdf:type owl:Class ;
+                   rdfs:subClassOf Geo:HazardFeature ;
+                   rdfs:comment "A geographic area exposed to or affected by storm-surge inundation."@en ;
+                   rdfs:label "Storm Surge Area"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Stream
+Geo:Stream rdf:type owl:Class ;
+           rdfs:subClassOf Geo:HydrologicalFeature ;
+           rdfs:comment "A small natural flowing watercourse."@en ;
+           rdfs:label "Stream"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/TerrainFeature
+Geo:TerrainFeature rdf:type owl:Class ;
+                   rdfs:subClassOf Geo:NaturalFeature ;
+                   rdfs:comment "A feature describing the shape or physical form of the land surface."@en ;
+                   rdfs:label "Terrain Feature"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/TransportFeature
+Geo:TransportFeature rdf:type owl:Class ;
+                     rdfs:subClassOf Geo:GeoFeature ;
+                     rdfs:label "Transport Feature"@en ;
+                     skos:definition "Represents Transport features with respect to each Geo Graphical areas"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/TransportHub
+Geo:TransportHub rdf:type owl:Class ;
+                 rdfs:subClassOf Geo:TransportFeature ;
+                 rdfs:comment "A location where multiple transportation services or routes connect."@en ;
+                 rdfs:label "Transport Hub"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Tunnel
+Geo:Tunnel rdf:type owl:Class ;
+           rdfs:subClassOf Geo:TransportFeature ;
+           rdfs:comment "An underground or enclosed passage carrying a road, railway, waterway, or utility."@en ;
+           rdfs:label "Tunnel"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/University
+Geo:University rdf:type owl:Class ;
+               rdfs:subClassOf Geo:AdminInstitute ;
+               rdfs:comment "A higher-education institution represented as a geographic location."@en ;
+               rdfs:label "University"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Valley
+Geo:Valley rdf:type owl:Class ;
+           rdfs:subClassOf Geo:TerrainFeature ;
+           rdfs:comment "A low area of land between hills or mountains, often containing a river or stream."@en ;
+           rdfs:label "Valley"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/WaterTreatmentPlant
+Geo:WaterTreatmentPlant rdf:type owl:Class ;
+                        rdfs:subClassOf Geo:AdminInstitute ;
+                        rdfs:comment "A facility where water is treated to make it suitable for distribution or use."@en ;
+                        rdfs:label "Water Treatment Plant"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/WeatherStation
+Geo:WeatherStation rdf:type owl:Class ;
+                   rdfs:subClassOf Geo:AdminInstitute ;
+                   rdfs:comment "A site equipped to observe and record meteorological conditions."@en ;
+                   rdfs:label "Weather Station"@en .
+
+
+###  http://meteo_onto.org/meteo_geo/Wetland
+Geo:Wetland rdf:type owl:Class ;
+            rdfs:subClassOf Geo:HydrologicalFeature ;
+            rdfs:comment "A specialized geographic feature classified as wetland, within the hydrological feature category."@en ;
+            rdfs:label "Wetland"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( Core:AdminLocation
+                Core:LocationType
+                Geo:AdminInstitute
+                Geo:NaturalFeature
+                Geo:TransportFeature
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( Core:Point
+                Geo:LineString
+                Geo:MultiLineString
+                Geo:MultiPoint
+                Geo:MultiPolygon
+                Geo:Polygon
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( Geo:Airport
+                Geo:CommunicationCenter
+                Geo:CommunityCenter
+                Geo:DisasterManagementCenter
+                Geo:ElectricalSubstation
+                Geo:EvacuationCenter
+                Geo:FireStation
+                Geo:GovernmentAdministrativeOffice
+                Geo:Hospital
+                Geo:MedicalCenter
+                Geo:MeteorologyDepartment
+                Geo:MilitaryCamp
+                Geo:PoliceStation
+                Geo:PowerStation
+                Geo:ReliefCenter
+                Geo:RescueCenter
+                Geo:ReservoirControlCenter
+                Geo:School
+                Geo:Seaport
+                Geo:Shelter
+                Geo:TransportHub
+                Geo:University
+                Geo:WaterTreatmentPlant
+                Geo:WeatherStation
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( Geo:DroughtArea
+                Geo:EvacuationZone
+                Geo:FloodZone
+                Geo:HighRiskArea
+                Geo:LandslideZone
+                Geo:SafeZone
+                Geo:StormSurgeArea
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
