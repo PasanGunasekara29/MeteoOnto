@@ -1,0 +1,397 @@
+@prefix : <http://meteo_onto.org/meteo_geo_dbpedia_alignment#> .
+@prefix Geo: <http://meteo_onto.org/meteo_geo/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix Core: <http://meteo_onto.org/meteo_core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://meteo_onto.org/meteo_geo_dbpedia_alignment#> .
+
+<http://meteo_onto.org/meteo_geo_dbpedia_align> rdf:type owl:Ontology ;
+                                                 owl:versionIRI <http://meteo_onto.org/meteo_geo_dbpedia_align/GEO_DBPEDIA_ALIGNV1_0> ;
+                                                 owl:imports <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core_Geo_Combined.ttl> ;
+                                                 rdfs:comment "Mappings from classes in the imported MeteoOnto Core and Geo ontology to DBpedia. Subclass axioms are used only where the MeteoOnto class is intended to be a narrower class of a DBpedia ontology class. SKOS mappings indicate close or related concepts and do not cause OWL class-membership inference."@en ;
+                                                 rdfs:label "MeteoOnto Geo DBpedia Alignment"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+skos:closeMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#relatedMatch
+skos:relatedMatch rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://dbpedia.org/ontology/Airport
+dbo:Airport rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Bridge
+dbo:Bridge rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Continent
+dbo:Continent rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Country
+dbo:Country rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/District
+dbo:District rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Forest
+dbo:Forest rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Hospital
+dbo:Hospital rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Lake
+dbo:Lake rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Locality
+dbo:Locality rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Municipality
+dbo:Municipality rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/NaturalPlace
+dbo:NaturalPlace rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Place
+dbo:Place rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/PowerStation
+dbo:PowerStation rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Province
+dbo:Province rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/River
+dbo:River rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Road
+dbo:Road rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/School
+dbo:School rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Settlement
+dbo:Settlement rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Station
+dbo:Station rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Stream
+dbo:Stream rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/University
+dbo:University rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Wetland
+dbo:Wetland rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_core/Continent
+Core:Continent rdfs:subClassOf dbo:Continent .
+
+
+###  http://meteo_onto.org/meteo_core/Country
+Core:Country rdfs:subClassOf dbo:Country .
+
+
+###  http://meteo_onto.org/meteo_core/District
+Core:District rdfs:subClassOf dbo:District .
+
+
+###  http://meteo_onto.org/meteo_core/Locality
+Core:Locality rdfs:subClassOf dbo:Locality .
+
+
+###  http://meteo_onto.org/meteo_core/Municipality
+Core:Municipality rdfs:subClassOf dbo:Municipality .
+
+
+###  http://meteo_onto.org/meteo_core/Settlement
+Core:Settlement rdfs:subClassOf dbo:Settlement .
+
+
+###  http://meteo_onto.org/meteo_core/StateProvince
+Core:StateProvince rdfs:subClassOf dbo:Province .
+
+
+###  http://meteo_onto.org/meteo_geo/AdminInstitute
+Geo:AdminInstitute rdfs:subClassOf dbo:Place .
+
+
+###  http://meteo_onto.org/meteo_geo/Airport
+Geo:Airport rdfs:subClassOf dbo:Airport .
+
+
+###  http://meteo_onto.org/meteo_geo/Bridge
+Geo:Bridge rdfs:subClassOf dbo:Bridge .
+
+
+###  http://meteo_onto.org/meteo_geo/BusTerminal
+Geo:BusTerminal rdfs:subClassOf dbo:Station .
+
+
+###  http://meteo_onto.org/meteo_geo/Forest
+Geo:Forest rdfs:subClassOf dbo:Forest .
+
+
+###  http://meteo_onto.org/meteo_geo/GeoFeature
+Geo:GeoFeature rdfs:subClassOf dbo:Place .
+
+
+###  http://meteo_onto.org/meteo_geo/Hospital
+Geo:Hospital rdfs:subClassOf dbo:Hospital .
+
+
+###  http://meteo_onto.org/meteo_geo/Lake
+Geo:Lake rdfs:subClassOf dbo:Lake .
+
+
+###  http://meteo_onto.org/meteo_geo/NaturalFeature
+Geo:NaturalFeature rdfs:subClassOf dbo:NaturalPlace .
+
+
+###  http://meteo_onto.org/meteo_geo/PowerStation
+Geo:PowerStation rdfs:subClassOf dbo:PowerStation .
+
+
+###  http://meteo_onto.org/meteo_geo/River
+Geo:River rdfs:subClassOf dbo:River .
+
+
+###  http://meteo_onto.org/meteo_geo/Road
+Geo:Road rdfs:subClassOf dbo:Road .
+
+
+###  http://meteo_onto.org/meteo_geo/School
+Geo:School rdfs:subClassOf dbo:School .
+
+
+###  http://meteo_onto.org/meteo_geo/Stream
+Geo:Stream rdfs:subClassOf dbo:Stream .
+
+
+###  http://meteo_onto.org/meteo_geo/University
+Geo:University rdfs:subClassOf dbo:University .
+
+
+###  http://meteo_onto.org/meteo_geo/Wetland
+Geo:Wetland rdfs:subClassOf dbo:Wetland .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+Core:AdminLocation skos:closeMatch dbo:AdministrativeRegion .
+
+
+Core:LocationType skos:relatedMatch dbo:Place .
+
+
+Core:Point skos:relatedMatch <http://dbpedia.org/resource/Point_(geometry)> .
+
+
+Core:SubContinent skos:relatedMatch dbo:Continent .
+
+
+Geo:AgriculturalLand skos:closeMatch dbr:Agriculture .
+
+
+Geo:Beach skos:closeMatch dbo:Beach .
+
+
+Geo:Coastline skos:relatedMatch dbr:Coastline .
+
+
+Geo:CoastlineFeature skos:relatedMatch dbr:Coast .
+
+
+Geo:CommunicationCenter skos:relatedMatch dbo:Telecommunications .
+
+
+Geo:CommunityCenter skos:relatedMatch dbo:Community .
+
+
+Geo:DisasterManagementCenter skos:relatedMatch dbo:Organisation .
+
+
+Geo:DroughtArea skos:relatedMatch dbr:Drought .
+
+
+Geo:ElectricalSubstation skos:closeMatch dbr:Electrical_substation .
+
+
+Geo:Estuary skos:closeMatch dbo:Estuary .
+
+
+Geo:EvacuationCenter skos:relatedMatch dbo:Building .
+
+
+Geo:EvacuationZone skos:relatedMatch dbr:Evacuation .
+
+
+Geo:FireStation skos:relatedMatch dbo:Building .
+
+
+Geo:FloodZone skos:relatedMatch dbr:Flood .
+
+
+Geo:Flyover skos:closeMatch dbo:Road .
+
+
+Geo:GeoGeometry skos:relatedMatch dbr:Geometry .
+
+
+Geo:Geography skos:closeMatch dbr:Geography .
+
+
+Geo:GovernmentAdministrativeOffice skos:relatedMatch dbo:Government .
+
+
+Geo:Grassland skos:closeMatch dbo:Grassland .
+
+
+Geo:HazardFeature skos:relatedMatch dbr:Natural_hazard .
+
+
+Geo:HighRiskArea skos:relatedMatch dbr:Risk .
+
+
+Geo:Hill skos:closeMatch dbo:Hill .
+
+
+Geo:HydrologicalFeature skos:closeMatch dbo:BodyOfWater .
+
+
+Geo:Lagoon skos:closeMatch dbo:Lagoon .
+
+
+Geo:LandCoverFeature skos:relatedMatch dbr:Land_cover .
+
+
+Geo:LandslideZone skos:relatedMatch dbr:Landslide .
+
+
+Geo:LineString skos:relatedMatch <http://dbpedia.org/resource/Line_(geometry)> .
+
+
+Geo:Mangrove skos:closeMatch dbo:Mangrove .
+
+
+Geo:MedicalCenter skos:relatedMatch dbo:Hospital .
+
+
+Geo:MeteorologyDepartment skos:relatedMatch dbo:Meteorology .
+
+
+Geo:MilitaryCamp skos:relatedMatch dbo:MilitaryBase .
+
+
+Geo:MultiLineString skos:relatedMatch dbr:Multi-line_string .
+
+
+Geo:MultiPoint skos:relatedMatch <http://dbpedia.org/resource/Point_(geometry)> .
+
+
+Geo:MultiPolygon skos:relatedMatch dbr:Polygon .
+
+
+Geo:Plain skos:closeMatch dbo:Plain .
+
+
+Geo:Point skos:relatedMatch <http://dbpedia.org/resource/Point_(geometry)> .
+
+
+Geo:PoliceStation skos:relatedMatch dbo:PoliceStation .
+
+
+Geo:Polygon skos:relatedMatch dbr:Polygon .
+
+
+Geo:ReliefCenter skos:relatedMatch dbo:Organisation .
+
+
+Geo:RescueCenter skos:relatedMatch dbo:Organisation .
+
+
+Geo:Reservior skos:relatedMatch dbo:Reservoir .
+
+
+Geo:Reservoir skos:closeMatch dbo:Reservoir .
+
+
+Geo:ReservoirControlCenter skos:relatedMatch dbo:Organisation .
+
+
+Geo:SafeZone skos:relatedMatch dbr:Protected_area .
+
+
+Geo:Seaport skos:relatedMatch dbo:Port .
+
+
+Geo:Shelter skos:closeMatch dbo:Shelter .
+
+
+Geo:Steam skos:relatedMatch dbr:Water_vapor .
+
+
+Geo:StormSurgeArea skos:relatedMatch dbr:Storm_surge .
+
+
+Geo:TerrainFeature skos:closeMatch dbo:Landform .
+
+
+Geo:TransportFeature skos:relatedMatch dbo:Infrastructure .
+
+
+Geo:TransportHub skos:relatedMatch dbo:Station .
+
+
+Geo:Tunnel skos:closeMatch dbo:Tunnel .
+
+
+Geo:Valley skos:closeMatch dbo:Valley .
+
+
+Geo:WaterTreatmentPlant skos:relatedMatch dbo:Plant .
+
+
+Geo:WeatherStation skos:relatedMatch dbo:Station .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
