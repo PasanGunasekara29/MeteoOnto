@@ -1,0 +1,211 @@
+@prefix : <http://meteo_onto.org/meteo_risk_dbpedia_alignment/> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix Risk: <http://meteo_onto.org/meteo_risk/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@base <http://meteo_onto.org/meteo_risk_dbpedia_alignment/> .
+
+<http://meteo_onto.org/meteo_risk_dbpedia_alignment> rdf:type owl:Ontology ;
+                                                      owl:versionIRI <http://meteo_onto.org/meteo_risk_dbpedia_alignment/1.0> ;
+                                                      owl:imports <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core_RiskAndSafety_Combined.ttl> ;
+                                                      rdfs:comment "Alignments for classes in the MeteoOnto Risk and Safety namespace. rdfs:subClassOf links support inference to a broader DBpedia ontology class; SKOS matches record close or related concepts without asserting OWL class equivalence."@en ;
+                                                      rdfs:label "MeteoOnto Risk and Safety DBpedia Alignment"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#closeMatch
+skos:closeMatch rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#relatedMatch
+skos:relatedMatch rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://dbpedia.org/ontology/Event
+dbo:Event rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/GovernmentAgency
+dbo:GovernmentAgency rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Hospital
+dbo:Hospital rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Organisation
+dbo:Organisation rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/Place
+dbo:Place rdf:type owl:Class .
+
+
+###  http://dbpedia.org/ontology/School
+dbo:School rdf:type owl:Class .
+
+
+###  http://meteo_onto.org/meteo_risk/EmergencyResponseAgency
+Risk:EmergencyResponseAgency rdfs:subClassOf dbo:Organisation .
+
+
+###  http://meteo_onto.org/meteo_risk/GeographicFeature
+Risk:GeographicFeature rdfs:subClassOf dbo:Place .
+
+
+###  http://meteo_onto.org/meteo_risk/GovernmentAuthority
+Risk:GovernmentAuthority rdfs:subClassOf dbo:GovernmentAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/Hospital
+Risk:Hospital rdfs:subClassOf dbo:Hospital .
+
+
+###  http://meteo_onto.org/meteo_risk/ResponseOrganization
+Risk:ResponseOrganization rdfs:subClassOf dbo:Organisation .
+
+
+###  http://meteo_onto.org/meteo_risk/School
+Risk:School rdfs:subClassOf dbo:School .
+
+
+###  http://meteo_onto.org/meteo_risk/WeatherEvent
+Risk:WeatherEvent rdfs:subClassOf dbo:Event .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+Risk:AmbulanceService skos:relatedMatch dbpedia:Ambulance .
+
+
+Risk:CivilProtectionAgency skos:relatedMatch dbpedia:Civil_defense .
+
+
+Risk:CommunicationFacility skos:relatedMatch dbpedia:Telecommunications .
+
+
+Risk:CriticalInfrastructure skos:closeMatch dbpedia:Critical_infrastructure .
+
+
+Risk:DistrictAuthority skos:relatedMatch dbpedia:Local_government .
+
+
+Risk:DistrictDisasterManagementOffice skos:relatedMatch dbpedia:Disaster_management .
+
+
+Risk:DistrictHealthOffice skos:relatedMatch dbpedia:Public_health .
+
+
+Risk:DistrictHydrologicalOffice skos:relatedMatch dbpedia:Hydrology .
+
+
+Risk:DistrictMeteorologicalOffice skos:relatedMatch dbpedia:Meteorology .
+
+
+Risk:DistrictWaterResourcesOffice skos:relatedMatch dbpedia:Water_resources .
+
+
+Risk:EmergencyMedicalService skos:closeMatch dbpedia:Emergency_medical_services .
+
+
+Risk:FireService skos:closeMatch dbpedia:Fire_department .
+
+
+Risk:HighRisk skos:relatedMatch dbpedia:Risk_assessment .
+
+
+Risk:LocalAdministrativeAuthority skos:relatedMatch dbpedia:Local_government .
+
+
+Risk:LocalAuthority skos:relatedMatch dbpedia:Local_government .
+
+
+Risk:LocalDisasterManagementUnit skos:relatedMatch dbpedia:Disaster_management .
+
+
+Risk:LowRisk skos:relatedMatch dbpedia:Risk_assessment .
+
+
+Risk:ModerateRisk skos:relatedMatch dbpedia:Risk_assessment .
+
+
+Risk:MunicipalAuthority skos:relatedMatch dbpedia:Municipality .
+
+
+Risk:NationalAuthority skos:relatedMatch dbpedia:Government .
+
+
+Risk:NationalDisasterManagementAgency skos:relatedMatch dbpedia:Disaster_management .
+
+
+Risk:NationalHealthAuthority skos:relatedMatch dbpedia:Public_health .
+
+
+Risk:NationalHydrologicalAgency skos:relatedMatch dbpedia:Hydrology .
+
+
+Risk:NationalMeteorologicalAgency skos:relatedMatch dbpedia:Meteorology .
+
+
+Risk:NationalWaterResourcesAuthority skos:relatedMatch dbpedia:Water_resources .
+
+
+Risk:PoliceService skos:closeMatch dbpedia:Police .
+
+
+Risk:PowerFacility skos:relatedMatch dbpedia:Power_station .
+
+
+Risk:RescueUnit skos:relatedMatch dbpedia:Rescue .
+
+
+Risk:Risk skos:closeMatch dbpedia:Risk .
+
+
+Risk:RiskLevel skos:relatedMatch dbpedia:Risk_assessment .
+
+
+Risk:StateAuthority skos:relatedMatch dbpedia:State_government .
+
+
+Risk:StateDisasterManagementOffice skos:relatedMatch dbpedia:Disaster_management .
+
+
+Risk:StateHealthOffice skos:relatedMatch dbpedia:Public_health .
+
+
+Risk:StateHydrologicalOffice skos:relatedMatch dbpedia:Hydrology .
+
+
+Risk:StateMeteorologicalOffice skos:relatedMatch dbpedia:Meteorology .
+
+
+Risk:StateWaterResourcesOffice skos:relatedMatch dbpedia:Water_resources .
+
+
+Risk:TransportSystem skos:relatedMatch dbpedia:Transportation .
+
+
+Risk:VeryHighRisk skos:relatedMatch dbpedia:Risk_assessment .
+
+
+Risk:VeryLowRisk skos:relatedMatch dbpedia:Risk_assessment .
+
+
+Risk:WaterSupplyFacility skos:relatedMatch dbpedia:Water_supply_network .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
