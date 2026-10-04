@@ -1,0 +1,137 @@
+@prefix : <http://meteo_onto.org/meteo_geo#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix Geo: <http://meteo_onto.org/meteo_geo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix Core: <http://meteo_onto.org/meteo_core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@base <http://meteo_onto.org/meteo_geo#> .
+
+<http://meteo_onto.org/meteo_geo_align_sparql> rdf:type owl:Ontology ;
+                                                owl:versionIRI Geo:GEO_SPARQL_ALIGN1_0 ;
+                                                owl:imports Geo:GEO1_0 ,
+                                                            <https://pasangunasekara29.github.io/MeteoOnto/GeoSPARQL1_1.ttl> ;
+                                                dc:contributor "Prof. Dulani Meedeniya"@en ;
+                                                dc:creator "H. K. Pasan Gunasekara"@en ;
+                                                dc:description "This ontology represents Geo Graphical Features with respect meteorological data"@en ;
+                                                dc:title "MeteoOnto_Geo_GeoSPARQL_Align"@en ;
+                                                terms:license "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                                owl:versionInfo "http://meteo_onto.org/meteo_geo/GEO1_0"@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+terms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://meteo_onto.org/meteo_core/wktLiteral
+Core:wktLiteral owl:equivalentClass Geo:WKTLiteral ,
+                                    <http://www.opengis.net/ont/geosparql#wktLiteral> .
+
+
+###  http://meteo_onto.org/meteo_geo/WKTLiteral
+Geo:WKTLiteral rdf:type rdfs:Datatype ;
+               owl:equivalentClass <http://www.opengis.net/ont/geosparql#wktLiteral> .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_geo/hasContain
+Geo:hasContain owl:equivalentProperty <http://www.opengis.net/ont/geosparql#sfContains> .
+
+
+###  http://meteo_onto.org/meteo_geo/hasGeometry
+Geo:hasGeometry owl:equivalentProperty <http://www.opengis.net/ont/geosparql#hasGeometry> .
+
+
+###  http://meteo_onto.org/meteo_geo/hasIntersection
+Geo:hasIntersection owl:equivalentProperty <http://www.opengis.net/ont/geosparql#sfIntersects> .
+
+
+###  http://meteo_onto.org/meteo_geo/hasOverlap
+Geo:hasOverlap owl:equivalentProperty <http://www.opengis.net/ont/geosparql#sfTouches> .
+
+
+###  http://meteo_onto.org/meteo_geo/isWithIn
+Geo:isWithIn owl:equivalentProperty <http://www.opengis.net/ont/geosparql#sfWithin> .
+
+
+###  http://www.opengis.net/ont/geosparql#sfContains
+<http://www.opengis.net/ont/geosparql#sfContains> rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_geo/hasCoordinate
+Geo:hasCoordinate rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain Geo:GeoGeometry ;
+                  rdfs:range Geo:WKTLiteral .
+
+
+###  http://meteo_onto.org/meteo_geo/hasName
+Geo:hasName rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_geo/GeoFeature
+Geo:GeoFeature rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Feature> .
+
+
+###  http://meteo_onto.org/meteo_geo/GeoGeometry
+Geo:GeoGeometry rdf:type owl:Class ;
+                rdfs:subClassOf <http://www.opengis.net/ont/geosparql#Geometry> .
+
+
+###  http://www.opengis.net/ont/geosparql#Feature
+<http://www.opengis.net/ont/geosparql#Feature> rdf:type owl:Class .
+
+
+###  http://www.opengis.net/ont/geosparql#Geometry
+<http://www.opengis.net/ont/geosparql#Geometry> rdf:type owl:Class .
+
+
+###  http://www.opengis.net/ont/geosparql#SpatialObject
+<http://www.opengis.net/ont/geosparql#SpatialObject> rdf:type owl:Class .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
