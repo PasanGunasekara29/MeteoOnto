@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -31,15 +32,9 @@
     }
 
     body {
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
-
       color: #172033;
-
       background: #f7faff;
     }
 
@@ -55,13 +50,10 @@
 
     nav {
       position: sticky;
-
       top: 0;
-
       z-index: 1000;
 
-      background:
-        rgba(6, 27, 55, 0.96);
+      background: rgba(6, 27, 55, 0.97);
 
       backdrop-filter: blur(12px);
 
@@ -72,64 +64,39 @@
     }
 
     .nav-container {
-
       max-width: 1200px;
-
       margin: auto;
 
-      padding:
-        17px 25px;
+      padding: 17px 25px;
 
       display: flex;
-
-      justify-content:
-        space-between;
-
-      align-items:
-        center;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .logo {
-
       font-size: 1.5rem;
-
       font-weight: 700;
-
-      letter-spacing:
-        -0.5px;
     }
 
     .logo span {
-
-      color:
-        #67d5ff;
+      color: #67d5ff;
     }
 
     .nav-links {
-
       display: flex;
-
       gap: 25px;
-
       list-style: none;
     }
 
     .nav-links a {
-
-      color:
-        #e8f3ff;
-
-      font-size:
-        0.95rem;
-
-      transition:
-        0.3s;
+      color: #e8f3ff;
+      font-size: 0.95rem;
+      transition: 0.3s;
     }
 
     .nav-links a:hover {
-
-      color:
-        #67d5ff;
+      color: #67d5ff;
     }
 
 
@@ -139,91 +106,68 @@
 
     .hero {
 
-      min-height:
-        85vh;
+      min-height: 85vh;
 
-      display:
-        flex;
+      display: flex;
+      align-items: center;
 
-      align-items:
-        center;
+      position: relative;
 
-      position:
-        relative;
+      overflow: hidden;
 
-      overflow:
-        hidden;
-
-      color:
-        white;
+      color: white;
 
       background:
-
         linear-gradient(
           120deg,
           #071f43 0%,
-          #0b416c 48%,
+          #0b416c 50%,
           #126f8f 100%
         );
     }
 
 
-    /* subtle atmospheric light */
+    /* Atmospheric background glow */
 
     .hero::before {
 
       content: "";
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        700px;
+      width: 750px;
+      height: 750px;
 
-      height:
-        700px;
+      right: -300px;
+      top: -300px;
 
-      right:
-        -250px;
-
-      top:
-        -250px;
-
-      border-radius:
-        50%;
+      border-radius: 50%;
 
       background:
         radial-gradient(
           circle,
-          rgba(93,220,255,0.20),
-          rgba(93,220,255,0.03) 50%,
+          rgba(90,220,255,0.22),
+          rgba(90,220,255,0.05) 45%,
           transparent 70%
         );
 
-      pointer-events:
-        none;
+      pointer-events: none;
     }
 
 
     .hero-content {
 
-      max-width:
-        1200px;
+      max-width: 1200px;
 
-      width:
-        100%;
+      width: 100%;
 
-      margin:
-        auto;
+      margin: auto;
 
-      padding:
-        85px 25px;
+      padding: 80px 25px;
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        2;
+      z-index: 2;
     }
 
 
@@ -233,130 +177,103 @@
 
     .badge {
 
-      display:
-        inline-block;
+      display: inline-block;
 
-      padding:
-        8px 16px;
+      padding: 8px 16px;
 
-      margin-bottom:
-        20px;
+      margin-bottom: 18px;
 
       border:
         1px solid
         rgba(255,255,255,0.35);
 
-      border-radius:
-        30px;
+      border-radius: 30px;
 
       background:
-        rgba(255,255,255,0.09);
+        rgba(255,255,255,0.08);
 
-      color:
-        #eefaff;
+      font-size: 0.85rem;
 
-      font-size:
-        0.85rem;
-
-      backdrop-filter:
-        blur(8px);
+      backdrop-filter: blur(8px);
     }
 
 
     /* =========================================
-       TITLE + WEATHER GLOBE
+       TITLE AREA
        ========================================= */
 
     .hero-title-wrap {
 
-      position:
-        relative;
+      position: relative;
 
-      display:
-        inline-flex;
+      width: 100%;
 
-      align-items:
-        center;
+      min-height: 270px;
 
-      min-height:
-        280px;
+      display: flex;
 
-      z-index:
-        2;
+      align-items: center;
+
+      z-index: 2;
     }
 
 
     .hero-title-wrap h1 {
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        5;
+      z-index: 10;
 
       font-size:
         clamp(3.5rem, 8vw, 6.5rem);
 
-      line-height:
-        1;
+      line-height: 1;
 
-      margin-bottom:
-        25px;
+      margin: 0;
 
-      letter-spacing:
-        -4px;
+      letter-spacing: -4px;
+
+      white-space: nowrap;
 
       text-shadow:
         0 5px 30px
-        rgba(0,0,0,0.15);
+        rgba(0,0,0,0.16);
     }
 
 
     .hero-title-wrap h1 span {
 
-      color:
-        #68d8ff;
+      color: #68d8ff;
     }
 
 
     /* =========================================
-       REAL WEATHER-ANALYSIS GLOBE
+       WEATHER ANALYSIS GLOBE
        ========================================= */
 
     .rotating-globe {
 
-      position:
-        absolute;
+      position: absolute;
 
-      width:
-        430px;
+      width: 390px;
+      height: 390px;
 
-      height:
-        430px;
+      /*
+        IMPORTANT:
+        The globe is positioned independently
+        from the title so it cannot push
+        MeteoOnto to the right.
+      */
 
-      left:
-        calc(100% + 60px);
+      left: 720px;
 
-      top:
-        50%;
+      top: 50%;
 
-      transform:
-        translateY(-50%);
+      transform: translateY(-50%);
 
-      display:
-        flex;
+      z-index: 3;
 
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      z-index:
-        1;
-
-      pointer-events:
-        none;
+      pointer-events: none;
 
       animation:
         weatherGlobeRotate
@@ -368,54 +285,59 @@
 
     .rotating-globe img {
 
-      width:
-        100%;
+      width: 100%;
+      height: 100%;
 
-      height:
-        100%;
+      object-fit: contain;
 
-      object-fit:
-        contain;
+      display: block;
 
-      display:
-        block;
+      /*
+        If the image cannot load, don't show
+        the alt text.
+      */
+
+      font-size: 0;
+
+      color: transparent;
 
       filter:
-
         drop-shadow(
-          0 0 12px
-          rgba(110,225,255,0.55)
+          0 0 14px
+          rgba(100,220,255,0.55)
         )
 
         drop-shadow(
           0 0 35px
-          rgba(70,190,245,0.35)
+          rgba(50,190,240,0.35)
         )
 
         drop-shadow(
-          0 0 65px
+          0 0 60px
           rgba(40,160,220,0.20)
         );
     }
 
 
-    /* slow rotation */
+    /*
+      Slow rotation:
+      75 seconds per complete revolution.
+    */
 
     @keyframes weatherGlobeRotate {
 
       from {
-
         transform:
           translateY(-50%)
           rotate(0deg);
       }
 
       to {
-
         transform:
           translateY(-50%)
           rotate(360deg);
       }
+
     }
 
 
@@ -428,26 +350,20 @@
       content:
         "✦   ·   ✧   ·   ✦";
 
-      position:
-        absolute;
+      position: absolute;
 
-      left:
-        calc(100% + 110px);
+      left: 800px;
 
-      top:
-        2%;
+      top: 20px;
 
       color:
-        rgba(185,245,255,0.7);
+        rgba(185,245,255,0.65);
 
-      font-size:
-        18px;
+      font-size: 17px;
 
-      letter-spacing:
-        8px;
+      letter-spacing: 8px;
 
-      z-index:
-        4;
+      z-index: 4;
 
       animation:
         floatingParticles
@@ -466,7 +382,7 @@
           translateY(0);
 
         opacity:
-          0.35;
+          0.3;
       }
 
       50% {
@@ -477,6 +393,7 @@
         opacity:
           0.85;
       }
+
     }
 
 
@@ -486,23 +403,19 @@
 
     .hero p {
 
-      max-width:
-        760px;
+      max-width: 760px;
 
-      font-size:
-        1.2rem;
+      font-size: 1.2rem;
 
-      color:
-        #d9efff;
+      color: #d9efff;
 
-      margin-bottom:
-        35px;
+      margin-top: 10px;
 
-      position:
-        relative;
+      margin-bottom: 35px;
 
-      z-index:
-        5;
+      position: relative;
+
+      z-index: 10;
     }
 
 
@@ -512,51 +425,39 @@
 
     .buttons {
 
-      display:
-        flex;
+      display: flex;
 
-      flex-wrap:
-        wrap;
+      flex-wrap: wrap;
 
-      gap:
-        15px;
+      gap: 15px;
 
-      position:
-        relative;
+      position: relative;
 
-      z-index:
-        5;
+      z-index: 10;
     }
 
     .btn {
 
-      padding:
-        13px 23px;
+      padding: 13px 23px;
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
-      font-weight:
-        600;
+      font-weight: 600;
 
-      transition:
-        0.3s;
+      transition: 0.3s;
 
-      display:
-        inline-block;
+      display: inline-block;
     }
 
     .btn-primary {
 
-      background:
-        #62d5ff;
+      background: #62d5ff;
 
-      color:
-        #06203b;
+      color: #06203b;
 
       box-shadow:
         0 8px 25px
-        rgba(98,213,255,0.20);
+        rgba(98,213,255,0.2);
     }
 
     .btn-primary:hover {
@@ -574,8 +475,7 @@
         1px solid
         rgba(255,255,255,0.45);
 
-      color:
-        white;
+      color: white;
 
       background:
         rgba(255,255,255,0.03);
@@ -592,52 +492,37 @@
 
 
     /* =========================================
-       GENERAL SECTIONS
+       SECTIONS
        ========================================= */
 
     section {
-
-      padding:
-        85px 25px;
+      padding: 85px 25px;
     }
 
     .container {
-
-      max-width:
-        1200px;
-
-      margin:
-        auto;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .section-header {
-
-      max-width:
-        760px;
-
-      margin-bottom:
-        45px;
+      max-width: 760px;
+      margin-bottom: 45px;
     }
 
     .section-header h2 {
 
-      font-size:
-        2.4rem;
+      font-size: 2.4rem;
 
-      margin-bottom:
-        15px;
+      margin-bottom: 15px;
 
-      color:
-        #102b4e;
+      color: #102b4e;
     }
 
     .section-header p {
 
-      color:
-        #617084;
+      color: #617084;
 
-      font-size:
-        1.05rem;
+      font-size: 1.05rem;
     }
 
 
@@ -647,37 +532,30 @@
 
     .cards {
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         repeat(3, 1fr);
 
-      gap:
-        25px;
+      gap: 25px;
     }
 
     .card {
 
-      background:
-        white;
+      background: white;
 
-      padding:
-        30px;
+      padding: 30px;
 
-      border-radius:
-        15px;
+      border-radius: 15px;
 
       border:
-        1px solid
-        #e2eaf3;
+        1px solid #e2eaf3;
 
       box-shadow:
         0 8px 30px
         rgba(22,55,90,0.07);
 
-      transition:
-        0.3s;
+      transition: 0.3s;
     }
 
     .card:hover {
@@ -692,26 +570,21 @@
 
     .icon {
 
-      font-size:
-        2rem;
+      font-size: 2rem;
 
-      margin-bottom:
-        15px;
+      margin-bottom: 15px;
     }
 
     .card h3 {
 
-      margin-bottom:
-        10px;
+      margin-bottom: 10px;
 
-      color:
-        #12365e;
+      color: #12365e;
     }
 
     .card p {
 
-      color:
-        #657386;
+      color: #657386;
     }
 
 
@@ -721,51 +594,41 @@
 
     .about {
 
-      background:
-        white;
+      background: white;
     }
 
     .about-grid {
 
-      display:
-        grid;
+      display: grid;
 
       grid-template-columns:
         1fr 1fr;
 
-      gap:
-        60px;
+      gap: 60px;
 
-      align-items:
-        center;
+      align-items: center;
     }
 
     .about-text p {
 
-      margin-bottom:
-        18px;
+      margin-bottom: 18px;
 
-      color:
-        #5e6c7d;
+      color: #5e6c7d;
     }
 
     .highlight {
 
-      padding:
-        25px;
+      padding: 25px;
 
       border-left:
-        4px solid
-        #1598cc;
+        4px solid #1598cc;
 
       background:
         #f0f9ff;
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
-      margin-top:
-        25px;
+      margin-top: 25px;
     }
 
 
@@ -776,8 +639,7 @@
     .concept {
 
       border-top:
-        4px solid
-        #38afd9;
+        4px solid #38afd9;
     }
 
 
@@ -796,21 +658,13 @@
       background:
         #0b294b;
 
-      color:
-        white;
+      color: white;
 
-      padding:
-        45px;
+      padding: 45px;
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
-      overflow-x:
-        auto;
-
-      box-shadow:
-        0 15px 40px
-        rgba(10,50,80,0.10);
+      overflow-x: auto;
     }
 
     .architecture-box pre {
@@ -819,8 +673,7 @@
         Consolas,
         monospace;
 
-      line-height:
-        1.8;
+      line-height: 1.8;
 
       color:
         #bfeeff;
@@ -833,14 +686,11 @@
 
     .standards {
 
-      display:
-        flex;
+      display: flex;
 
-      flex-wrap:
-        wrap;
+      flex-wrap: wrap;
 
-      gap:
-        15px;
+      gap: 15px;
     }
 
     .standard {
@@ -854,11 +704,9 @@
       padding:
         12px 18px;
 
-      border-radius:
-        8px;
+      border-radius: 8px;
 
-      font-weight:
-        600;
+      font-weight: 600;
     }
 
 
@@ -871,14 +719,12 @@
       background:
         #081d35;
 
-      color:
-        white;
+      color: white;
     }
 
     .code-section h2 {
 
-      color:
-        white;
+      color: white;
     }
 
     .code-section .section-header p {
@@ -892,14 +738,11 @@
       background:
         #020b15;
 
-      border-radius:
-        12px;
+      border-radius: 12px;
 
-      padding:
-        30px;
+      padding: 30px;
 
-      overflow-x:
-        auto;
+      overflow-x: auto;
 
       border:
         1px solid
@@ -915,8 +758,7 @@
         Consolas,
         monospace;
 
-      line-height:
-        1.8;
+      line-height: 1.8;
     }
 
 
@@ -956,8 +798,7 @@
 
     footer h3 {
 
-      color:
-        white;
+      color: white;
 
       margin-bottom:
         12px;
@@ -1002,14 +843,31 @@
 
 
     /* =========================================
-       MOBILE
+       TABLET / MOBILE
        ========================================= */
+
+    @media (max-width: 1000px) {
+
+      .rotating-globe {
+
+        width: 330px;
+        height: 330px;
+
+        left: 590px;
+      }
+
+      .hero-title-wrap::before {
+
+        left: 650px;
+      }
+
+    }
+
 
     @media (max-width: 850px) {
 
       .nav-links {
-        display:
-          none;
+        display: none;
       }
 
       .cards,
@@ -1035,7 +893,7 @@
       .hero-title-wrap {
 
         min-height:
-          210px;
+          230px;
       }
 
       .hero-title-wrap h1 {
@@ -1049,23 +907,18 @@
 
       .rotating-globe {
 
-        width:
-          260px;
+        width: 270px;
+        height: 270px;
 
-        height:
-          260px;
-
-        left:
-          calc(100% + 20px);
+        left: 350px;
 
         opacity:
-          0.65;
+          0.7;
       }
 
       .hero-title-wrap::before {
 
-        left:
-          calc(100% + 25px);
+        left: 400px;
       }
 
       section {
@@ -1079,31 +932,24 @@
         padding:
           25px;
       }
+
     }
 
 
-    /* =========================================
-       VERY SMALL SCREENS
-       ========================================= */
-
-    @media (max-width: 520px) {
+    @media (max-width: 600px) {
 
       .hero-title-wrap {
 
         min-height:
-          180px;
+          190px;
       }
 
       .rotating-globe {
 
-        width:
-          210px;
+        width: 220px;
+        height: 220px;
 
-        height:
-          210px;
-
-        left:
-          calc(100% - 5px);
+        left: 210px;
 
         opacity:
           0.5;
@@ -1120,6 +966,29 @@
         font-size:
           1.05rem;
       }
+
+    }
+
+
+    @media (max-width: 430px) {
+
+      .rotating-globe {
+
+        width: 180px;
+        height: 180px;
+
+        left: 150px;
+
+        opacity:
+          0.35;
+      }
+
+      .hero-title-wrap {
+
+        min-height:
+          170px;
+      }
+
     }
 
   </style>
@@ -1130,9 +999,9 @@
 <body>
 
 
-  <!-- =====================================
+  <!-- =========================================
        NAVIGATION
-       ===================================== -->
+       ========================================= -->
 
   <nav>
 
@@ -1145,39 +1014,27 @@
       <ul class="nav-links">
 
         <li>
-          <a href="#about">
-            About
-          </a>
+          <a href="#about">About</a>
         </li>
 
         <li>
-          <a href="#ontology">
-            Ontology
-          </a>
+          <a href="#ontology">Ontology</a>
         </li>
 
         <li>
-          <a href="#architecture">
-            Architecture
-          </a>
+          <a href="#architecture">Architecture</a>
         </li>
 
         <li>
-          <a href="#standards">
-            Standards
-          </a>
+          <a href="#standards">Standards</a>
         </li>
 
         <li>
-          <a href="#applications">
-            Applications
-          </a>
+          <a href="#applications">Applications</a>
         </li>
 
         <li>
-          <a href="#examples">
-            Examples
-          </a>
+          <a href="#examples">Examples</a>
         </li>
 
       </ul>
@@ -1187,10 +1044,9 @@
   </nav>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        HERO
-       ===================================== -->
+       ========================================= -->
 
   <header class="hero">
 
@@ -1207,19 +1063,25 @@
       </div>
 
 
+      <!-- TITLE -->
+
       <div class="hero-title-wrap">
 
+
         <!--
-          IMPORTANT:
-          Keep meteonto_weather_globe.png
-          in the same folder as index.html.
+          WEATHER ANALYSIS GLOBE
+
+          The PNG MUST be in the same directory
+          as index.html.
         -->
 
         <div class="rotating-globe">
 
           <img
-            src="meteonto_weather_globe.png"
-            alt="Meteorological weather analysis globe"
+            src="./meteonto_weather_globe.png"
+            alt=""
+            aria-hidden="true"
+            onerror="this.style.display='none';"
           >
 
         </div>
@@ -1232,15 +1094,20 @@
       </div>
 
 
+      <!-- DESCRIPTION -->
+
       <p>
 
-        A semantic ontology for representing, integrating,
-        and connecting meteorological knowledge — from
-        weather phenomena and atmospheric conditions to
-        sensor observations and forecasts.
+        A semantic ontology for representing,
+        integrating, and connecting meteorological
+        knowledge — from weather phenomena and
+        atmospheric conditions to sensor observations
+        and forecasts.
 
       </p>
 
+
+      <!-- BUTTONS -->
 
       <div class="buttons">
 
@@ -1268,10 +1135,9 @@
   </header>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        ABOUT
-       ===================================== -->
+       ========================================= -->
 
   <section
     id="about"
@@ -1287,10 +1153,8 @@
         </h2>
 
         <p>
-
           A semantic foundation for interoperable
           meteorological data and knowledge.
-
         </p>
 
       </div>
@@ -1305,7 +1169,6 @@
 
             MeteoOnto provides a structured semantic
             representation of the meteorological domain.
-
             It captures important concepts, relationships,
             observations, measurements, and forecasts used
             to describe atmospheric and weather-related
@@ -1326,9 +1189,7 @@
 
           <div class="highlight">
 
-            <strong>
-              Goal:
-            </strong>
+            <strong>Goal:</strong>
 
             Enable machines and applications to understand
             and connect meteorological information using
@@ -1353,11 +1214,9 @@
 
             Meteorological information is produced by many
             different systems, organizations, sensors, and
-            data formats.
-
-            A shared ontology provides common concepts and
-            relationships that enable these sources to
-            communicate semantically.
+            data formats. A shared ontology provides common
+            concepts and relationships that enable these
+            sources to communicate semantically.
 
           </p>
 
@@ -1370,10 +1229,9 @@
   </section>
 
 
-
-  <!-- =====================================
-       ONTOLOGY CONCEPTS
-       ===================================== -->
+  <!-- =========================================
+       CORE ONTOLOGY CONCEPTS
+       ========================================= -->
 
   <section id="ontology">
 
@@ -1388,8 +1246,8 @@
 
         <p>
 
-          MeteoOnto organizes meteorological knowledge into
-          interconnected semantic concepts.
+          MeteoOnto organizes meteorological knowledge
+          into interconnected semantic concepts.
 
         </p>
 
@@ -1511,7 +1369,7 @@
           </div>
 
           <h3>
-            Spatial & Temporal Context
+            Spatial &amp; Temporal Context
           </h3>
 
           <p>
@@ -1531,10 +1389,9 @@
   </section>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        ARCHITECTURE
-       ===================================== -->
+       ========================================= -->
 
   <section
     id="architecture"
@@ -1551,8 +1408,8 @@
 
         <p>
 
-          A conceptual view of how major MeteoOnto
-          components relate to one another.
+          A conceptual view of how the major
+          MeteoOnto components relate to one another.
 
         </p>
 
@@ -1589,10 +1446,9 @@
   </section>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        STANDARDS
-       ===================================== -->
+       ========================================= -->
 
   <section id="standards">
 
@@ -1602,7 +1458,7 @@
       <div class="section-header">
 
         <h2>
-          Interoperability & Standards
+          Interoperability &amp; Standards
         </h2>
 
         <p>
@@ -1653,10 +1509,9 @@
   </section>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        APPLICATIONS
-       ===================================== -->
+       ========================================= -->
 
   <section id="applications">
 
@@ -1810,10 +1665,9 @@
   </section>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        SEMANTIC EXAMPLE
-       ===================================== -->
+       ========================================= -->
 
   <section
     id="examples"
@@ -1870,10 +1724,9 @@ meteo:Observation001
   </section>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        DOCUMENTATION
-       ===================================== -->
+       ========================================= -->
 
   <section>
 
@@ -1887,9 +1740,7 @@ meteo:Observation001
         </h2>
 
         <p>
-
           Explore the ontology and its semantic components.
-
         </p>
 
       </div>
@@ -1965,10 +1816,9 @@ meteo:Observation001
   </section>
 
 
-
-  <!-- =====================================
+  <!-- =========================================
        FOOTER
-       ===================================== -->
+       ========================================= -->
 
   <footer>
 
