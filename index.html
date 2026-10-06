@@ -38,10 +38,30 @@ footer{background:#061724;color:#aac0c3;padding:34px 0}.foot{display:flex;align-
 <aside class="sidebar" id="topicSidebar" aria-label="MeteoOnto topics">
 <div class="side-title">MeteoOnto topics</div>
 <input id="topicSearch" class="side-search" type="search" placeholder="Search topics…" autocomplete="off" aria-label="Search topics">
-<div class="side-group"><strong>Guide</strong><div class="side-links"><a href="#overview" data-topic="introduction overview domain model concepts">Introduction</a><a href="#explorer" data-topic="ontology explorer graph visualization classes properties core model">Ontology explorer</a></div></div>
-<div class="side-group"><strong>Ontology modules</strong><div class="side-links"><a href="#explorer" data-module-link="core" data-topic="core ontology observations sensors data time">Core ontology</a><a href="#explorer" data-module-link="forecast" data-topic="forecast forecasting model">Forecasting</a><a href="#explorer" data-module-link="geo" data-topic="geospatial location geography geometry">Geospatial</a><a href="#explorer" data-module-link="extreme" data-topic="extreme weather phenomena">Extreme weather</a><a href="#explorer" data-module-link="risk" data-topic="risk safety hazards">Risk &amp; safety</a></div></div>
-<div class="side-group"><strong>Alignments</strong><div class="side-links"><a href="#alignments" data-alignment="0" data-topic="sosa ssn sensor observation alignment">SOSA / SSN</a><a href="#alignments" data-alignment="1" data-topic="qudt quantities units alignment">QUDT</a><a href="#alignments" data-alignment="2" data-topic="prov provenance alignment">PROV-O</a><a href="#alignments" data-alignment="3" data-topic="owl time temporal alignment">OWL-Time</a><a href="#alignments" data-alignment="4" data-topic="geosparql spatial geography alignment">GeoSPARQL</a><a href="#alignments" data-alignment="5" data-topic="dbpedia geography mapping">DBpedia · Geography</a><a href="#alignments" data-alignment="6" data-topic="dbpedia risk safety hazard mapping">DBpedia · Risk &amp; safety</a><a href="#alignments" data-alignment="7" data-topic="sweet extreme weather mapping">SWEET</a><a href="#alignments" data-alignment="8" data-topic="dbpedia geographic features mapping">DBpedia · Geo module</a></div></div>
-<div class="side-group"><strong>Downloads &amp; use</strong><div class="side-links"><a href="#files" data-topic="downloads files turtle owl rdf formats">Ontology downloads</a><a href="#files" data-topic="python rdflib load parse">Use with Python</a><a href="#files" data-topic="sparql query classes">SPARQL queries</a><a href="https://github.com/PasanGunasekara29/MeteoOnto" data-topic="source github repository">Source repository ↗</a></div><div class="side-empty" id="topicEmpty">No matching topics</div></div>
+<div class="side-group"><strong>MeteoOnto Lifecycle</strong><div class="side-links">
+<a href="#overview" data-topic="lifecycle development ontology design scope domain">MeteoOnto Development</a>
+<a href="#overview" data-topic="lifecycle requirements domain scope competency goals">MeteoOnto Requirements</a>
+<a href="#explorer" data-module-link="core" data-topic="lifecycle implementation core ontology classes properties">MeteoOnto Implementation</a>
+<a href="#alignments" data-alignment="0" data-topic="lifecycle evaluation validation mappings alignment">MeteoOnto Evaluation</a>
+<a href="#files" data-topic="lifecycle publication release license citation files">MeteoOnto Publication</a>
+</div></div>
+<div class="side-group"><strong>Data Sources</strong><div class="side-links">
+<a href="#explorer" data-module-link="core" data-topic="data sources observations measured properties results">Weather Observation Data</a>
+<a href="#explorer" data-module-link="core" data-topic="data sources sensors platforms stations deployments">Sensor &amp; Platform Data</a>
+<a href="#explorer" data-module-link="forecast" data-topic="data sources forecast model prediction">Forecast &amp; Model Data</a>
+<a href="#explorer" data-module-link="geo" data-topic="data sources geographic location place geometry">Geospatial Data</a>
+<a href="#explorer" data-module-link="risk" data-topic="data sources hazard risk safety">Hazard &amp; Risk Data</a>
+</div></div>
+<div class="side-group"><strong>MeteoOnto playground</strong><div class="side-links">
+<a href="#explorer" data-module-link="core" data-topic="playground browse ontology graph visualization class property">Browse the Ontology Graph</a>
+<a href="#files" data-topic="playground sparql query example">Query MeteoOnto with SPARQL</a>
+</div></div>
+<div class="side-group"><strong>METEOONTO DOWNLOADS</strong><div class="side-links">
+<a href="#files" data-topic="downloads ontology turtle owl rdf formats files">Ontology Download Formats</a>
+</div></div>
+<div class="side-group"><strong>Using MeteoOnto</strong><div class="side-links">
+<a href="#files" data-topic="using query query language sparql rdflib python interface">How to Query MeteoOnto</a>
+</div><div class="side-empty" id="topicEmpty">No matching topics</div></div>
 </aside><div class="content-main"><main>
 <section id="overview"><div class="wrap"><div class="section-head"><div><div class="section-kicker">The domain model</div><h2 class="section-title">One semantic view of weather data.</h2><p class="section-intro">A modular vocabulary for describing how observations are made, what they measure, where and when they apply, and how datasets and models produce results.</p></div></div><div class="pillars">
 <article class="pillar"><div class="icon">◉</div><h3>Observations &amp; results</h3><p>Represent observed properties, reported results, numeric and non-numeric data, and observation context.</p></article>
