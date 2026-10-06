@@ -9,7 +9,7 @@
 <style>
 :root{--ink:#102b4c;--muted:#61758f;--paper:#f4f8fc;--white:#fff;--line:#d9e5f1;--teal:#167fe5;--mint:#b9e6ff;--sky:#d6efff;--gold:#75cbff;--deep:#071a33;--shadow:0 18px 55px rgba(4,34,48,.1);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--paper);color:var(--ink);line-height:1.6}a{color:inherit;text-decoration:none}button,select,input{font:inherit}button{cursor:pointer}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}.top{position:sticky;top:0;z-index:20;background:rgba(7,27,45,.94);backdrop-filter:blur(14px);color:#eef8f4;border-bottom:1px solid #ffffff20}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-weight:800;letter-spacing:-.04em;font-size:1.22rem}.brand i{font-style:normal;color:var(--sky)}.navlinks{display:flex;align-items:center;gap:25px;font-size:.9rem;color:#c2d4dc}.navlinks a:hover{color:white}.navcta{border:1px solid #b9e6ff66;border-radius:999px;padding:8px 14px;color:var(--mint)}
-.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);color:#fff;padding:92px 0 86px}.hero:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 77% 42%,#136f7099,transparent 36%),radial-gradient(ellipse at 100% 0%,#204e68,transparent 40%),linear-gradient(115deg,#071a33 8%,#0c2d50 70%,#174b79)}.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:46px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--mint);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;font-weight:750}.eyebrow:before{content:"";width:26px;height:1px;background:currentColor}.hero h1{font-size:clamp(3.5rem,7vw,6.4rem);line-height:.96;letter-spacing:-.075em;margin:20px 0 24px;max-width:720px}.hero h1 span{color:var(--mint)}.lead{font-size:1.15rem;color:#c6d9df;max-width:600px;line-height:1.75}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;border-radius:8px;font-weight:700;font-size:.91rem;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{background:#93d9ff;color:#08264b}.ghost{border:1px solid #d6eee066;color:#effaf6}.meta{display:flex;gap:22px;flex-wrap:wrap;color:#9eb7c1;font-size:.82rem;margin-top:30px}.meta b{color:#e9f7f4;font-weight:700}.hero-visual{position:relative;min-height:410px;display:grid;place-items:center}.orb{width:min(390px,78vw);aspect-ratio:1;border-radius:50%;position:relative;background:transparent;box-shadow:none;overflow:visible}.weather-globe{position:absolute;width:112%;height:112%;left:-6%;top:-6%;object-fit:contain;display:block;animation:globeSpin 52s linear infinite;filter:drop-shadow(0 20px 38px #0008)}@keyframes globeSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.orb:before,.orb:after{content:"";position:absolute;inset:-5%;border-radius:50%;border:1px solid #c2e7ff54;transform:rotate(-28deg) scaleY(.32)}.orb:after{transform:rotate(25deg) scaleY(.52);border-color:#8fd0ff44}.orbit{position:absolute;width:440px;height:130px;border:1px solid #b9e6ff4f;border-radius:50%;transform:rotate(-22deg)}.orbit:after{content:"";position:absolute;width:9px;height:9px;background:var(--gold);border-radius:50%;top:12px;left:66px;box-shadow:0 0 22px var(--gold)}.node{position:absolute;background:#0c3042d9;border:1px solid #b9e6ff55;padding:10px 13px;border-radius:10px;backdrop-filter:blur(8px);font-size:.76rem;color:#e5f3ff;box-shadow:0 10px 30px #00111c55}.n1{top:28px;left:2%}.n2{right:-2%;top:108px}.n3{bottom:52px;left:-1%}.n4{bottom:6px;right:9%}.n5{top:42%;right:-8%}.spark{color:var(--gold)}
+.hero{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);color:#fff;padding:92px 0 86px}.hero:before{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(ellipse at 77% 42%,#136f7099,transparent 36%),radial-gradient(ellipse at 100% 0%,#204e68,transparent 40%),linear-gradient(115deg,#071a33 8%,#0c2d50 70%,#174b79)}.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:46px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--mint);font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;font-weight:750}.eyebrow:before{content:"";width:26px;height:1px;background:currentColor}.hero h1{font-size:clamp(3.5rem,7vw,6.4rem);line-height:.96;letter-spacing:-.075em;margin:20px 0 24px;max-width:720px}.hero h1 span{color:var(--mint)}.lead{font-size:1.15rem;color:#c6d9df;max-width:600px;line-height:1.75}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 18px;border-radius:8px;font-weight:700;font-size:.91rem;transition:.18s}.btn:hover{transform:translateY(-2px)}.primary{background:#93d9ff;color:#08264b}.ghost{border:1px solid #d6eee066;color:#effaf6}.meta{display:flex;gap:22px;flex-wrap:wrap;color:#9eb7c1;font-size:.82rem;margin-top:30px}.meta b{color:#e9f7f4;font-weight:700}.hero-visual{position:relative;min-height:410px;display:grid;place-items:center}.orb{width:min(390px,78vw);aspect-ratio:1;border-radius:50%;position:relative;background:transparent;box-shadow:none;overflow:visible}.weather-globe{position:absolute;width:112%;height:112%;left:-6%;top:-6%;display:block;filter:drop-shadow(0 18px 30px #0008)}to{transform:rotate(360deg)}}.orb:before,.orb:after{content:"";position:absolute;inset:-5%;border-radius:50%;border:1px solid #c2e7ff54;transform:rotate(-28deg) scaleY(.32)}.orb:after{transform:rotate(25deg) scaleY(.52);border-color:#8fd0ff44}.orbit{position:absolute;width:440px;height:130px;border:1px solid #b9e6ff4f;border-radius:50%;transform:rotate(-22deg)}.orbit:after{content:"";position:absolute;width:9px;height:9px;background:var(--gold);border-radius:50%;top:12px;left:66px;box-shadow:0 0 22px var(--gold)}.node{position:absolute;background:#0c3042d9;border:1px solid #b9e6ff55;padding:10px 13px;border-radius:10px;backdrop-filter:blur(8px);font-size:.76rem;color:#e5f3ff;box-shadow:0 10px 30px #00111c55}.n1{top:28px;left:2%}.n2{right:-2%;top:108px}.n3{bottom:52px;left:-1%}.n4{bottom:6px;right:9%}.n5{top:42%;right:-8%}.spark{color:var(--gold)}
 .stats{background:#fff;border-bottom:1px solid var(--line)}.statrow{display:grid;grid-template-columns:repeat(4,1fr)}.stat{padding:22px 10px;border-right:1px solid var(--line);text-align:center}.stat:last-child{border:0}.stat strong{display:block;font-size:1.4rem;letter-spacing:-.04em}.stat span{font-size:.78rem;color:var(--muted)}
 section{padding:84px 0}.section-kicker{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:#167fe5;font-weight:800}.section-title{font-size:clamp(2rem,4vw,3.1rem);line-height:1.08;letter-spacing:-.055em;margin:12px 0}.section-intro{max-width:680px;color:var(--muted);font-size:1.02rem}.section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin-bottom:34px}.section-head>div{max-width:750px}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.pillar{border:1px solid var(--line);background:#fff;border-radius:13px;padding:23px;min-height:182px;box-shadow:0 6px 24px #102b4c08}.icon{display:grid;place-items:center;width:39px;height:39px;border-radius:10px;background:#e4f2ff;color:#167fe5;font-size:1.15rem;margin-bottom:18px}.pillar h3{font-size:1rem;margin:0 0 8px}.pillar p{font-size:.87rem;color:var(--muted);margin:0}
@@ -28,12 +28,12 @@ footer{background:#061724;color:#aac0c3;padding:34px 0}.foot{display:flex;align-
 .layout{display:grid;grid-template-columns:244px minmax(0,1fr);gap:34px;align-items:start;width:min(1440px,calc(100% - 48px));margin:auto}.sidebar{position:sticky;top:92px;max-height:calc(100vh - 108px);overflow:auto;padding:19px 15px 22px;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 8px 28px #102b4c0a}.side-title{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#71859e;padding:0 9px 11px}.side-search{width:100%;border:1px solid #cbd9e8;background:#f6faff;color:#173558;border-radius:8px;padding:10px 11px;font-size:.84rem;outline:none}.side-search:focus{border-color:#438fda;box-shadow:0 0 0 3px #438fda24}.side-group{margin-top:17px}.side-group strong{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:#7388a0;padding:0 9px 6px}.side-links{display:grid;gap:3px}.side-links a{display:block;padding:7px 9px;border-radius:7px;color:#38536f;font-size:.83rem;line-height:1.35}.side-links a:hover,.side-links a.active{background:#e8f4ff;color:#126fc4}.side-links a.active{font-weight:700}.side-links a[hidden]{display:none}.side-empty{font-size:.78rem;color:#7b8da0;padding:8px 9px;display:none}.mobile-menu{display:none;border:1px solid #b9e6ff66;background:transparent;color:#e9f6ff;border-radius:8px;padding:7px 10px}.content-main{min-width:0}.content-main section:first-child{padding-top:78px}.top .wrap.nav{width:min(1440px,calc(100% - 48px))}
 @media(max-width:980px){.layout{grid-template-columns:1fr;width:min(100% - 34px,900px);gap:0}.sidebar{position:fixed;z-index:35;left:12px;top:75px;bottom:12px;width:min(310px,calc(100vw - 24px));max-height:none;transform:translateX(calc(-100% - 18px));transition:transform .22s ease;box-shadow:0 20px 60px #061a3350}.sidebar.open{transform:translateX(0)}.mobile-menu{display:inline-flex;align-items:center;gap:7px}.top .wrap.nav{width:calc(100% - 30px)}.content-main section:first-child{padding-top:60px}}
 @media(max-width:560px){.nav{gap:10px}.navlinks{gap:8px}.navlinks a:not(.navcta){display:none}.navcta{font-size:.78rem;padding:7px 10px}.layout{width:calc(100% - 28px)}}
-@media(prefers-reduced-motion:reduce){.weather-globe{animation:none!important}}
+
 </style>
 </head>
 <body>
 <div class="top"><div class="wrap nav"><button class="mobile-menu" id="menuToggle" aria-controls="topicSidebar" aria-expanded="false">☰ <span>Topics</span></button><a class="brand" href="#">Meteo<i>Onto</i></a><nav class="navlinks" aria-label="Main navigation"><a href="#overview">Overview</a><a href="#explorer">Explorer</a><a href="#alignments">Alignments</a><a href="#files">Files</a><a class="navcta" href="https://github.com/PasanGunasekara29/MeteoOnto">GitHub ↗</a></nav></div></div>
-<header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">MeteoOnto · Meteorological Ontology</div><h1>Weather knowledge,<br><span>connected.</span></h1><p class="lead">MeteoOnto connects weather observations, sensors, measurements, forecasts, locations and time in one machine-readable ontology. Alignments with SOSA/SSN, QUDT, PROV-O, OWL-Time, GeoSPARQL, DBpedia and SWEET help data from different systems work together.</p><div class="actions"><a class="btn primary" href="#explorer">Explore the ontology <span>↓</span></a><a class="btn ghost" href="#alignments">View alignments</a></div><div class="meta"><span><b>OWL / Turtle</b> formal model</span><span><b>CC BY 4.0</b> license</span><span><b>Open source</b> on GitHub</span></div></div><div class="hero-visual" aria-hidden="true"><div class="orb"><img class="weather-globe" src="./meteo-weather-globe.webp" alt="" aria-hidden="true"></div><div class="orbit"></div><div class="node n1">Observation <span class="spark">✦</span></div><div class="node n2">Atmospheric condition</div><div class="node n3">Sensor · Platform</div><div class="node n4">Place &amp; time</div><div class="node n5">Forecast</div></div></div></header>
+<header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">MeteoOnto · Meteorological Ontology</div><h1>Weather knowledge,<br><span>connected.</span></h1><p class="lead">MeteoOnto connects weather observations, sensors, measurements, forecasts, locations and time in one machine-readable ontology. Alignments with SOSA/SSN, QUDT, PROV-O, OWL-Time, GeoSPARQL, DBpedia and SWEET help data from different systems work together.</p><div class="actions"><a class="btn primary" href="#explorer">Explore the ontology <span>↓</span></a><a class="btn ghost" href="#alignments">View alignments</a></div><div class="meta"><span><b>OWL / Turtle</b> formal model</span><span><b>CC BY 4.0</b> license</span><span><b>Open source</b> on GitHub</span></div></div><div class="hero-visual" aria-hidden="true"><div class="orb"><canvas class="weather-globe" id="weatherGlobe" width="384" height="384" role="img" aria-label="Three-dimensional rotating weather globe"></canvas><img id="weatherTexture" src="./meteo-world-weather.webp" alt="" hidden></div><div class="orbit"></div><div class="node n1">Observation <span class="spark">✦</span></div><div class="node n2">Atmospheric condition</div><div class="node n3">Sensor · Platform</div><div class="node n4">Place &amp; time</div><div class="node n5">Forecast</div></div></div></header>
 <div class="stats"><div class="wrap statrow"><div class="stat"><strong id="classStat">—</strong><span>core classes</span></div><div class="stat"><strong id="propertyStat">—</strong><span>properties</span></div><div class="stat"><strong id="alignStat">9</strong><span>alignment files</span></div><div class="stat"><strong>RDF · OWL</strong><span>machine-readable</span></div></div></div>
 <div class="layout">
 <aside class="sidebar" id="topicSidebar" aria-label="MeteoOnto topics">
@@ -147,6 +147,61 @@ topicSearch.addEventListener("input",filterTopics);
 menuToggle.addEventListener("click",()=>{const open=sidebar.classList.toggle("open");menuToggle.setAttribute("aria-expanded",String(open))});
 document.querySelectorAll("#topicSidebar a").forEach(a=>a.addEventListener("click",()=>{document.querySelectorAll("#topicSidebar a").forEach(x=>x.classList.remove("active"));a.classList.add("active");if(a.dataset.moduleLink){document.getElementById("module").value=a.dataset.moduleLink;loadModule()}if(a.dataset.alignment!==undefined)chooseAlignment(Number(a.dataset.alignment));sidebar.classList.remove("open");menuToggle.setAttribute("aria-expanded","false")}));
 
+
+function initRotatingGlobe(){
+  const canvas=document.getElementById("weatherGlobe");
+  const texture=document.getElementById("weatherTexture");
+  if(!canvas||!texture)return;
+  const ctx=canvas.getContext("2d",{alpha:true});
+  if(!ctx)return;
+  const size=canvas.width, center=(size-1)/2, radius=size*.47;
+  const frame=ctx.createImageData(size,size), pixels=frame.data;
+  const map=document.createElement("canvas"), mapCtx=map.getContext("2d",{willReadFrequently:true});
+  const render=()=>{
+    if(!texture.naturalWidth)return;
+    map.width=1024;map.height=512;
+    mapCtx.drawImage(texture,0,0,map.width,map.height);
+    const src=mapCtx.getImageData(0,0,map.width,map.height).data;
+    const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const twoPi=Math.PI*2, lx=-.42, ly=.48, lz=.77;
+    let last=0;
+    const paint=now=>{
+      if(!reduced&&now-last<32){requestAnimationFrame(paint);return}
+      last=now;
+      const angle=reduced?0:now/1000*twoPi/72;
+      const ca=Math.cos(angle),sa=Math.sin(angle);
+      let k=0;
+      for(let y=0;y<size;y++){
+        const ny=(center-y)/radius;
+        for(let x=0;x<size;x++,k+=4){
+          const nx=(x-center)/radius, rr=nx*nx+ny*ny;
+          if(rr>1){pixels[k]=pixels[k+1]=pixels[k+2]=pixels[k+3]=0;continue}
+          const nz=Math.sqrt(1-rr);
+          const rx=nx*ca+nz*sa, rz=-nx*sa+nz*ca;
+          let u=(Math.atan2(rx,rz)/twoPi+.5);u-=Math.floor(u);
+          const v=Math.acos(Math.max(-1,Math.min(1,ny)))/Math.PI;
+          const tx=Math.min(map.width-1,Math.floor(u*map.width));
+          const ty=Math.min(map.height-1,Math.floor(v*(map.height-1)));
+          const q=(ty*map.width+tx)*4;
+          const diffuse=Math.max(0,nx*lx+ny*ly+nz*lz);
+          const edge=Math.sqrt(rr);
+          const rim=Math.pow(edge,5);
+          const shade=.38+.72*diffuse;
+          pixels[k]=Math.min(255,src[q]*shade+18*rim);
+          pixels[k+1]=Math.min(255,src[q+1]*shade+40*rim);
+          pixels[k+2]=Math.min(255,src[q+2]*shade+65*rim);
+          pixels[k+3]=255;
+        }
+      }
+      ctx.putImageData(frame,0,0);
+      if(!reduced)requestAnimationFrame(paint);
+    };
+    requestAnimationFrame(paint);
+  };
+  if(texture.complete&&texture.naturalWidth)render();
+  else texture.addEventListener("load",render,{once:true});
+}
+initRotatingGlobe();
 </script>
 </body>
 </html>
