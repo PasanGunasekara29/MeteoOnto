@@ -10,6 +10,11 @@
         content="MeteoOnto is a semantic ontology for representing meteorological knowledge, weather phenomena, atmospheric conditions, observations, sensors, forecasts, and relationships.">
 
   <style>
+
+    /* =========================
+       GLOBAL
+       ========================= */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -32,7 +37,11 @@
       color: inherit;
     }
 
-    /* Navigation */
+
+    /* =========================
+       NAVIGATION
+       ========================= */
+
     nav {
       position: sticky;
       top: 0;
@@ -76,15 +85,30 @@
       color: #67d5ff;
     }
 
-    /* Hero */
+
+    /* =========================
+       HERO
+       ========================= */
+
     .hero {
       min-height: 85vh;
       display: flex;
       align-items: center;
+      position: relative;
+      overflow: hidden;
       color: white;
+
       background:
-        linear-gradient(135deg, rgba(7, 32, 70, 0.95), rgba(12, 93, 130, 0.82)),
-        radial-gradient(circle at top right, #62d5ff, transparent 35%);
+        linear-gradient(
+          135deg,
+          rgba(7, 32, 70, 0.96),
+          rgba(12, 93, 130, 0.86)
+        ),
+        radial-gradient(
+          circle at top right,
+          #62d5ff,
+          transparent 35%
+        );
     }
 
     .hero-content {
@@ -92,6 +116,8 @@
       width: 100%;
       margin: auto;
       padding: 80px 25px;
+      position: relative;
+      z-index: 2;
     }
 
     .badge {
@@ -104,15 +130,189 @@
       font-size: 0.85rem;
     }
 
-    .hero h1 {
+
+    /* =========================
+       METEONTO TITLE + GLOBE
+       ========================= */
+
+    .hero-title-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 250px;
+      z-index: 1;
+    }
+
+    .hero-title-wrap h1 {
+      position: relative;
+      z-index: 5;
+
       font-size: clamp(3rem, 7vw, 6rem);
       line-height: 1;
       margin-bottom: 25px;
+      letter-spacing: -3px;
     }
 
-    .hero h1 span {
+    .hero-title-wrap h1 span {
       color: #68d8ff;
     }
+
+
+    /* Main rotating globe */
+
+    .rotating-globe {
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      left: calc(100% + 120px);
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 32% 27%,
+          rgba(255,255,255,0.95) 0%,
+          rgba(145,235,255,0.9) 8%,
+          rgba(35,170,225,0.85) 30%,
+          rgba(10,100,170,0.95) 65%,
+          rgba(3,35,75,1) 100%
+        );
+
+      box-shadow:
+        0 0 25px rgba(85,220,255,0.8),
+        0 0 60px rgba(55,190,240,0.5),
+        0 0 100px rgba(40,170,230,0.25),
+        inset -30px -20px 45px rgba(0,20,55,0.75),
+        inset 15px 10px 25px rgba(180,245,255,0.3);
+
+      opacity: 0.96;
+
+      animation:
+        globeRotate 28s linear infinite;
+
+      pointer-events: none;
+    }
+
+
+    /* Atmospheric outer ring */
+
+    .rotating-globe::before {
+      content: "";
+
+      position: absolute;
+
+      inset: -13px;
+
+      border-radius: 50%;
+
+      border: 2px solid rgba(120,230,255,0.55);
+
+      box-shadow:
+        0 0 15px rgba(90,220,255,0.5),
+        0 0 35px rgba(90,220,255,0.3),
+        0 0 60px rgba(90,220,255,0.15);
+
+      animation:
+        atmospherePulse 5s ease-in-out infinite;
+    }
+
+
+    /* Atmospheric bands */
+
+    .rotating-globe::after {
+      content: "";
+
+      position: absolute;
+
+      width: 115%;
+      height: 32%;
+
+      left: -7.5%;
+      top: 34%;
+
+      border-top: 2px solid rgba(190,245,255,0.45);
+      border-bottom: 2px solid rgba(190,245,255,0.3);
+
+      border-radius: 50%;
+
+      transform: rotate(-12deg);
+    }
+
+
+    /* Globe rotation */
+
+    @keyframes globeRotate {
+
+      0% {
+        transform: translateY(-50%) rotate(0deg);
+      }
+
+      100% {
+        transform: translateY(-50%) rotate(360deg);
+      }
+
+    }
+
+
+    /* Atmospheric pulse */
+
+    @keyframes atmospherePulse {
+
+      0%, 100% {
+        opacity: 0.45;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.9;
+        transform: scale(1.035);
+      }
+
+    }
+
+
+    /* Floating atmospheric particles */
+
+    .hero-title-wrap::before {
+      content: "✦  ·  ·  ✧  ·";
+
+      position: absolute;
+
+      left: calc(100% + 60px);
+      top: 5%;
+
+      color: rgba(170,240,255,0.7);
+
+      font-size: 18px;
+      letter-spacing: 15px;
+
+      animation:
+        particles 8s ease-in-out infinite;
+
+      z-index: 3;
+    }
+
+    @keyframes particles {
+
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 0.35;
+      }
+
+      50% {
+        transform: translateY(-18px);
+        opacity: 0.9;
+      }
+
+    }
+
+
+    /* Hero description */
 
     .hero p {
       max-width: 750px;
@@ -120,6 +320,9 @@
       color: #d9efff;
       margin-bottom: 35px;
     }
+
+
+    /* Buttons */
 
     .buttons {
       display: flex;
@@ -154,7 +357,11 @@
       background: rgba(255,255,255,0.1);
     }
 
-    /* Sections */
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
     section {
       padding: 85px 25px;
     }
@@ -180,7 +387,11 @@
       font-size: 1.05rem;
     }
 
-    /* Cards */
+
+    /* =========================
+       CARDS
+       ========================= */
+
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -215,7 +426,11 @@
       color: #657386;
     }
 
-    /* About */
+
+    /* =========================
+       ABOUT
+       ========================= */
+
     .about {
       background: white;
     }
@@ -240,7 +455,11 @@
       margin-top: 25px;
     }
 
-    /* Architecture */
+
+    /* =========================
+       ARCHITECTURE
+       ========================= */
+
     .architecture {
       background: #eef7fc;
     }
@@ -259,18 +478,20 @@
       color: #bfeeff;
     }
 
-    /* Concepts */
+
+    /* =========================
+       CONCEPTS
+       ========================= */
+
     .concept {
       border-top: 4px solid #38afd9;
     }
 
-    .concept ul {
-      margin-top: 15px;
-      padding-left: 20px;
-      color: #657386;
-    }
 
-    /* Standards */
+    /* =========================
+       STANDARDS
+       ========================= */
+
     .standards {
       display: flex;
       flex-wrap: wrap;
@@ -285,7 +506,11 @@
       font-weight: 600;
     }
 
-    /* Code */
+
+    /* =========================
+       CODE
+       ========================= */
+
     .code-section {
       background: #081d35;
       color: white;
@@ -308,7 +533,11 @@
       line-height: 1.8;
     }
 
-    /* Footer */
+
+    /* =========================
+       FOOTER
+       ========================= */
+
     footer {
       background: #06182c;
       color: #a9c1d6;
@@ -348,8 +577,13 @@
       font-size: 0.9rem;
     }
 
-    /* Mobile */
+
+    /* =========================
+       MOBILE
+       ========================= */
+
     @media (max-width: 850px) {
+
       .nav-links {
         display: none;
       }
@@ -361,7 +595,25 @@
       }
 
       .hero {
-        min-height: 75vh;
+        min-height: 80vh;
+      }
+
+      .hero-title-wrap {
+        min-height: 190px;
+      }
+
+      .hero-title-wrap h1 {
+        font-size: clamp(3rem, 15vw, 5rem);
+      }
+
+      .rotating-globe {
+        width: 180px;
+        height: 180px;
+        left: calc(100% + 35px);
+      }
+
+      .hero-title-wrap::before {
+        left: calc(100% + 15px);
       }
 
       section {
@@ -371,36 +623,82 @@
       .architecture-box {
         padding: 25px;
       }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <!-- Navigation -->
+
+  <!-- =========================
+       NAVIGATION
+       ========================= -->
+
   <nav>
+
     <div class="nav-container">
-      <div class="logo">Meteo<span>Onto</span></div>
+
+      <div class="logo">
+        Meteo<span>Onto</span>
+      </div>
 
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#ontology">Ontology</a></li>
-        <li><a href="#architecture">Architecture</a></li>
-        <li><a href="#standards">Standards</a></li>
-        <li><a href="#examples">Examples</a></li>
+
+        <li>
+          <a href="#about">About</a>
+        </li>
+
+        <li>
+          <a href="#ontology">Ontology</a>
+        </li>
+
+        <li>
+          <a href="#architecture">Architecture</a>
+        </li>
+
+        <li>
+          <a href="#standards">Standards</a>
+        </li>
+
+        <li>
+          <a href="#examples">Examples</a>
+        </li>
+
       </ul>
+
     </div>
+
   </nav>
 
-  <!-- Hero -->
+
+  <!-- =========================
+       HERO
+       ========================= -->
+
   <header class="hero">
+
     <div class="hero-content">
 
       <div class="badge">
         Semantic Web · Meteorology · Knowledge Representation
       </div>
 
-      <h1>Meteo<span>Onto</span></h1>
+
+      <!-- TITLE + ROTATING GLOBE -->
+
+      <div class="hero-title-wrap">
+
+        <div class="rotating-globe"></div>
+
+        <h1>
+          Meteo<span>Onto</span>
+        </h1>
+
+      </div>
+
 
       <p>
         A semantic ontology for representing, integrating, and connecting
@@ -408,67 +706,98 @@
         conditions to sensor observations and forecasts.
       </p>
 
+
       <div class="buttons">
-        <a href="#ontology" class="btn btn-primary">
+
+        <a
+          href="#ontology"
+          class="btn btn-primary">
           Explore the Ontology
         </a>
 
-        <a href="#about" class="btn btn-secondary">
+        <a
+          href="#about"
+          class="btn btn-secondary">
           Learn More
         </a>
+
       </div>
 
     </div>
+
   </header>
 
-  <!-- About -->
+
+  <!-- =========================
+       ABOUT
+       ========================= -->
+
   <section id="about" class="about">
+
     <div class="container">
 
       <div class="section-header">
-        <h2>About MeteoOnto</h2>
+
+        <h2>
+          About MeteoOnto
+        </h2>
+
         <p>
-          A semantic foundation for interoperable meteorological data and
-          knowledge.
+          A semantic foundation for interoperable meteorological
+          data and knowledge.
         </p>
+
       </div>
+
 
       <div class="about-grid">
 
         <div class="about-text">
 
           <p>
-            MeteoOnto provides a structured semantic representation of the
-            meteorological domain. It captures important concepts,
-            relationships, observations, measurements, and forecasts used
-            to describe atmospheric and weather-related phenomena.
+            MeteoOnto provides a structured semantic representation
+            of the meteorological domain. It captures important
+            concepts, relationships, observations, measurements,
+            and forecasts used to describe atmospheric and
+            weather-related phenomena.
           </p>
 
           <p>
-            The ontology is intended to support knowledge representation,
-            semantic data integration, interoperability, discovery, and
-            reasoning across heterogeneous meteorological datasets.
+            The ontology is intended to support knowledge
+            representation, semantic data integration,
+            interoperability, discovery, and reasoning across
+            heterogeneous meteorological datasets.
           </p>
 
           <div class="highlight">
+
             <strong>Goal:</strong>
-            Enable machines and applications to understand and connect
-            meteorological information using formal semantic relationships.
+
+            Enable machines and applications to understand and
+            connect meteorological information using formal
+            semantic relationships.
+
           </div>
 
         </div>
 
+
         <div class="card">
 
-          <div class="icon">🌍</div>
+          <div class="icon">
+            🌍
+          </div>
 
-          <h3>Why an Ontology?</h3>
+          <h3>
+            Why an Ontology?
+          </h3>
 
           <p>
-            Meteorological information is produced by many different
-            systems, organizations, sensors, and data formats.
-            A shared ontology provides common concepts and relationships
-            that enable these sources to communicate semantically.
+            Meteorological information is produced by many
+            different systems, organizations, sensors, and data
+            formats. A shared ontology provides common concepts
+            and relationships that enable these sources to
+            communicate semantically.
           </p>
 
         </div>
@@ -476,96 +805,180 @@
       </div>
 
     </div>
+
   </section>
 
-  <!-- Core concepts -->
+
+  <!-- =========================
+       CORE ONTOLOGY
+       ========================= -->
+
   <section id="ontology">
 
     <div class="container">
 
       <div class="section-header">
-        <h2>Core Ontology Concepts</h2>
+
+        <h2>
+          Core Ontology Concepts
+        </h2>
+
         <p>
-          MeteoOnto organizes meteorological knowledge into interconnected
-          semantic concepts.
+          MeteoOnto organizes meteorological knowledge into
+          interconnected semantic concepts.
         </p>
+
       </div>
+
 
       <div class="cards">
 
-        <div class="card concept">
-          <div class="icon">🌦️</div>
-          <h3>Weather Phenomena</h3>
-          <p>
-            Representation of phenomena such as rain, snow, fog,
-            thunderstorms, clouds, wind, and other atmospheric events.
-          </p>
-        </div>
 
         <div class="card concept">
-          <div class="icon">🌡️</div>
-          <h3>Atmospheric Conditions</h3>
+
+          <div class="icon">
+            🌦️
+          </div>
+
+          <h3>
+            Weather Phenomena
+          </h3>
+
           <p>
-            Concepts describing temperature, pressure, humidity,
-            visibility, wind conditions, and related atmospheric states.
+            Representation of phenomena such as rain, snow,
+            fog, thunderstorms, clouds, wind, and other
+            atmospheric events.
           </p>
+
         </div>
 
-        <div class="card concept">
-          <div class="icon">📡</div>
-          <h3>Observations</h3>
-          <p>
-            Semantic representation of observations collected from
-            meteorological instruments and observation systems.
-          </p>
-        </div>
 
         <div class="card concept">
-          <div class="icon">🛰️</div>
-          <h3>Sensors</h3>
+
+          <div class="icon">
+            🌡️
+          </div>
+
+          <h3>
+            Atmospheric Conditions
+          </h3>
+
+          <p>
+            Concepts describing temperature, pressure,
+            humidity, visibility, wind conditions, and
+            related atmospheric states.
+          </p>
+
+        </div>
+
+
+        <div class="card concept">
+
+          <div class="icon">
+            📡
+          </div>
+
+          <h3>
+            Observations
+          </h3>
+
+          <p>
+            Semantic representation of observations collected
+            from meteorological instruments and observation
+            systems.
+          </p>
+
+        </div>
+
+
+        <div class="card concept">
+
+          <div class="icon">
+            🛰️
+          </div>
+
+          <h3>
+            Sensors
+          </h3>
+
           <p>
             Representation of sensors, platforms, instruments,
-            measurements, and their relationships to observations.
+            measurements, and their relationships to
+            observations.
           </p>
+
         </div>
 
+
         <div class="card concept">
-          <div class="icon">🔮</div>
-          <h3>Forecasts</h3>
+
+          <div class="icon">
+            🔮
+          </div>
+
+          <h3>
+            Forecasts
+          </h3>
+
           <p>
-            Concepts for representing predicted atmospheric conditions,
-            forecast periods, locations, and forecast variables.
+            Concepts for representing predicted atmospheric
+            conditions, forecast periods, locations, and
+            forecast variables.
           </p>
+
         </div>
 
+
         <div class="card concept">
-          <div class="icon">📍</div>
-          <h3>Spatial & Temporal Context</h3>
+
+          <div class="icon">
+            📍
+          </div>
+
+          <h3>
+            Spatial & Temporal Context
+          </h3>
+
           <p>
             Representation of locations, regions, time periods,
             observation times, and forecast validity periods.
           </p>
+
         </div>
 
       </div>
 
     </div>
+
   </section>
 
-  <!-- Architecture -->
-  <section id="architecture" class="architecture">
+
+  <!-- =========================
+       ARCHITECTURE
+       ========================= -->
+
+  <section
+    id="architecture"
+    class="architecture">
 
     <div class="container">
 
       <div class="section-header">
-        <h2>Ontology Architecture</h2>
+
+        <h2>
+          Ontology Architecture
+        </h2>
+
         <p>
-          A conceptual view of how the major MeteoOnto components relate
-          to one another.
+          A conceptual view of how the major MeteoOnto
+          components relate to one another.
         </p>
+
       </div>
 
+
       <div class="architecture-box">
+
 <pre>
                     MeteoOnto
                         │
@@ -585,227 +998,448 @@
                     │                   │
                  Location             Time
 </pre>
+
       </div>
 
     </div>
+
   </section>
 
-  <!-- Standards -->
+
+  <!-- =========================
+       STANDARDS
+       ========================= -->
+
   <section id="standards">
 
     <div class="container">
 
       <div class="section-header">
-        <h2>Interoperability & Standards</h2>
+
+        <h2>
+          Interoperability & Standards
+        </h2>
+
         <p>
-          MeteoOnto is designed with interoperability and reuse of
-          established semantic standards in mind.
+          MeteoOnto is designed with interoperability and
+          reuse of established semantic standards in mind.
         </p>
+
       </div>
+
 
       <div class="standards">
 
-        <div class="standard">RDF</div>
-        <div class="standard">OWL</div>
-        <div class="standard">SOSA</div>
-        <div class="standard">SSN</div>
-        <div class="standard">SWEET</div>
-        <div class="standard">SPARQL</div>
-        <div class="standard">Linked Data</div>
+        <div class="standard">
+          RDF
+        </div>
+
+        <div class="standard">
+          OWL
+        </div>
+
+        <div class="standard">
+          SOSA
+        </div>
+
+        <div class="standard">
+          SSN
+        </div>
+
+        <div class="standard">
+          SWEET
+        </div>
+
+        <div class="standard">
+          SPARQL
+        </div>
+
+        <div class="standard">
+          Linked Data
+        </div>
 
       </div>
 
     </div>
+
   </section>
 
-  <!-- Applications -->
+
+  <!-- =========================
+       APPLICATIONS
+       ========================= -->
+
   <section>
 
     <div class="container">
 
       <div class="section-header">
-        <h2>Potential Applications</h2>
+
+        <h2>
+          Potential Applications
+        </h2>
+
         <p>
-          MeteoOnto can provide a semantic foundation for a range of
-          meteorological and environmental applications.
+          MeteoOnto can provide a semantic foundation for a
+          range of meteorological and environmental applications.
         </p>
+
       </div>
+
 
       <div class="cards">
 
-        <div class="card">
-          <div class="icon">🔗</div>
-          <h3>Data Integration</h3>
-          <p>
-            Connect meteorological datasets originating from different
-            systems and organizations.
-          </p>
-        </div>
 
         <div class="card">
-          <div class="icon">🧠</div>
-          <h3>Knowledge Graphs</h3>
+
+          <div class="icon">
+            🔗
+          </div>
+
+          <h3>
+            Data Integration
+          </h3>
+
+          <p>
+            Connect meteorological datasets originating from
+            different systems and organizations.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icon">
+            🧠
+          </div>
+
+          <h3>
+            Knowledge Graphs
+          </h3>
+
           <p>
             Build machine-readable knowledge graphs representing
             meteorological entities and their relationships.
           </p>
+
         </div>
 
-        <div class="card">
-          <div class="icon">🔎</div>
-          <h3>Semantic Search</h3>
-          <p>
-            Discover meteorological information based on meaning,
-            relationships, location, time, and context.
-          </p>
-        </div>
 
         <div class="card">
-          <div class="icon">📊</div>
-          <h3>Data Analytics</h3>
+
+          <div class="icon">
+            🔎
+          </div>
+
+          <h3>
+            Semantic Search
+          </h3>
+
           <p>
-            Provide a common semantic structure for analytical and
-            decision-support systems.
+            Discover meteorological information based on
+            meaning, relationships, location, time, and context.
           </p>
+
         </div>
 
-        <div class="card">
-          <div class="icon">🌐</div>
-          <h3>Interoperability</h3>
-          <p>
-            Improve communication between heterogeneous meteorological
-            systems and data providers.
-          </p>
-        </div>
 
         <div class="card">
-          <div class="icon">🤖</div>
-          <h3>Semantic Reasoning</h3>
+
+          <div class="icon">
+            📊
+          </div>
+
+          <h3>
+            Data Analytics
+          </h3>
+
           <p>
-            Support automated reasoning over meteorological observations,
-            phenomena, and relationships.
+            Provide a common semantic structure for analytical
+            and decision-support systems.
           </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icon">
+            🌐
+          </div>
+
+          <h3>
+            Interoperability
+          </h3>
+
+          <p>
+            Improve communication between heterogeneous
+            meteorological systems and data providers.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icon">
+            🤖
+          </div>
+
+          <h3>
+            Semantic Reasoning
+          </h3>
+
+          <p>
+            Support automated reasoning over meteorological
+            observations, phenomena, and relationships.
+          </p>
+
         </div>
 
       </div>
 
     </div>
+
   </section>
 
-  <!-- Example -->
-  <section id="examples" class="code-section">
+
+  <!-- =========================
+       RDF EXAMPLE
+       ========================= -->
+
+  <section
+    id="examples"
+    class="code-section">
 
     <div class="container">
 
       <div class="section-header">
-        <h2>Semantic Representation Example</h2>
+
+        <h2>
+          Semantic Representation Example
+        </h2>
+
         <p>
-          An example of how a meteorological observation can be expressed
-          using semantic technologies.
+          An example of how a meteorological observation can
+          be expressed using semantic technologies.
         </p>
+
       </div>
 
+
       <div class="code-box">
+
 <code>
-@prefix meteo: &lt;https://example.org/meteo#&gt; .
-@prefix sosa:  &lt;http://www.w3.org/ns/sosa/&gt; .
+@prefix meteo:
+  &lt;https://example.org/meteo#&gt; .
+
+@prefix sosa:
+  &lt;http://www.w3.org/ns/sosa/&gt; .
 
 meteo:Observation001
     a sosa:Observation ;
-    sosa:observedProperty meteo:Temperature ;
-    sosa:hasSimpleResult "28.4" ;
-    meteo:observedAt meteo:Colombo ;
-    meteo:observationTime "2026-10-06T12:00:00Z" .
+
+    sosa:observedProperty
+        meteo:Temperature ;
+
+    sosa:hasSimpleResult
+        "28.4" ;
+
+    meteo:observedAt
+        meteo:Colombo ;
+
+    meteo:observationTime
+        "2026-10-06T12:00:00Z" .
 </code>
+
       </div>
 
     </div>
+
   </section>
 
-  <!-- Documentation -->
+
+  <!-- =========================
+       DOCUMENTATION
+       ========================= -->
+
   <section>
 
     <div class="container">
 
       <div class="section-header">
-        <h2>Documentation</h2>
+
+        <h2>
+          Documentation
+        </h2>
+
         <p>
           Explore the ontology and its semantic components.
         </p>
+
       </div>
+
 
       <div class="cards">
 
-        <div class="card">
-          <div class="icon">📖</div>
-          <h3>Classes</h3>
-          <p>
-            Definitions of the principal meteorological concepts
-            represented in MeteoOnto.
-          </p>
-        </div>
 
         <div class="card">
-          <div class="icon">🔗</div>
-          <h3>Properties</h3>
+
+          <div class="icon">
+            📖
+          </div>
+
+          <h3>
+            Classes
+          </h3>
+
           <p>
-            Semantic relationships connecting observations, phenomena,
-            sensors, locations, measurements, and forecasts.
+            Definitions of the principal meteorological
+            concepts represented in MeteoOnto.
           </p>
+
         </div>
 
+
         <div class="card">
-          <div class="icon">💻</div>
-          <h3>Ontology Files</h3>
+
+          <div class="icon">
+            🔗
+          </div>
+
+          <h3>
+            Properties
+          </h3>
+
           <p>
-            OWL, RDF, Turtle, and other machine-readable representations
-            can be provided here.
+            Semantic relationships connecting observations,
+            phenomena, sensors, locations, measurements,
+            and forecasts.
           </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icon">
+            💻
+          </div>
+
+          <h3>
+            Ontology Files
+          </h3>
+
+          <p>
+            OWL, RDF, Turtle, and other machine-readable
+            representations can be provided here.
+          </p>
+
         </div>
 
       </div>
 
     </div>
+
   </section>
 
-  <!-- Footer -->
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
+
   <footer>
 
     <div class="footer-grid">
 
+
       <div>
-        <h3>MeteoOnto</h3>
+
+        <h3>
+          MeteoOnto
+        </h3>
+
         <p>
           A semantic ontology for meteorological knowledge,
           interoperability, and data integration.
         </p>
+
       </div>
 
-      <div>
-        <h3>Explore</h3>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#ontology">Ontology</a></li>
-          <li><a href="#architecture">Architecture</a></li>
-          <li><a href="#standards">Standards</a></li>
-        </ul>
-      </div>
 
       <div>
-        <h3>Resources</h3>
+
+        <h3>
+          Explore
+        </h3>
+
         <ul>
-          <li><a href="#examples">Examples</a></li>
-          <li><a href="#ontology">Documentation</a></li>
+
+          <li>
+            <a href="#about">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a href="#ontology">
+              Ontology
+            </a>
+          </li>
+
+          <li>
+            <a href="#architecture">
+              Architecture
+            </a>
+          </li>
+
+          <li>
+            <a href="#standards">
+              Standards
+            </a>
+          </li>
+
         </ul>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Resources
+        </h3>
+
+        <ul>
+
+          <li>
+            <a href="#examples">
+              Examples
+            </a>
+          </li>
+
+          <li>
+            <a href="#ontology">
+              Documentation
+            </a>
+          </li>
+
+        </ul>
+
       </div>
 
     </div>
 
+
     <div class="copyright">
+
       © 2026 MeteoOnto. All rights reserved.
+
     </div>
 
   </footer>
+
 
 </body>
 </html>
