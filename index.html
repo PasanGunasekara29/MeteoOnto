@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>MeteoOnto | Meteorological Ontology</title>
 
-  <meta name="description"
-        content="MeteoOnto is a semantic ontology for representing meteorological knowledge, weather phenomena, atmospheric conditions, observations, sensors, forecasts, and relationships.">
+  <meta
+    name="description"
+    content="MeteoOnto is a semantic ontology for representing, integrating, and connecting meteorological knowledge, weather phenomena, atmospheric conditions, observations, sensors, forecasts, and relationships."
+  >
 
   <style>
 
-    /* =========================
+    /* =========================================
        GLOBAL
-       ========================= */
+       ========================================= */
 
     * {
       box-sizing: border-box;
@@ -26,9 +31,15 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
       line-height: 1.6;
+
       color: #172033;
+
       background: #f7faff;
     }
 
@@ -38,604 +49,1090 @@
     }
 
 
-    /* =========================
+    /* =========================================
        NAVIGATION
-       ========================= */
+       ========================================= */
 
     nav {
       position: sticky;
+
       top: 0;
+
       z-index: 1000;
-      background: rgba(10, 30, 60, 0.96);
-      backdrop-filter: blur(10px);
+
+      background:
+        rgba(6, 27, 55, 0.96);
+
+      backdrop-filter: blur(12px);
+
       color: white;
+
+      border-bottom:
+        1px solid rgba(255,255,255,0.08);
     }
 
     .nav-container {
+
       max-width: 1200px;
+
       margin: auto;
-      padding: 18px 25px;
+
+      padding:
+        17px 25px;
+
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        center;
     }
 
     .logo {
+
       font-size: 1.5rem;
+
       font-weight: 700;
+
+      letter-spacing:
+        -0.5px;
     }
 
     .logo span {
-      color: #67d5ff;
+
+      color:
+        #67d5ff;
     }
 
     .nav-links {
+
       display: flex;
+
       gap: 25px;
+
       list-style: none;
     }
 
     .nav-links a {
-      color: #e8f3ff;
-      font-size: 0.95rem;
-      transition: 0.3s;
+
+      color:
+        #e8f3ff;
+
+      font-size:
+        0.95rem;
+
+      transition:
+        0.3s;
     }
 
     .nav-links a:hover {
-      color: #67d5ff;
+
+      color:
+        #67d5ff;
     }
 
 
-    /* =========================
+    /* =========================================
        HERO
-       ========================= */
+       ========================================= */
 
     .hero {
-      min-height: 85vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      color: white;
+
+      min-height:
+        85vh;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      position:
+        relative;
+
+      overflow:
+        hidden;
+
+      color:
+        white;
 
       background:
+
         linear-gradient(
-          135deg,
-          rgba(7, 32, 70, 0.96),
-          rgba(12, 93, 130, 0.86)
-        ),
-        radial-gradient(
-          circle at top right,
-          #62d5ff,
-          transparent 35%
+          120deg,
+          #071f43 0%,
+          #0b416c 48%,
+          #126f8f 100%
         );
     }
+
+
+    /* subtle atmospheric light */
+
+    .hero::before {
+
+      content: "";
+
+      position:
+        absolute;
+
+      width:
+        700px;
+
+      height:
+        700px;
+
+      right:
+        -250px;
+
+      top:
+        -250px;
+
+      border-radius:
+        50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(93,220,255,0.20),
+          rgba(93,220,255,0.03) 50%,
+          transparent 70%
+        );
+
+      pointer-events:
+        none;
+    }
+
 
     .hero-content {
-      max-width: 1200px;
-      width: 100%;
-      margin: auto;
-      padding: 80px 25px;
-      position: relative;
-      z-index: 2;
+
+      max-width:
+        1200px;
+
+      width:
+        100%;
+
+      margin:
+        auto;
+
+      padding:
+        85px 25px;
+
+      position:
+        relative;
+
+      z-index:
+        2;
     }
+
+
+    /* =========================================
+       BADGE
+       ========================================= */
 
     .badge {
-      display: inline-block;
-      padding: 7px 15px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 30px;
-      background: rgba(255,255,255,0.1);
-      font-size: 0.85rem;
-    }
 
+      display:
+        inline-block;
 
-    /* =========================
-       METEONTO TITLE + GLOBE
-       ========================= */
+      padding:
+        8px 16px;
 
-    .hero-title-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      min-height: 250px;
-      z-index: 1;
-    }
+      margin-bottom:
+        20px;
 
-    .hero-title-wrap h1 {
-      position: relative;
-      z-index: 5;
+      border:
+        1px solid
+        rgba(255,255,255,0.35);
 
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: 1;
-      margin-bottom: 25px;
-      letter-spacing: -3px;
-    }
-
-    .hero-title-wrap h1 span {
-      color: #68d8ff;
-    }
-
-
-    /* Main rotating globe */
-
-    .rotating-globe {
-      position: absolute;
-
-      width: 250px;
-      height: 250px;
-
-      left: calc(100% + 120px);
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      border-radius: 50%;
+      border-radius:
+        30px;
 
       background:
-        radial-gradient(
-          circle at 32% 27%,
-          rgba(255,255,255,0.95) 0%,
-          rgba(145,235,255,0.9) 8%,
-          rgba(35,170,225,0.85) 30%,
-          rgba(10,100,170,0.95) 65%,
-          rgba(3,35,75,1) 100%
+        rgba(255,255,255,0.09);
+
+      color:
+        #eefaff;
+
+      font-size:
+        0.85rem;
+
+      backdrop-filter:
+        blur(8px);
+    }
+
+
+    /* =========================================
+       TITLE + WEATHER GLOBE
+       ========================================= */
+
+    .hero-title-wrap {
+
+      position:
+        relative;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      min-height:
+        280px;
+
+      z-index:
+        2;
+    }
+
+
+    .hero-title-wrap h1 {
+
+      position:
+        relative;
+
+      z-index:
+        5;
+
+      font-size:
+        clamp(3.5rem, 8vw, 6.5rem);
+
+      line-height:
+        1;
+
+      margin-bottom:
+        25px;
+
+      letter-spacing:
+        -4px;
+
+      text-shadow:
+        0 5px 30px
+        rgba(0,0,0,0.15);
+    }
+
+
+    .hero-title-wrap h1 span {
+
+      color:
+        #68d8ff;
+    }
+
+
+    /* =========================================
+       REAL WEATHER-ANALYSIS GLOBE
+       ========================================= */
+
+    .rotating-globe {
+
+      position:
+        absolute;
+
+      width:
+        430px;
+
+      height:
+        430px;
+
+      left:
+        calc(100% + 60px);
+
+      top:
+        50%;
+
+      transform:
+        translateY(-50%);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      z-index:
+        1;
+
+      pointer-events:
+        none;
+
+      animation:
+        weatherGlobeRotate
+        75s
+        linear
+        infinite;
+    }
+
+
+    .rotating-globe img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        contain;
+
+      display:
+        block;
+
+      filter:
+
+        drop-shadow(
+          0 0 12px
+          rgba(110,225,255,0.55)
+        )
+
+        drop-shadow(
+          0 0 35px
+          rgba(70,190,245,0.35)
+        )
+
+        drop-shadow(
+          0 0 65px
+          rgba(40,160,220,0.20)
         );
-
-      box-shadow:
-        0 0 25px rgba(85,220,255,0.8),
-        0 0 60px rgba(55,190,240,0.5),
-        0 0 100px rgba(40,170,230,0.25),
-        inset -30px -20px 45px rgba(0,20,55,0.75),
-        inset 15px 10px 25px rgba(180,245,255,0.3);
-
-      opacity: 0.96;
-
-      animation:
-        globeRotate 28s linear infinite;
-
-      pointer-events: none;
     }
 
 
-    /* Atmospheric outer ring */
+    /* slow rotation */
 
-    .rotating-globe::before {
-      content: "";
+    @keyframes weatherGlobeRotate {
 
-      position: absolute;
+      from {
 
-      inset: -13px;
-
-      border-radius: 50%;
-
-      border: 2px solid rgba(120,230,255,0.55);
-
-      box-shadow:
-        0 0 15px rgba(90,220,255,0.5),
-        0 0 35px rgba(90,220,255,0.3),
-        0 0 60px rgba(90,220,255,0.15);
-
-      animation:
-        atmospherePulse 5s ease-in-out infinite;
-    }
-
-
-    /* Atmospheric bands */
-
-    .rotating-globe::after {
-      content: "";
-
-      position: absolute;
-
-      width: 115%;
-      height: 32%;
-
-      left: -7.5%;
-      top: 34%;
-
-      border-top: 2px solid rgba(190,245,255,0.45);
-      border-bottom: 2px solid rgba(190,245,255,0.3);
-
-      border-radius: 50%;
-
-      transform: rotate(-12deg);
-    }
-
-
-    /* Globe rotation */
-
-    @keyframes globeRotate {
-
-      0% {
-        transform: translateY(-50%) rotate(0deg);
+        transform:
+          translateY(-50%)
+          rotate(0deg);
       }
 
-      100% {
-        transform: translateY(-50%) rotate(360deg);
-      }
+      to {
 
+        transform:
+          translateY(-50%)
+          rotate(360deg);
+      }
     }
 
 
-    /* Atmospheric pulse */
-
-    @keyframes atmospherePulse {
-
-      0%, 100% {
-        opacity: 0.45;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.9;
-        transform: scale(1.035);
-      }
-
-    }
-
-
-    /* Floating atmospheric particles */
+    /* =========================================
+       ATMOSPHERIC PARTICLES
+       ========================================= */
 
     .hero-title-wrap::before {
-      content: "✦  ·  ·  ✧  ·";
 
-      position: absolute;
+      content:
+        "✦   ·   ✧   ·   ✦";
 
-      left: calc(100% + 60px);
-      top: 5%;
+      position:
+        absolute;
 
-      color: rgba(170,240,255,0.7);
+      left:
+        calc(100% + 110px);
 
-      font-size: 18px;
-      letter-spacing: 15px;
+      top:
+        2%;
+
+      color:
+        rgba(185,245,255,0.7);
+
+      font-size:
+        18px;
+
+      letter-spacing:
+        8px;
+
+      z-index:
+        4;
 
       animation:
-        particles 8s ease-in-out infinite;
-
-      z-index: 3;
+        floatingParticles
+        8s
+        ease-in-out
+        infinite;
     }
 
-    @keyframes particles {
 
-      0%, 100% {
-        transform: translateY(0);
-        opacity: 0.35;
+    @keyframes floatingParticles {
+
+      0%,
+      100% {
+
+        transform:
+          translateY(0);
+
+        opacity:
+          0.35;
       }
 
       50% {
-        transform: translateY(-18px);
-        opacity: 0.9;
-      }
 
+        transform:
+          translateY(-18px);
+
+        opacity:
+          0.85;
+      }
     }
 
 
-    /* Hero description */
+    /* =========================================
+       HERO DESCRIPTION
+       ========================================= */
 
     .hero p {
-      max-width: 750px;
-      font-size: 1.25rem;
-      color: #d9efff;
-      margin-bottom: 35px;
+
+      max-width:
+        760px;
+
+      font-size:
+        1.2rem;
+
+      color:
+        #d9efff;
+
+      margin-bottom:
+        35px;
+
+      position:
+        relative;
+
+      z-index:
+        5;
     }
 
 
-    /* Buttons */
+    /* =========================================
+       BUTTONS
+       ========================================= */
 
     .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        15px;
+
+      position:
+        relative;
+
+      z-index:
+        5;
     }
 
     .btn {
-      padding: 13px 23px;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: 0.3s;
-      display: inline-block;
+
+      padding:
+        13px 23px;
+
+      border-radius:
+        8px;
+
+      font-weight:
+        600;
+
+      transition:
+        0.3s;
+
+      display:
+        inline-block;
     }
 
     .btn-primary {
-      background: #62d5ff;
-      color: #06203b;
+
+      background:
+        #62d5ff;
+
+      color:
+        #06203b;
+
+      box-shadow:
+        0 8px 25px
+        rgba(98,213,255,0.20);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      background: #8ce2ff;
+
+      transform:
+        translateY(-3px);
+
+      background:
+        #8ce2ff;
     }
 
     .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.4);
-      color: white;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.45);
+
+      color:
+        white;
+
+      background:
+        rgba(255,255,255,0.03);
     }
 
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
+
+      background:
+        rgba(255,255,255,0.12);
+
+      transform:
+        translateY(-3px);
     }
 
 
-    /* =========================
-       SECTIONS
-       ========================= */
+    /* =========================================
+       GENERAL SECTIONS
+       ========================================= */
 
     section {
-      padding: 85px 25px;
+
+      padding:
+        85px 25px;
     }
 
     .container {
-      max-width: 1200px;
-      margin: auto;
+
+      max-width:
+        1200px;
+
+      margin:
+        auto;
     }
 
     .section-header {
-      max-width: 750px;
-      margin-bottom: 45px;
+
+      max-width:
+        760px;
+
+      margin-bottom:
+        45px;
     }
 
     .section-header h2 {
-      font-size: 2.4rem;
-      margin-bottom: 15px;
-      color: #102b4e;
+
+      font-size:
+        2.4rem;
+
+      margin-bottom:
+        15px;
+
+      color:
+        #102b4e;
     }
 
     .section-header p {
-      color: #617084;
-      font-size: 1.05rem;
+
+      color:
+        #617084;
+
+      font-size:
+        1.05rem;
     }
 
 
-    /* =========================
+    /* =========================================
        CARDS
-       ========================= */
+       ========================================= */
 
     .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap:
+        25px;
     }
 
     .card {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      border: 1px solid #e2eaf3;
-      box-shadow: 0 8px 30px rgba(22, 55, 90, 0.07);
-      transition: 0.3s;
+
+      background:
+        white;
+
+      padding:
+        30px;
+
+      border-radius:
+        15px;
+
+      border:
+        1px solid
+        #e2eaf3;
+
+      box-shadow:
+        0 8px 30px
+        rgba(22,55,90,0.07);
+
+      transition:
+        0.3s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(22, 55, 90, 0.12);
+
+      transform:
+        translateY(-5px);
+
+      box-shadow:
+        0 15px 35px
+        rgba(22,55,90,0.12);
     }
 
     .icon {
-      font-size: 2rem;
-      margin-bottom: 15px;
+
+      font-size:
+        2rem;
+
+      margin-bottom:
+        15px;
     }
 
     .card h3 {
-      margin-bottom: 10px;
-      color: #12365e;
+
+      margin-bottom:
+        10px;
+
+      color:
+        #12365e;
     }
 
     .card p {
-      color: #657386;
+
+      color:
+        #657386;
     }
 
 
-    /* =========================
+    /* =========================================
        ABOUT
-       ========================= */
+       ========================================= */
 
     .about {
-      background: white;
+
+      background:
+        white;
     }
 
     .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        60px;
+
+      align-items:
+        center;
     }
 
     .about-text p {
-      margin-bottom: 18px;
-      color: #5e6c7d;
+
+      margin-bottom:
+        18px;
+
+      color:
+        #5e6c7d;
     }
 
     .highlight {
-      padding: 25px;
-      border-left: 4px solid #1598cc;
-      background: #f0f9ff;
-      border-radius: 8px;
-      margin-top: 25px;
+
+      padding:
+        25px;
+
+      border-left:
+        4px solid
+        #1598cc;
+
+      background:
+        #f0f9ff;
+
+      border-radius:
+        8px;
+
+      margin-top:
+        25px;
     }
 
 
-    /* =========================
+    /* =========================================
+       ONTOLOGY
+       ========================================= */
+
+    .concept {
+
+      border-top:
+        4px solid
+        #38afd9;
+    }
+
+
+    /* =========================================
        ARCHITECTURE
-       ========================= */
+       ========================================= */
 
     .architecture {
-      background: #eef7fc;
+
+      background:
+        #eef7fc;
     }
 
     .architecture-box {
-      background: #0b294b;
-      color: white;
-      padding: 45px;
-      border-radius: 18px;
-      overflow-x: auto;
+
+      background:
+        #0b294b;
+
+      color:
+        white;
+
+      padding:
+        45px;
+
+      border-radius:
+        18px;
+
+      overflow-x:
+        auto;
+
+      box-shadow:
+        0 15px 40px
+        rgba(10,50,80,0.10);
     }
 
     .architecture-box pre {
-      font-family: Consolas, monospace;
-      line-height: 1.8;
-      color: #bfeeff;
+
+      font-family:
+        Consolas,
+        monospace;
+
+      line-height:
+        1.8;
+
+      color:
+        #bfeeff;
     }
 
 
-    /* =========================
-       CONCEPTS
-       ========================= */
-
-    .concept {
-      border-top: 4px solid #38afd9;
-    }
-
-
-    /* =========================
+    /* =========================================
        STANDARDS
-       ========================= */
+       ========================================= */
 
     .standards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        15px;
     }
 
     .standard {
-      background: #eaf7fd;
-      color: #126489;
-      padding: 12px 18px;
-      border-radius: 8px;
-      font-weight: 600;
+
+      background:
+        #eaf7fd;
+
+      color:
+        #126489;
+
+      padding:
+        12px 18px;
+
+      border-radius:
+        8px;
+
+      font-weight:
+        600;
     }
 
 
-    /* =========================
+    /* =========================================
        CODE
-       ========================= */
+       ========================================= */
 
     .code-section {
-      background: #081d35;
-      color: white;
+
+      background:
+        #081d35;
+
+      color:
+        white;
     }
 
     .code-section h2 {
-      color: white;
+
+      color:
+        white;
+    }
+
+    .code-section .section-header p {
+
+      color:
+        #b9d2e6;
     }
 
     .code-box {
-      background: #020b15;
-      border-radius: 12px;
-      padding: 30px;
-      overflow-x: auto;
+
+      background:
+        #020b15;
+
+      border-radius:
+        12px;
+
+      padding:
+        30px;
+
+      overflow-x:
+        auto;
+
+      border:
+        1px solid
+        rgba(120,220,255,0.12);
     }
 
     .code-box code {
-      color: #bdeeff;
-      font-family: Consolas, monospace;
-      line-height: 1.8;
+
+      color:
+        #bdeeff;
+
+      font-family:
+        Consolas,
+        monospace;
+
+      line-height:
+        1.8;
     }
 
 
-    /* =========================
+    /* =========================================
        FOOTER
-       ========================= */
+       ========================================= */
 
     footer {
-      background: #06182c;
-      color: #a9c1d6;
-      padding: 45px 25px;
+
+      background:
+        #06182c;
+
+      color:
+        #a9c1d6;
+
+      padding:
+        45px 25px;
     }
 
     .footer-grid {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 40px;
+
+      max-width:
+        1200px;
+
+      margin:
+        auto;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        2fr 1fr 1fr;
+
+      gap:
+        40px;
     }
 
     footer h3 {
-      color: white;
-      margin-bottom: 12px;
+
+      color:
+        white;
+
+      margin-bottom:
+        12px;
     }
 
     footer ul {
-      list-style: none;
+
+      list-style:
+        none;
     }
 
     footer li {
-      margin-bottom: 8px;
+
+      margin-bottom:
+        8px;
     }
 
     footer a:hover {
-      color: #67d5ff;
+
+      color:
+        #67d5ff;
     }
 
     .copyright {
-      max-width: 1200px;
-      margin: 35px auto 0;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.9rem;
+
+      max-width:
+        1200px;
+
+      margin:
+        35px auto 0;
+
+      padding-top:
+        20px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,0.1);
+
+      font-size:
+        0.9rem;
     }
 
 
-    /* =========================
+    /* =========================================
        MOBILE
-       ========================= */
+       ========================================= */
 
     @media (max-width: 850px) {
 
       .nav-links {
-        display: none;
+        display:
+          none;
       }
 
       .cards,
       .about-grid,
       .footer-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
       }
 
       .hero {
-        min-height: 80vh;
+
+        min-height:
+          80vh;
+      }
+
+      .hero-content {
+
+        padding:
+          65px 20px;
       }
 
       .hero-title-wrap {
-        min-height: 190px;
+
+        min-height:
+          210px;
       }
 
       .hero-title-wrap h1 {
-        font-size: clamp(3rem, 15vw, 5rem);
+
+        font-size:
+          clamp(3rem, 15vw, 5rem);
+
+        letter-spacing:
+          -2px;
       }
 
       .rotating-globe {
-        width: 180px;
-        height: 180px;
-        left: calc(100% + 35px);
+
+        width:
+          260px;
+
+        height:
+          260px;
+
+        left:
+          calc(100% + 20px);
+
+        opacity:
+          0.65;
       }
 
       .hero-title-wrap::before {
-        left: calc(100% + 15px);
+
+        left:
+          calc(100% + 25px);
       }
 
       section {
-        padding: 60px 20px;
+
+        padding:
+          60px 20px;
       }
 
       .architecture-box {
-        padding: 25px;
+
+        padding:
+          25px;
+      }
+    }
+
+
+    /* =========================================
+       VERY SMALL SCREENS
+       ========================================= */
+
+    @media (max-width: 520px) {
+
+      .hero-title-wrap {
+
+        min-height:
+          180px;
       }
 
+      .rotating-globe {
+
+        width:
+          210px;
+
+        height:
+          210px;
+
+        left:
+          calc(100% - 5px);
+
+        opacity:
+          0.5;
+      }
+
+      .hero-title-wrap::before {
+
+        display:
+          none;
+      }
+
+      .hero p {
+
+        font-size:
+          1.05rem;
+      }
     }
 
   </style>
+
 </head>
 
 
 <body>
 
 
-  <!-- =========================
+  <!-- =====================================
        NAVIGATION
-       ========================= -->
+       ===================================== -->
 
   <nav>
 
@@ -648,23 +1145,39 @@
       <ul class="nav-links">
 
         <li>
-          <a href="#about">About</a>
+          <a href="#about">
+            About
+          </a>
         </li>
 
         <li>
-          <a href="#ontology">Ontology</a>
+          <a href="#ontology">
+            Ontology
+          </a>
         </li>
 
         <li>
-          <a href="#architecture">Architecture</a>
+          <a href="#architecture">
+            Architecture
+          </a>
         </li>
 
         <li>
-          <a href="#standards">Standards</a>
+          <a href="#standards">
+            Standards
+          </a>
         </li>
 
         <li>
-          <a href="#examples">Examples</a>
+          <a href="#applications">
+            Applications
+          </a>
+        </li>
+
+        <li>
+          <a href="#examples">
+            Examples
+          </a>
         </li>
 
       </ul>
@@ -674,24 +1187,43 @@
   </nav>
 
 
-  <!-- =========================
+
+  <!-- =====================================
        HERO
-       ========================= -->
+       ===================================== -->
 
   <header class="hero">
 
     <div class="hero-content">
 
       <div class="badge">
-        Semantic Web · Meteorology · Knowledge Representation
+
+        Semantic Web
+        ·
+        Meteorology
+        ·
+        Knowledge Representation
+
       </div>
 
 
-      <!-- TITLE + ROTATING GLOBE -->
-
       <div class="hero-title-wrap">
 
-        <div class="rotating-globe"></div>
+        <!--
+          IMPORTANT:
+          Keep meteonto_weather_globe.png
+          in the same folder as index.html.
+        -->
+
+        <div class="rotating-globe">
+
+          <img
+            src="meteonto_weather_globe.png"
+            alt="Meteorological weather analysis globe"
+          >
+
+        </div>
+
 
         <h1>
           Meteo<span>Onto</span>
@@ -701,9 +1233,12 @@
 
 
       <p>
-        A semantic ontology for representing, integrating, and connecting
-        meteorological knowledge — from weather phenomena and atmospheric
-        conditions to sensor observations and forecasts.
+
+        A semantic ontology for representing, integrating,
+        and connecting meteorological knowledge — from
+        weather phenomena and atmospheric conditions to
+        sensor observations and forecasts.
+
       </p>
 
 
@@ -712,13 +1247,18 @@
         <a
           href="#ontology"
           class="btn btn-primary">
+
           Explore the Ontology
+
         </a>
+
 
         <a
           href="#about"
           class="btn btn-secondary">
+
           Learn More
+
         </a>
 
       </div>
@@ -728,13 +1268,17 @@
   </header>
 
 
-  <!-- =========================
-       ABOUT
-       ========================= -->
 
-  <section id="about" class="about">
+  <!-- =====================================
+       ABOUT
+       ===================================== -->
+
+  <section
+    id="about"
+    class="about">
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -743,8 +1287,10 @@
         </h2>
 
         <p>
-          A semantic foundation for interoperable meteorological
-          data and knowledge.
+
+          A semantic foundation for interoperable
+          meteorological data and knowledge.
+
         </p>
 
       </div>
@@ -752,30 +1298,41 @@
 
       <div class="about-grid">
 
+
         <div class="about-text">
 
           <p>
-            MeteoOnto provides a structured semantic representation
-            of the meteorological domain. It captures important
-            concepts, relationships, observations, measurements,
-            and forecasts used to describe atmospheric and
-            weather-related phenomena.
+
+            MeteoOnto provides a structured semantic
+            representation of the meteorological domain.
+
+            It captures important concepts, relationships,
+            observations, measurements, and forecasts used
+            to describe atmospheric and weather-related
+            phenomena.
+
           </p>
 
+
           <p>
+
             The ontology is intended to support knowledge
             representation, semantic data integration,
-            interoperability, discovery, and reasoning across
-            heterogeneous meteorological datasets.
+            interoperability, discovery, and reasoning
+            across heterogeneous meteorological datasets.
+
           </p>
+
 
           <div class="highlight">
 
-            <strong>Goal:</strong>
+            <strong>
+              Goal:
+            </strong>
 
-            Enable machines and applications to understand and
-            connect meteorological information using formal
-            semantic relationships.
+            Enable machines and applications to understand
+            and connect meteorological information using
+            formal semantic relationships.
 
           </div>
 
@@ -793,11 +1350,15 @@
           </h3>
 
           <p>
+
             Meteorological information is produced by many
-            different systems, organizations, sensors, and data
-            formats. A shared ontology provides common concepts
-            and relationships that enable these sources to
+            different systems, organizations, sensors, and
+            data formats.
+
+            A shared ontology provides common concepts and
+            relationships that enable these sources to
             communicate semantically.
+
           </p>
 
         </div>
@@ -809,13 +1370,15 @@
   </section>
 
 
-  <!-- =========================
-       CORE ONTOLOGY
-       ========================= -->
+
+  <!-- =====================================
+       ONTOLOGY CONCEPTS
+       ===================================== -->
 
   <section id="ontology">
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -824,8 +1387,10 @@
         </h2>
 
         <p>
+
           MeteoOnto organizes meteorological knowledge into
           interconnected semantic concepts.
+
         </p>
 
       </div>
@@ -845,9 +1410,11 @@
           </h3>
 
           <p>
-            Representation of phenomena such as rain, snow,
-            fog, thunderstorms, clouds, wind, and other
-            atmospheric events.
+
+            Representation of phenomena such as rain,
+            snow, fog, thunderstorms, clouds, wind,
+            and other atmospheric events.
+
           </p>
 
         </div>
@@ -864,9 +1431,11 @@
           </h3>
 
           <p>
+
             Concepts describing temperature, pressure,
-            humidity, visibility, wind conditions, and
-            related atmospheric states.
+            humidity, visibility, wind conditions,
+            and related atmospheric states.
+
           </p>
 
         </div>
@@ -883,9 +1452,11 @@
           </h3>
 
           <p>
-            Semantic representation of observations collected
-            from meteorological instruments and observation
-            systems.
+
+            Semantic representation of observations
+            collected from meteorological instruments
+            and observation systems.
+
           </p>
 
         </div>
@@ -902,9 +1473,11 @@
           </h3>
 
           <p>
-            Representation of sensors, platforms, instruments,
-            measurements, and their relationships to
-            observations.
+
+            Representation of sensors, platforms,
+            instruments, measurements, and their
+            relationships to observations.
+
           </p>
 
         </div>
@@ -921,9 +1494,11 @@
           </h3>
 
           <p>
-            Concepts for representing predicted atmospheric
-            conditions, forecast periods, locations, and
-            forecast variables.
+
+            Concepts for representing predicted
+            atmospheric conditions, forecast periods,
+            locations, and forecast variables.
+
           </p>
 
         </div>
@@ -940,8 +1515,11 @@
           </h3>
 
           <p>
-            Representation of locations, regions, time periods,
-            observation times, and forecast validity periods.
+
+            Representation of locations, regions,
+            time periods, observation times, and
+            forecast validity periods.
+
           </p>
 
         </div>
@@ -953,15 +1531,17 @@
   </section>
 
 
-  <!-- =========================
+
+  <!-- =====================================
        ARCHITECTURE
-       ========================= -->
+       ===================================== -->
 
   <section
     id="architecture"
     class="architecture">
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -970,8 +1550,10 @@
         </h2>
 
         <p>
-          A conceptual view of how the major MeteoOnto
+
+          A conceptual view of how major MeteoOnto
           components relate to one another.
+
         </p>
 
       </div>
@@ -980,23 +1562,24 @@
       <div class="architecture-box">
 
 <pre>
-                    MeteoOnto
-                        │
-          ┌─────────────┼─────────────┐
-          │             │             │
-     Phenomena     Observations    Forecasts
-          │             │             │
-    ┌─────┴─────┐   ┌───┴────┐   ┌───┴────┐
-    │           │   │        │   │        │
-  Weather   Atmospheric Sensor Measurement Time
-  Events    Conditions   │        │
-                         └────┬───┘
-                              │
-                        Observation
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
-                 Location             Time
+                         MeteoOnto
+                             │
+              ┌──────────────┼──────────────┐
+              │              │              │
+         Phenomena      Observations     Forecasts
+              │              │              │
+       ┌──────┴──────┐  ┌────┴────┐    ┌────┴────┐
+       │             │  │         │    │         │
+    Weather      Atmospheric   Sensor Measurement Time
+     Events       Conditions      │        │
+                                  │        │
+                                  └────┬───┘
+                                       │
+                                  Observation
+                                       │
+                           ┌───────────┴───────────┐
+                           │                       │
+                        Location                  Time
 </pre>
 
       </div>
@@ -1006,13 +1589,15 @@
   </section>
 
 
-  <!-- =========================
+
+  <!-- =====================================
        STANDARDS
-       ========================= -->
+       ===================================== -->
 
   <section id="standards">
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -1021,8 +1606,11 @@
         </h2>
 
         <p>
-          MeteoOnto is designed with interoperability and
-          reuse of established semantic standards in mind.
+
+          MeteoOnto is designed with interoperability
+          and reuse of established semantic standards
+          in mind.
+
         </p>
 
       </div>
@@ -1065,13 +1653,15 @@
   </section>
 
 
-  <!-- =========================
-       APPLICATIONS
-       ========================= -->
 
-  <section>
+  <!-- =====================================
+       APPLICATIONS
+       ===================================== -->
+
+  <section id="applications">
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -1080,8 +1670,10 @@
         </h2>
 
         <p>
-          MeteoOnto can provide a semantic foundation for a
-          range of meteorological and environmental applications.
+
+          MeteoOnto can provide a semantic foundation
+          for meteorological and environmental applications.
+
         </p>
 
       </div>
@@ -1101,8 +1693,10 @@
           </h3>
 
           <p>
-            Connect meteorological datasets originating from
-            different systems and organizations.
+
+            Connect meteorological datasets originating
+            from different systems and organizations.
+
           </p>
 
         </div>
@@ -1119,8 +1713,11 @@
           </h3>
 
           <p>
-            Build machine-readable knowledge graphs representing
-            meteorological entities and their relationships.
+
+            Build machine-readable knowledge graphs
+            representing meteorological entities and
+            their relationships.
+
           </p>
 
         </div>
@@ -1137,8 +1734,11 @@
           </h3>
 
           <p>
-            Discover meteorological information based on
-            meaning, relationships, location, time, and context.
+
+            Discover meteorological information based
+            on meaning, relationships, location, time,
+            and context.
+
           </p>
 
         </div>
@@ -1155,8 +1755,10 @@
           </h3>
 
           <p>
-            Provide a common semantic structure for analytical
-            and decision-support systems.
+
+            Provide a common semantic structure for
+            analytical and decision-support systems.
+
           </p>
 
         </div>
@@ -1173,8 +1775,10 @@
           </h3>
 
           <p>
+
             Improve communication between heterogeneous
             meteorological systems and data providers.
+
           </p>
 
         </div>
@@ -1191,8 +1795,10 @@
           </h3>
 
           <p>
+
             Support automated reasoning over meteorological
             observations, phenomena, and relationships.
+
           </p>
 
         </div>
@@ -1204,15 +1810,17 @@
   </section>
 
 
-  <!-- =========================
-       RDF EXAMPLE
-       ========================= -->
+
+  <!-- =====================================
+       SEMANTIC EXAMPLE
+       ===================================== -->
 
   <section
     id="examples"
     class="code-section">
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -1221,8 +1829,10 @@
         </h2>
 
         <p>
-          An example of how a meteorological observation can
-          be expressed using semantic technologies.
+
+          An example of how a meteorological observation
+          can be expressed using semantic technologies.
+
         </p>
 
       </div>
@@ -1232,10 +1842,10 @@
 
 <code>
 @prefix meteo:
-  &lt;https://example.org/meteo#&gt; .
+    &lt;https://example.org/meteo#&gt; .
 
 @prefix sosa:
-  &lt;http://www.w3.org/ns/sosa/&gt; .
+    &lt;http://www.w3.org/ns/sosa/&gt; .
 
 meteo:Observation001
     a sosa:Observation ;
@@ -1260,13 +1870,15 @@ meteo:Observation001
   </section>
 
 
-  <!-- =========================
+
+  <!-- =====================================
        DOCUMENTATION
-       ========================= -->
+       ===================================== -->
 
   <section>
 
     <div class="container">
+
 
       <div class="section-header">
 
@@ -1275,7 +1887,9 @@ meteo:Observation001
         </h2>
 
         <p>
+
           Explore the ontology and its semantic components.
+
         </p>
 
       </div>
@@ -1295,8 +1909,10 @@ meteo:Observation001
           </h3>
 
           <p>
+
             Definitions of the principal meteorological
             concepts represented in MeteoOnto.
+
           </p>
 
         </div>
@@ -1313,9 +1929,11 @@ meteo:Observation001
           </h3>
 
           <p>
+
             Semantic relationships connecting observations,
             phenomena, sensors, locations, measurements,
             and forecasts.
+
           </p>
 
         </div>
@@ -1332,8 +1950,10 @@ meteo:Observation001
           </h3>
 
           <p>
+
             OWL, RDF, Turtle, and other machine-readable
             representations can be provided here.
+
           </p>
 
         </div>
@@ -1345,9 +1965,10 @@ meteo:Observation001
   </section>
 
 
-  <!-- =========================
+
+  <!-- =====================================
        FOOTER
-       ========================= -->
+       ===================================== -->
 
   <footer>
 
@@ -1361,8 +1982,10 @@ meteo:Observation001
         </h3>
 
         <p>
-          A semantic ontology for meteorological knowledge,
-          interoperability, and data integration.
+
+          A semantic ontology for meteorological
+          knowledge, interoperability, and data integration.
+
         </p>
 
       </div>
@@ -1434,7 +2057,8 @@ meteo:Observation001
 
     <div class="copyright">
 
-      © 2026 MeteoOnto. All rights reserved.
+      © 2026 MeteoOnto.
+      All rights reserved.
 
     </div>
 
