@@ -244,7 +244,7 @@ function buildGraph(triples,module){
   }
   const nodesMap=new Map();
   for(const id of classes)if(id.startsWith(LOCAL))nodesMap.set(id,{id,label:getLabel(id,labels),kind:"class",definition:definitions.get(id)||""});
-  for(const id of properties)if(id.startsWith(LOCAL))nodesMap.set(id,{id,label:getLabel(id,labels),kind:"property",propertyType:types.get(id),definition:definitions.get(id)||""});
+  for(const id of properties)if(id.startsWith(LOCAL))nodesMap.set(id,{id,label:getLabel(id,labels),kind:"property",propertyType:types.get(id)||"Ontology property",definition:definitions.get(id)||""});
   const edges=[],seen=new Set(), add=(source,target,label,kind)=>{
     if(!nodesMap.has(source)||!nodesMap.has(target)||source===target)return;
     const key=[source,target,label].join("|");if(seen.has(key))return;seen.add(key);edges.push({source,target,label,kind})
@@ -282,7 +282,7 @@ function drawGraph(){
   const q=document.getElementById("graphSearch").value.trim().toLowerCase(),nodes=currentGraph.nodes;
   const typeFilter=document.getElementById("graphType")?.value||"all";
   let matched=nodes.filter(n=>(typeFilter==="all"||n.kind===typeFilter)&&(!q||n.label.toLowerCase().includes(q)||n.id.toLowerCase().includes(q)));
-  if(q&&matched.length){const ids=new Set(matched.map(n=>n.id));for(const e of currentGraph.edges)if(ids.has(e.source)||ids.has(e.target)){ids.add(e.source);ids.add(e.target)}matched=nodes.filter(n=>ids.has(n.id))}
+  if(q&&matched.length){const ids=new Set(matched.map(n=>n.id));for(const e of currentGraph.edges)if(ids.has(e.source)||ids.has(e.target)){ids.add(e.source);ids.add(e.target)}matched=nodes.filter(n=>ids.has(n.id)&&(typeFilter==="all"||n.kind===typeFilter))}
   const visible=new Set(matched.map(n=>n.id)),edges=currentGraph.edges.filter(e=>visible.has(e.source)&&visible.has(e.target));
   const byId=new Map(nodes.map(n=>[n.id,n]));
   svg.setAttribute("viewBox","0 0 1200 740");
