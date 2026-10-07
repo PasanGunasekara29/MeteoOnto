@@ -57,13 +57,11 @@ skos:definition rdf:type owl:AnnotationProperty .
 #################################################################
 
 ###  http://meteo_onto.org/meteo_core/wktLiteral
-Core:wktLiteral owl:equivalentClass Geo:WKTLiteral ,
-                                    <http://www.opengis.net/ont/geosparql#wktLiteral> .
+Core:wktLiteral owl:equivalentClass <http://www.opengis.net/ont/geosparql#wktLiteral> .
 
 
 ###  http://meteo_onto.org/meteo_geo/WKTLiteral
-Geo:WKTLiteral rdf:type rdfs:Datatype ;
-               owl:equivalentClass <http://www.opengis.net/ont/geosparql#wktLiteral> .
+Geo:WKTLiteral rdf:type rdfs:Datatype .
 
 
 #################################################################
