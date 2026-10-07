@@ -103,6 +103,20 @@ footer{background:#020e19;color:#91b2ca;border-top:1px solid #0b3e60}
 .side-links a{font-size:1rem;line-height:1.5;font-weight:500;padding:8px 9px 8px 14px;margin-left:5px;border-left:1px solid #155078;border-radius:0 6px 6px 0;color:#c4d9e9}
 .side-links a:hover,.side-links a.active{border-left:3px solid #25b5ff;padding-left:12px;background:#0a3552;color:#67caff}
 @media(max-width:560px){.side-group strong{font-size:1.1rem}.side-links a{font-size:1.02rem}}
+
+/* Keep topic navigation in the page flow; remove the slide-in drawer */
+.layout{grid-template-columns:300px minmax(0,1fr);gap:34px}
+.sidebar{width:300px;position:sticky;top:92px;transform:none!important;transition:none!important}
+.mobile-menu{display:none!important}
+@media(max-width:980px){
+ .layout{grid-template-columns:270px minmax(0,1fr);width:calc(100% - 34px);gap:20px}
+ .sidebar{width:270px;position:sticky;top:78px;left:auto;bottom:auto;max-height:calc(100vh - 90px);transform:none!important;transition:none!important;box-shadow:none}
+}
+@media(max-width:560px){
+ .layout{display:block;width:calc(100% - 28px)}
+ .sidebar{position:relative;top:auto;left:auto;bottom:auto;width:100%;max-height:none;overflow:visible;transform:none!important;transition:none!important;margin-bottom:18px}
+ .mobile-menu{display:none!important}
+}
 </style>
 </head>
 <body>
