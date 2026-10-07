@@ -1,0 +1,537 @@
+@prefix : <http://meteo_onto.org/meteo_risk/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ext: <http://meteo_onto.org/meteo_extreame/> .
+@prefix geo: <http://meteo_onto.org/meteo_geo/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix risk: <http://meteo_onto.org/meteo_risk/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix meteo_core: <http://meteo_onto.org/meteo_core/> .
+@prefix forecasting: <http://meteo_onto.org/meteo_forecasting/> .
+@base <http://meteo_onto.org/meteo_risk/> .
+
+<http://meteo_onto.org/meteo_risk/> rdf:type owl:Ontology ;
+                                     owl:versionIRI risk:RISKV_1 ;
+                                     owl:imports forecasting:ForecatingV_1 ,
+                                                 <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core.ttl> ,
+                                                 <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core_Extreame_Combined.ttl> ,
+                                                 <https://pasangunasekara29.github.io/MeteoOnto/Meteo_Onto_Core_Geo_Combined.ttl> ;
+                                     dc:contributor "Prof. Dulani Meedeniya"@en ;
+                                     dc:creator "H. K. Pasan Gunasekara"@en ;
+                                     dc:description "This ontology represents Risk and Safety Concepts with respect meteorological data"@en ;
+                                     dc:title "MeteoOnto_Risk And Safety"@en ;
+                                     terms:license "https://creativecommons.org/licenses/by/4.0/"@en ;
+                                     owl:versionInfo "http://meteo_onto.org/meteo_geo/RISK1_0"@en .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://meteo_onto.org/meteo_risk/affects
+risk:affects rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf risk:hasRiskAttributeOf ;
+             owl:inverseOf risk:isAffectedBy ;
+             rdfs:domain ext:ExtreameEvent ;
+             rdfs:range [ rdf:type owl:Class ;
+                          owl:unionOf ( risk:CriticalInfrastructure
+                                        risk:GeographicFeature
+                                      )
+                        ] .
+
+
+###  http://meteo_onto.org/meteo_risk/governs
+risk:governs rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf risk:hasRiskAttributeOf ;
+             owl:inverseOf risk:isGoverenedBy ;
+             rdfs:domain risk:GovernmentAuthority ;
+             rdfs:range risk:GeographicFeature .
+
+
+###  http://meteo_onto.org/meteo_risk/hasDistrictAuthority
+risk:hasDistrictAuthority rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf risk:hasSubAuthority ;
+                          owl:inverseOf risk:isDistrictAuthorityOf ;
+                          rdfs:domain risk:StateAuthority ;
+                          rdfs:range risk:DistrictAuthority ;
+                          owl:propertyChainAxiom ( risk:hasLocalAuthority
+                                                   risk:hasDistrictAuthority
+                                                 ) .
+
+
+###  http://meteo_onto.org/meteo_risk/hasLocalAuthority
+risk:hasLocalAuthority rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf risk:hasSubAuthority ;
+                       owl:inverseOf risk:isLocalAuthorityOf ;
+                       rdfs:domain risk:DistrictAuthority ;
+                       rdfs:range risk:LocalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/hasRiskAttributeOf
+risk:hasRiskAttributeOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        owl:inverseOf risk:isRiskAttributeOf ;
+                        rdf:type owl:TransitiveProperty ;
+                        rdfs:domain risk:Risk ;
+                        rdfs:range risk:Risk .
+
+
+###  http://meteo_onto.org/meteo_risk/hasRiskLeveL
+risk:hasRiskLeveL rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf risk:hasRiskAttributeOf ;
+                  owl:inverseOf risk:isRiskLevelOf ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( risk:CriticalInfrastructure
+                                              risk:GeographicFeature
+                                            )
+                              ] ;
+                  rdfs:range risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/hasStateAuthority
+risk:hasStateAuthority rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf risk:hasSubAuthority ;
+                       owl:inverseOf risk:isStateAuthorityOf ;
+                       rdfs:domain risk:NationalAuthority ;
+                       rdfs:range risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/hasSubAuthority
+risk:hasSubAuthority rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf risk:hasRiskAttributeOf ;
+                     owl:inverseOf risk:isSubAuthorityOf ;
+                     rdf:type owl:TransitiveProperty ;
+                     rdfs:domain risk:GovernmentAuthority ;
+                     rdfs:range risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/isAffectedBy
+risk:isAffectedBy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf risk:isRiskAttributeOf ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( risk:CriticalInfrastructure
+                                              risk:GeographicFeature
+                                            )
+                              ] ;
+                  rdfs:range ext:ExtreameEvent .
+
+
+###  http://meteo_onto.org/meteo_risk/isDistrictAuthorityOf
+risk:isDistrictAuthorityOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf risk:isSubAuthorityOf ;
+                           rdfs:domain risk:DistrictAuthority ;
+                           rdfs:range risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/isGoverenedBy
+risk:isGoverenedBy rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf risk:isRiskAttributeOf ;
+                   rdfs:domain risk:GeographicFeature ;
+                   rdfs:range risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/isLocalAuthorityOf
+risk:isLocalAuthorityOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf risk:isSubAuthorityOf ;
+                        rdfs:domain risk:LocalAuthority ;
+                        rdfs:range risk:DistrictAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/isManagedBy
+risk:isManagedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf risk:isRiskAttributeOf ;
+                 owl:inverseOf risk:manage ;
+                 rdfs:domain risk:GeographicFeature ;
+                 rdfs:range risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/isRiskAttributeOf
+risk:isRiskAttributeOf rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdf:type owl:TransitiveProperty ;
+                       rdfs:domain risk:Risk ;
+                       rdfs:range risk:Risk .
+
+
+###  http://meteo_onto.org/meteo_risk/isRiskLevelOf
+risk:isRiskLevelOf rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf risk:isRiskAttributeOf ;
+                   rdfs:domain risk:RiskLevel ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( risk:CriticalInfrastructure
+                                              risk:GeographicFeature
+                                            )
+                              ] .
+
+
+###  http://meteo_onto.org/meteo_risk/isStateAuthorityOf
+risk:isStateAuthorityOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf risk:isSubAuthorityOf ;
+                        rdfs:domain risk:StateAuthority ;
+                        rdfs:range risk:NationalAuthority ;
+                        owl:propertyChainAxiom ( risk:isLocalAuthorityOf
+                                                 risk:isDistrictAuthorityOf
+                                               ) .
+
+
+###  http://meteo_onto.org/meteo_risk/isSubAuthorityOf
+risk:isSubAuthorityOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf risk:isRiskAttributeOf ;
+                      rdf:type owl:TransitiveProperty ;
+                      rdfs:domain risk:GovernmentAuthority ;
+                      rdfs:range risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/manage
+risk:manage rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf risk:hasRiskAttributeOf ;
+            rdfs:domain risk:EmergencyResponseAgency ;
+            rdfs:range risk:GeographicFeature .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://meteo_onto.org/meteo_extreame/ExtreameEvent
+ext:ExtreameEvent owl:equivalentClass risk:WeatherEvent .
+
+
+###  http://meteo_onto.org/meteo_geo/GeoFeature
+geo:GeoFeature owl:equivalentClass risk:GeographicFeature .
+
+
+###  http://meteo_onto.org/meteo_risk/AmbulanceService
+risk:AmbulanceService rdf:type owl:Class ;
+                      rdfs:subClassOf risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/CivilProtectionAgency
+risk:CivilProtectionAgency rdf:type owl:Class ;
+                           rdfs:subClassOf risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/CommunicationFacility
+risk:CommunicationFacility rdf:type owl:Class ;
+                           rdfs:subClassOf risk:CriticalInfrastructure .
+
+
+###  http://meteo_onto.org/meteo_risk/CriticalInfrastructure
+risk:CriticalInfrastructure rdf:type owl:Class ;
+                            rdfs:subClassOf risk:Risk ;
+                            owl:disjointWith risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/DistrictAuthority
+risk:DistrictAuthority rdf:type owl:Class ;
+                       rdfs:subClassOf risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/DistrictDisasterManagementOffice
+risk:DistrictDisasterManagementOffice rdf:type owl:Class ;
+                                      rdfs:subClassOf risk:DistrictAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/DistrictHealthOffice
+risk:DistrictHealthOffice rdf:type owl:Class ;
+                          rdfs:subClassOf risk:DistrictAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/DistrictHydrologicalOffice
+risk:DistrictHydrologicalOffice rdf:type owl:Class ;
+                                rdfs:subClassOf risk:DistrictAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/DistrictMeteorologicalOffice
+risk:DistrictMeteorologicalOffice rdf:type owl:Class ;
+                                  rdfs:subClassOf risk:DistrictAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/DistrictWaterResourcesOffice
+risk:DistrictWaterResourcesOffice rdf:type owl:Class ;
+                                  rdfs:subClassOf risk:DistrictAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/EmergencyMedicalService
+risk:EmergencyMedicalService rdf:type owl:Class ;
+                             rdfs:subClassOf risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/EmergencyResponseAgency
+risk:EmergencyResponseAgency rdf:type owl:Class ;
+                             rdfs:subClassOf risk:ResponseOrganization ;
+                             owl:disjointWith risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/FireService
+risk:FireService rdf:type owl:Class ;
+                 rdfs:subClassOf risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/GeographicFeature
+risk:GeographicFeature rdf:type owl:Class ;
+                       rdfs:subClassOf risk:Risk .
+
+
+###  http://meteo_onto.org/meteo_risk/GovernmentAuthority
+risk:GovernmentAuthority rdf:type owl:Class ;
+                         rdfs:subClassOf risk:ResponseOrganization .
+
+
+###  http://meteo_onto.org/meteo_risk/HighRisk
+risk:HighRisk rdf:type owl:Class ;
+              rdfs:subClassOf risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/Hospital
+risk:Hospital rdf:type owl:Class ;
+              rdfs:subClassOf risk:CriticalInfrastructure ,
+                              risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/LocalAdministrativeAuthority
+risk:LocalAdministrativeAuthority rdf:type owl:Class ;
+                                  rdfs:subClassOf risk:LocalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/LocalAuthority
+risk:LocalAuthority rdf:type owl:Class ;
+                    rdfs:subClassOf risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/LocalDisasterManagementUnit
+risk:LocalDisasterManagementUnit rdf:type owl:Class ;
+                                 rdfs:subClassOf risk:LocalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/LowRisk
+risk:LowRisk rdf:type owl:Class ;
+             rdfs:subClassOf risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/ModerateRisk
+risk:ModerateRisk rdf:type owl:Class ;
+                  rdfs:subClassOf risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/MunicipalAuthority
+risk:MunicipalAuthority rdf:type owl:Class ;
+                        rdfs:subClassOf risk:LocalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/NationalAuthority
+risk:NationalAuthority rdf:type owl:Class ;
+                       rdfs:subClassOf risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/NationalDisasterManagementAgency
+risk:NationalDisasterManagementAgency rdf:type owl:Class ;
+                                      rdfs:subClassOf risk:NationalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/NationalHealthAuthority
+risk:NationalHealthAuthority rdf:type owl:Class ;
+                             rdfs:subClassOf risk:NationalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/NationalHydrologicalAgency
+risk:NationalHydrologicalAgency rdf:type owl:Class ;
+                                rdfs:subClassOf risk:NationalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/NationalMeteorologicalAgency
+risk:NationalMeteorologicalAgency rdf:type owl:Class ;
+                                  rdfs:subClassOf risk:NationalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/NationalWaterResourcesAuthority
+risk:NationalWaterResourcesAuthority rdf:type owl:Class ;
+                                     rdfs:subClassOf risk:NationalAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/PoliceService
+risk:PoliceService rdf:type owl:Class ;
+                   rdfs:subClassOf risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/PowerFacility
+risk:PowerFacility rdf:type owl:Class ;
+                   rdfs:subClassOf risk:CriticalInfrastructure .
+
+
+###  http://meteo_onto.org/meteo_risk/RescueUnit
+risk:RescueUnit rdf:type owl:Class ;
+                rdfs:subClassOf risk:EmergencyResponseAgency .
+
+
+###  http://meteo_onto.org/meteo_risk/ResponseOrganization
+risk:ResponseOrganization rdf:type owl:Class ;
+                          rdfs:subClassOf risk:Risk .
+
+
+###  http://meteo_onto.org/meteo_risk/Risk
+risk:Risk rdf:type owl:Class ;
+          rdfs:subClassOf owl:Thing .
+
+
+###  http://meteo_onto.org/meteo_risk/RiskLevel
+risk:RiskLevel rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Class ;
+                                     owl:unionOf ( risk:HighRisk
+                                                   risk:LowRisk
+                                                   risk:ModerateRisk
+                                                   risk:VeryHighRisk
+                                                   risk:VeryLowRisk
+                                                 )
+                                   ] ;
+               rdfs:subClassOf risk:Risk .
+
+
+###  http://meteo_onto.org/meteo_risk/School
+risk:School rdf:type owl:Class ;
+            rdfs:subClassOf risk:CriticalInfrastructure .
+
+
+###  http://meteo_onto.org/meteo_risk/StateAuthority
+risk:StateAuthority rdf:type owl:Class ;
+                    rdfs:subClassOf risk:GovernmentAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/StateDisasterManagementOffice
+risk:StateDisasterManagementOffice rdf:type owl:Class ;
+                                   rdfs:subClassOf risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/StateHealthOffice
+risk:StateHealthOffice rdf:type owl:Class ;
+                       rdfs:subClassOf risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/StateHydrologicalOffice
+risk:StateHydrologicalOffice rdf:type owl:Class ;
+                             rdfs:subClassOf risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/StateMeteorologicalOffice
+risk:StateMeteorologicalOffice rdf:type owl:Class ;
+                               rdfs:subClassOf risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/StateWaterResourcesOffice
+risk:StateWaterResourcesOffice rdf:type owl:Class ;
+                               rdfs:subClassOf risk:StateAuthority .
+
+
+###  http://meteo_onto.org/meteo_risk/TransportSystem
+risk:TransportSystem rdf:type owl:Class ;
+                     rdfs:subClassOf risk:CriticalInfrastructure .
+
+
+###  http://meteo_onto.org/meteo_risk/VeryHighRisk
+risk:VeryHighRisk rdf:type owl:Class ;
+                  rdfs:subClassOf risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/VeryLowRisk
+risk:VeryLowRisk rdf:type owl:Class ;
+                 rdfs:subClassOf risk:RiskLevel .
+
+
+###  http://meteo_onto.org/meteo_risk/WaterSupplyFacility
+risk:WaterSupplyFacility rdf:type owl:Class ;
+                         rdfs:subClassOf risk:CriticalInfrastructure .
+
+
+###  http://meteo_onto.org/meteo_risk/WeatherEvent
+risk:WeatherEvent rdf:type owl:Class ;
+                  rdfs:subClassOf risk:Risk .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:AmbulanceService
+                risk:CivilProtectionAgency
+                risk:EmergencyMedicalService
+                risk:FireService
+                risk:PoliceService
+                risk:RescueUnit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:CommunicationFacility
+                risk:Hospital
+                risk:PowerFacility
+                risk:School
+                risk:TransportSystem
+                risk:WaterSupplyFacility
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:DistrictAuthority
+                risk:LocalAuthority
+                risk:NationalAuthority
+                risk:StateAuthority
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:DistrictDisasterManagementOffice
+                risk:DistrictHealthOffice
+                risk:DistrictHydrologicalOffice
+                risk:DistrictMeteorologicalOffice
+                risk:DistrictWaterResourcesOffice
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:HighRisk
+                risk:LowRisk
+                risk:ModerateRisk
+                risk:VeryHighRisk
+                risk:VeryLowRisk
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:LocalAdministrativeAuthority
+                risk:LocalDisasterManagementUnit
+                risk:MunicipalAuthority
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:NationalDisasterManagementAgency
+                risk:NationalHealthAuthority
+                risk:NationalHydrologicalAgency
+                risk:NationalMeteorologicalAgency
+                risk:NationalWaterResourcesAuthority
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( risk:StateDisasterManagementOffice
+                risk:StateHealthOffice
+                risk:StateHydrologicalOffice
+                risk:StateMeteorologicalOffice
+                risk:StateWaterResourcesOffice
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
