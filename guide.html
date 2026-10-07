@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071a33">
 <meta name="description" content="Explore MeteoOnto, a meteorological ontology for observations, sensors, data, space and time, forecasts, risk, and interoperability.">
-<title>MeteoOnto — Meteorological Ontology</title>
+<title>Mete∞nto — Interactive Ontology Guide</title>
 <style>
 :root{--ink:#102b4c;--muted:#61758f;--paper:#f4f8fc;--white:#fff;--line:#d9e5f1;--teal:#167fe5;--mint:#b9e6ff;--sky:#d6efff;--gold:#75cbff;--deep:#071a33;--shadow:0 18px 55px rgba(4,34,48,.1);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--paper);color:var(--ink);line-height:1.6}a{color:inherit;text-decoration:none}button,select,input{font:inherit}button{cursor:pointer}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}.top{position:sticky;top:0;z-index:20;background:rgba(7,27,45,.94);backdrop-filter:blur(14px);color:#eef8f4;border-bottom:1px solid #ffffff20}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-weight:800;letter-spacing:-.04em;font-size:1.22rem}.brand i{font-style:normal;color:var(--sky)}.navlinks{display:flex;align-items:center;gap:25px;font-size:.9rem;color:#c2d4dc}.navlinks a:hover{color:white}.navcta{border:1px solid #b9e6ff66;border-radius:999px;padding:8px 14px;color:var(--mint)}
@@ -130,33 +130,39 @@ footer{background:#020e19;color:#91b2ca;border-top:1px solid #0b3e60}
  .layout{display:block;width:calc(100% - 28px)}
  .sidebar{width:100%;position:static!important;max-height:none!important;overflow:visible!important;margin-bottom:18px}
 }
-</style>
+</style><link rel="stylesheet" href="docs.css">
 </head>
 <body>
-<div class="top"><div class="wrap nav"><button class="mobile-menu" id="menuToggle" aria-controls="topicSidebar" aria-expanded="false">☰ <span>Topics</span></button><a class="brand" href="index.html">Meteo<i>Onto</i></a><nav class="navlinks" aria-label="Main navigation"><a href="index.html">Introduction</a><a href="#overview">Overview</a><a href="#explorer">Explorer</a><a href="#alignments">Alignments</a><a href="#files">Files</a><a class="navcta" href="https://github.com/PasanGunasekara29/MeteoOnto">GitHub ↗</a></nav></div></div>
-<header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">MeteoOnto · Meteorological Ontology</div><h1>Mete<span>∞</span>nto</h1><p class="hero-tagline">Meteorology Knowledge Connected.</p><p class="hero-description">Mete∞nto connects the key layers of meteorological data: observations, sensors, and platforms through SOSA/SSN; units through QUDT; time through OWL-Time; places and spatial features through GeoSPARQL and DBpedia; and data collections and provenance through PROV-O. Its own forecasting, geospatial, extreme-weather, and risk modules add domain detail, while SWEET alignments connect atmospheric and hydrological phenomena with environmental science. Together, these links describe what happened, how it was measured, where and when it occurred, and how forecasts and datasets relate.</p><div class="actions"><a class="btn primary" href="#explorer">Explore the ontology <span>↓</span></a><a class="btn ghost" href="#alignments">View alignments</a></div><div class="meta"><span><b>OWL / Turtle</b> formal model</span><span><b>CC BY 4.0</b> license</span><span><b>Open source</b> on GitHub</span></div></div><div class="hero-visual" aria-hidden="true"><div class="orb"><canvas class="weather-globe" id="weatherGlobe" width="384" height="384" role="img" aria-label="Three-dimensional rotating weather globe"></canvas><img id="weatherTexture" src="./meteo-world-weather.webp" alt="" hidden></div><div class="orbit"></div><div class="node n1">Observation <span class="spark">✦</span></div><div class="node n2">Atmospheric condition</div><div class="node n3">Sensor · Platform</div><div class="node n4">Place &amp; time</div><div class="node n5">Forecast</div></div></div></header>
-<div class="layout">
-<aside class="sidebar" id="topicSidebar" aria-label="MeteoOnto topics">
-<div class="side-title">MeteoOnto topics</div>
+<header class="topbar"><div class="top-inner"><button class="mobile-menu" id="menuToggle" aria-controls="topicSidebar" aria-expanded="false">☰ Topics</button><a class="brand" href="https://pasangunasekara29.github.io/MeteoOnto/">Mete<span>∞</span>nto</a><nav class="toplinks" aria-label="Primary navigation"><a href="https://pasangunasekara29.github.io/MeteoOnto/">← Introduction</a><a href="#overview">Overview</a><a href="#explorer">Explorer</a><a href="#alignments">Alignments</a><a href="#files">Files</a><a class="repo" href="https://github.com/PasanGunasekara29/MeteoOnto" target="_blank" rel="noreferrer">GitHub ↗</a></nav></div></header>
+<header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">Mete∞nto · Interactive Ontology Guide</div><h1>Mete<span>∞</span>nto</h1><p class="hero-tagline">Meteorology Knowledge Connected.</p><p class="hero-description">Mete∞nto connects the key layers of meteorological data: observations, sensors, and platforms through SOSA/SSN; units through QUDT; time through OWL-Time; places and spatial features through GeoSPARQL and DBpedia; and data collections and provenance through PROV-O. Its own forecasting, geospatial, extreme-weather, and risk modules add domain detail, while SWEET alignments connect atmospheric and hydrological phenomena with environmental science. Together, these links describe what happened, how it was measured, where and when it occurred, and how forecasts and datasets relate.</p><div class="actions"><a class="btn primary" href="#explorer">Explore the ontology <span>↓</span></a><a class="btn ghost" href="#alignments">View alignments</a></div><div class="meta"><span><b>OWL / Turtle</b> formal model</span><span><b>CC BY 4.0</b> license</span><span><b>Open source</b> on GitHub</span></div></div><div class="hero-visual" aria-hidden="true"><div class="orb"><canvas class="weather-globe" id="weatherGlobe" width="384" height="384" role="img" aria-label="Three-dimensional rotating weather globe"></canvas><img id="weatherTexture" src="./meteo-world-weather.webp" alt="" hidden></div><div class="orbit"></div><div class="node n1">Observation <span class="spark">✦</span></div><div class="node n2">Atmospheric condition</div><div class="node n3">Sensor · Platform</div><div class="node n4">Place &amp; time</div><div class="node n5">Forecast</div></div></div></header>
+<div class="site-layout">
+<aside class="sidebar" id="topicSidebar" aria-label="Mete∞nto topics">
+<div class="side-label">Documentation topics</div>
 <input id="topicSearch" class="side-search" type="search" placeholder="Search topics…" autocomplete="off" aria-label="Search topics">
-<div class="side-group"><strong>MeteoOnto Lifecycle</strong><div class="side-links">
-<a href="#overview" data-topic="lifecycle development ontology design scope domain">MeteoOnto Development</a>
-<a href="#overview" data-topic="lifecycle requirements domain scope competency goals">MeteoOnto Requirements</a>
-<a href="#explorer" data-module-link="core" data-topic="lifecycle implementation core ontology classes properties">MeteoOnto Implementation</a>
-<a href="#alignments" data-alignment="0" data-topic="lifecycle evaluation validation mappings alignment">MeteoOnto Evaluation</a>
-<a href="#files" data-topic="lifecycle publication release license citation files">MeteoOnto Publication</a>
+<div class="side-group"><strong>Introduction</strong><div class="side-links"><a href="https://pasangunasekara29.github.io/MeteoOnto/" data-topic="introduction what is meteo ontology">What is Mete∞nto?</a></div></div>
+<div class="side-group"><strong>Mete∞nto Lifecycle</strong><div class="side-links">
+<a href="lifecycle/development.html" data-topic="lifecycle development ontology design scope domain">Development</a>
+<a href="lifecycle/requirements.html" data-topic="lifecycle requirements domain scope competency goals">Requirements</a>
+<a href="lifecycle/implementation.html" data-topic="lifecycle implementation core ontology classes properties">Implementation</a>
+<a href="lifecycle/evaluation.html" data-topic="lifecycle evaluation validation mappings alignment">Evaluation</a>
+<a href="lifecycle/publication.html" data-topic="lifecycle publication release license citation files">Publication</a>
 </div></div>
-<div class="side-group"><strong>MeteoOnto playground</strong><div class="side-links">
-<a href="#explorer" data-module-link="core" data-topic="playground browse ontology graph visualization class property">Browse the Ontology Graph</a>
-<a href="#files" data-topic="playground sparql query example">Query MeteoOnto with SPARQL</a>
+<div class="side-group"><strong>Data Sources</strong><div class="side-links">
+<a href="data/observations.html" data-topic="data sources weather observations">Weather Observations</a>
+<a href="data/sensors.html" data-topic="data sources sensors platforms">Sensors &amp; Platforms</a>
+<a href="data/datasets.html" data-topic="data sources datasets provenance">Datasets &amp; Provenance</a>
+<a href="data/forecasts.html" data-topic="data sources forecasts models">Forecasts &amp; Models</a>
+<a href="data/places.html" data-topic="data sources places time">Places &amp; Time</a>
+<a href="data/hazards.html" data-topic="data sources extreme weather risk">Extreme Weather &amp; Risk</a>
 </div></div>
-<div class="side-group"><strong>METEOONTO DOWNLOADS</strong><div class="side-links">
-<a href="#files" data-topic="downloads ontology turtle owl rdf formats files">Ontology Download Formats</a>
+<div class="side-group"><strong>Mete∞nto Playground</strong><div class="side-links">
+<a href="playground.html" data-topic="playground ontology graph explorer visualization">Explore the Ontology Graph</a>
+<a href="using.html#sparql" data-topic="playground query sparql">Query with SPARQL</a>
 </div></div>
-<div class="side-group"><strong>Using MeteoOnto</strong><div class="side-links">
-<a href="#files" data-topic="using query query language sparql rdflib python interface">How to Query MeteoOnto</a>
-</div><div class="side-empty" id="topicEmpty">No matching topics</div></div>
-</aside><div class="content-main"><main>
+<div class="side-group"><strong>Mete∞nto Downloads</strong><div class="side-links"><a href="downloads.html" data-topic="downloads ontology turtle owl rdf formats files">Ontology Download Formats</a></div></div>
+<div class="side-group"><strong>Using Mete∞nto</strong><div class="side-links"><a href="using.html" data-topic="using query python sparql competency questions">How to Query Mete∞nto</a></div></div>
+<div class="side-empty" id="topicEmpty">No matching topics.</div>
+</aside><div class="main content-main"><main>
 <section id="overview"><div class="wrap"><div class="section-head"><div><div class="section-kicker">The domain model</div><h2 class="section-title">One semantic view of weather data.</h2><p class="section-intro">A modular vocabulary for describing how observations are made, what they measure, where and when they apply, and how datasets and models produce results.</p></div></div><div class="pillars">
 <article class="pillar"><div class="icon">◉</div><h3>Observations &amp; results</h3><p>Represent observed properties, reported results, numeric and non-numeric data, and observation context.</p></article>
 <article class="pillar"><div class="icon">⌁</div><h3>Sensors &amp; platforms</h3><p>Connect sensors, platforms, deployments and procedures to the data they produce.</p></article>
@@ -177,7 +183,7 @@ SELECT ?class WHERE {
     "http://meteo_onto.org/meteo_core/"))
 }</pre></article></div></div></section>
 </main></div></div>
-<footer><div class="wrap foot"><div><b style="color:#f0faf5">MeteoOnto</b> · Semantic meteorology for connected data.</div><div>Released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://github.com/PasanGunasekara29/MeteoOnto">Source repository ↗</a></div></div></footer>
+<footer><div class="wrap foot"><div><b style="color:#f0faf5">Mete∞nto</b> · Meteorology Knowledge Connected.</div><div>Released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · <a href="https://github.com/PasanGunasekara29/MeteoOnto">Source repository ↗</a></div></div></footer>
 <script>
 const OWNER="PasanGunasekara29", REPO="MeteoOnto", BRANCH="main";
 const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/`;
