@@ -11,3 +11,34 @@
 /* Keep Data Sources out of the visitor navigation */
 aside.sidebar > .side-group:nth-of-type(4){display:none!important}
 .toplinks > a[href$="data/observations.html"]{display:none!important}
+
+/* Readability pass: larger navigation and supporting copy */
+.brand{font-size:1.28rem}
+.toplinks{font-size:.96rem}
+.side-label{font-size:.78rem;padding-bottom:11px}
+.side-search{font-size:.92rem;padding:11px 12px}
+.side-group{margin-top:18px}
+.side-group strong{font-size:.78rem;padding-bottom:7px}
+.side-links a{font-size:.92rem;line-height:1.48;padding:7px 9px}
+.side-empty{font-size:.88rem}
+.eyebrow,.section-kicker{font-size:.78rem}
+.hero-copy{font-size:1.12rem}
+.section-intro{font-size:1.08rem}
+.card h3{font-size:1.06rem}
+.card p{font-size:.92rem;line-height:1.6}
+.card .card-link{font-size:.9rem}
+.button{font-size:.92rem}
+.page-head p{font-size:1.06rem}
+.doc-section h2{font-size:1.38rem}
+.doc-section h3{font-size:1.08rem}
+.doc-section p,.doc-section li{font-size:1rem}
+.resource-link b{font-size:.94rem}
+.resource-link small{font-size:.84rem}
+.side-group{scroll-margin-top:90px}
+@media(max-width:680px){
+ .side-label{font-size:.8rem}
+ .side-group strong{font-size:.8rem}
+ .side-links a{font-size:.94rem}
+ .card p{font-size:.94rem}
+ .doc-section p,.doc-section li{font-size:1.02rem}
+}
