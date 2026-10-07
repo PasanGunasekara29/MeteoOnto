@@ -42,3 +42,12 @@ aside.sidebar > .side-group:nth-of-type(4){display:none!important}
  .card p{font-size:.94rem}
  .doc-section p,.doc-section li{font-size:1.02rem}
 }
+
+/* Stronger topic hierarchy and larger sidebar text */
+.side-label{font-size:.92rem;letter-spacing:.1em;color:#a8cee7;font-weight:850}
+.side-search{font-size:.98rem;padding:12px 13px}
+.side-group{margin-top:20px}
+.side-group strong{font-size:1.08rem;line-height:1.3;letter-spacing:-.015em;text-transform:none;color:#eff8ff;font-weight:850;border-left:3px solid #18aaff;background:linear-gradient(90deg,#0a3552,#071f32);border-radius:0 6px 6px 0;padding:7px 10px;margin:0 0 5px}
+.side-links a{font-size:1rem;line-height:1.5;font-weight:500;padding:8px 9px 8px 14px;margin-left:5px;border-left:1px solid #155078;border-radius:0 6px 6px 0;color:#c4d9e9}
+.side-links a:hover,.side-links a[aria-current=page]{border-left:3px solid #25b5ff;padding-left:12px;background:#0a3552;color:#67caff}
+@media(max-width:680px){.side-label{font-size:.94rem}.side-group strong{font-size:1.1rem}.side-links a{font-size:1.02rem}}
