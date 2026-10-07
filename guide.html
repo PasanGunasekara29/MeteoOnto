@@ -232,6 +232,7 @@ function parseTriples(text){
   for(const q of quads)triples.push([q.subject.value,q.predicate.value,q.object.value,q.object.termType,q.object.language||"",q.object.datatype?.value||""]);
   return triples
 }
+let currentGraph=null,cy=null,selectedNode=null;
 const MODULE_NAMESPACES={
   core:["http://meteo_onto.org/meteo_core/","http://meteo_onto.org/meteo_core#"],
   forecast:["http://meteo_onto.org/meteo_forecasting/"],
