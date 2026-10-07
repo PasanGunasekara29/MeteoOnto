@@ -23,7 +23,7 @@
     const paint=now=>{
       if(!reduced&&now-last<32){requestAnimationFrame(paint);return}
       last=now;
-      const angle=Math.PI+(reduced?0:now/1000*twoPi/72);
+      const angle=Math.PI-(reduced?0:now/1000*twoPi/72);
       const ca=Math.cos(angle),sa=Math.sin(angle);
       let k=0;
       for(let y=0;y<size;y++){
