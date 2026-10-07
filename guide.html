@@ -117,6 +117,19 @@ footer{background:#020e19;color:#91b2ca;border-top:1px solid #0b3e60}
  .sidebar{position:relative;top:auto;left:auto;bottom:auto;width:100%;max-height:none;overflow:visible;transform:none!important;transition:none!important;margin-bottom:18px}
  .mobile-menu{display:none!important}
 }
+
+/* Remove the sidebar's inner scrollbar and give the docs more room */
+.layout{width:min(1600px,calc(100% - 40px));grid-template-columns:300px minmax(0,1fr);gap:30px}
+.sidebar{position:static!important;top:auto!important;max-height:none!important;overflow:visible!important;width:300px}
+.content-main .wrap{width:min(1320px,100%)}
+@media(max-width:980px){
+ .layout{width:calc(100% - 34px);grid-template-columns:270px minmax(0,1fr);gap:20px}
+ .sidebar{position:static!important;top:auto!important;max-height:none!important;overflow:visible!important;width:270px}
+}
+@media(max-width:560px){
+ .layout{display:block;width:calc(100% - 28px)}
+ .sidebar{width:100%;position:static!important;max-height:none!important;overflow:visible!important;margin-bottom:18px}
+}
 </style>
 </head>
 <body>

@@ -65,3 +65,17 @@ aside.sidebar > .side-group:nth-of-type(4){display:none!important}
  .sidebar{position:relative;top:auto;left:auto;bottom:auto;width:100%;max-height:none;overflow:visible;transform:none!important;transition:none!important;margin-bottom:22px}
  .menu-button{display:none!important}
 }
+
+/* Remove the sidebar's inner scrollbar and give the docs more room */
+.site-layout{width:min(1600px,calc(100% - 40px));grid-template-columns:310px minmax(0,1fr);gap:30px}
+.content-width{max-width:1320px}
+.sidebar{position:static!important;top:auto!important;max-height:none!important;overflow:visible!important;width:310px}
+@media(max-width:980px){
+ .site-layout{width:calc(100% - 34px);grid-template-columns:280px minmax(0,1fr);gap:22px}
+ .sidebar{position:static!important;top:auto!important;max-height:none!important;overflow:visible!important;width:280px}
+}
+@media(max-width:680px){
+ .site-layout{width:calc(100% - 28px);display:block}
+ .sidebar{width:100%;position:static!important;max-height:none!important;overflow:visible!important;margin-bottom:22px}
+ .content-width{max-width:none}
+}
