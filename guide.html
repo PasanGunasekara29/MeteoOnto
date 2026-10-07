@@ -232,29 +232,60 @@ function parseTriples(text){
   for(const q of quads)triples.push([q.subject.value,q.predicate.value,q.object.value,q.object.termType,q.object.language||"",q.object.datatype?.value||""]);
   return triples
 }
+const MODULE_NAMESPACES={
+  core:["http://meteo_onto.org/meteo_core/","http://meteo_onto.org/meteo_core#"],
+  forecast:["http://meteo_onto.org/meteo_forecasting/"],
+  geo:["http://meteo_onto.org/meteo_geo/","http://meteo_onto.org/meteo_geo#"],
+  extreme:["http://meteo_onto.org/meteo_extreame/","http://meteo_onto.org/meteo_extreame#"],
+  risk:["http://meteo_onto.org/meteo_risk/","http://meteo_onto.org/meteo_risk#"]
+};
+function isModuleTerm(id,module){return (MODULE_NAMESPACES[module]||MODULE_NAMESPACES.core).some(ns=>id.startsWith(ns))}
 function buildGraph(triples,module){
-  const classIds=new Set(),objectProperties=new Set(),labels=new Map(),definitions=new Map(),domains=new Map(),ranges=new Map(),datatypes=new Set();
+  const classIds=new Set(),objectProperties=new Set(),labels=new Map(),definitions=new Map(),domains=new Map(),ranges=new Map(),datatypes=new Set(),bySubject=new Map();
+  const addMap=(map,key,value)=>{if(!map.has(key))map.set(key,[]);map.get(key).push(value)};
   for(const [s,p,o,termType,lang] of triples){
-    if(p===RDF+"type"&&(o===OWL+"Class"||o===RDFS+"Class"))classIds.add(s);
+    addMap(bySubject,s,{p,o,termType});
+    if(p===RDF+"type"&&(o===OWL+"Class"||o===RDFS+"Class")&&isModuleTerm(s,module))classIds.add(s);
     if(p===RDF+"type"&&(o===RDFS+"Datatype"||o===OWL+"DataRange"))datatypes.add(s);
-    if(p===RDF+"type"&&o===OWL+"ObjectProperty"&&s.startsWith(LOCAL))objectProperties.add(s);
+    if(p===RDF+"type"&&o===OWL+"ObjectProperty"&&isModuleTerm(s,module))objectProperties.add(s);
     if(p===RDFS+"label"&&termType==="Literal"&&(!lang||lang.startsWith("en"))&&!labels.has(s))labels.set(s,o);
     if((p===SKOS+"definition"||p===RDFS+"comment")&&termType==="Literal"&&!definitions.has(s))definitions.set(s,o);
-    if(p===RDFS+"domain"){if(!domains.has(s))domains.set(s,[]);domains.get(s).push(o)}
-    if(p===RDFS+"range"){if(!ranges.has(s))ranges.set(s,[]);ranges.get(s).push(o)}
-    if((p===RDFS+"subClassOf"||p===OWL+"equivalentClass"||p===OWL+"disjointWith")&&s.startsWith(LOCAL)&&o.startsWith(LOCAL)){classIds.add(s);classIds.add(o)}
+    if(p===RDFS+"domain")addMap(domains,s,{id:o,termType});
+    if(p===RDFS+"range")addMap(ranges,s,{id:o,termType});
+    if((p===RDFS+"subClassOf"||p===OWL+"equivalentClass"||p===OWL+"disjointWith")&&isModuleTerm(s,module)&&isModuleTerm(o,module)){classIds.add(s);classIds.add(o)}
   }
-  for(const [property] of domains)if(property.startsWith(LOCAL)&&ranges.has(property))objectProperties.add(property);
-  for(const property of objectProperties)for(const id of [...(domains.get(property)||[]),...(ranges.get(property)||[])])if(id.startsWith(LOCAL)&&!objectProperties.has(id)&&!datatypes.has(id))classIds.add(id);
-  classIds.forEach(id=>{if(datatypes.has(id))classIds.delete(id)});
-  const nodes=[...classIds].filter(id=>id.startsWith(LOCAL)&&!datatypes.has(id)&&!/wktliteral/i.test(id)).map(id=>{const label=getLabel(id,labels);return{data:{id,label,uri:id,definition:definitions.get(id)||""}}});
+  function expandClassExpression(id,termType,seen=new Set()){
+    if(termType!=="BlankNode")return [id];
+    if(seen.has(id))return [];seen.add(id);
+    const statements=bySubject.get(id)||[],listLink=statements.find(t=>t.p===OWL+"unionOf"||t.p===OWL+"intersectionOf"),complement=statements.find(t=>t.p===OWL+"complementOf");
+    if(complement)return expandClassExpression(complement.o,complement.termType,seen);
+    if(!listLink)return [];
+    const results=[],listSeen=new Set();let cell=listLink.o;
+    while(cell&&cell!=="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"&&!listSeen.has(cell)){
+      listSeen.add(cell);const entries=bySubject.get(cell)||[],first=entries.find(t=>t.p===RDF+"first"),rest=entries.find(t=>t.p===RDF+"rest");
+      if(first)results.push(...expandClassExpression(first.o,first.termType,seen));
+      cell=rest?.o
+    }
+    return results
+  }
+  const propertyDomains=new Map(),propertyRanges=new Map();
+  for(const property of new Set([...domains.keys(),...ranges.keys()])){
+    if(!isModuleTerm(property,module))continue;
+    const ds=(domains.get(property)||[]).flatMap(x=>expandClassExpression(x.id,x.termType)).filter(id=>isModuleTerm(id,module)&&!datatypes.has(id));
+    const rs=(ranges.get(property)||[]).flatMap(x=>expandClassExpression(x.id,x.termType)).filter(id=>isModuleTerm(id,module)&&!datatypes.has(id));
+    propertyDomains.set(property,ds);propertyRanges.set(property,rs);
+    if(!objectProperties.has(property)&&ds.length&&rs.length)objectProperties.add(property);
+    if(objectProperties.has(property)){ds.forEach(id=>classIds.add(id));rs.forEach(id=>classIds.add(id))}
+  }
+  for(const id of datatypes)classIds.delete(id);
+  const nodes=[...classIds].filter(id=>isModuleTerm(id,module)&&!datatypes.has(id)&&!/wktliteral/i.test(id)).map(id=>({data:{id,label:getLabel(id,labels),uri:id,definition:definitions.get(id)||""}}));
   const valid=new Set(nodes.map(n=>n.data.id)),edges=[],seen=new Set();
   const add=(source,target,label,kind,property="")=>{if(!valid.has(source)||!valid.has(target)||source===target)return;const key=[source,target,label,kind].join("|");if(seen.has(key))return;seen.add(key);edges.push({data:{id:"e"+edges.length,source,target,label,kind,property}})};
   for(const [s,p,o] of triples){if(p===RDFS+"subClassOf")add(s,o,"subClassOf","hierarchy");else if(p===OWL+"equivalentClass")add(s,o,"equivalentClass","axiom");else if(p===OWL+"disjointWith")add(s,o,"disjointWith","axiom")}
-  for(const property of objectProperties){const ds=(domains.get(property)||[]).filter(id=>valid.has(id)),rs=(ranges.get(property)||[]).filter(id=>valid.has(id)),label=getLabel(property,labels);for(const domain of ds)for(const range of rs)add(domain,range,label,"object-property",property)}
-  return{nodes,edges,triples,labels,definitions,classCount:nodes.length,propertyCount:new Set(edges.filter(e=>e.data.kind==="object-property").map(e=>e.data.property)).size,module}
+  for(const property of objectProperties){const ds=propertyDomains.get(property)||[],rs=propertyRanges.get(property)||[],label=getLabel(property,labels);for(const domain of ds)for(const range of rs)add(domain,range,label,"object-property",property)}
+  const linked=new Set(edges.flatMap(e=>[e.data.source,e.data.target]));
+  return{nodes,edges,triples,labels,definitions,classCount:nodes.length,isolatedCount:nodes.filter(n=>!linked.has(n.data.id)).length,propertyCount:new Set(edges.filter(e=>e.data.kind==="object-property").map(e=>e.data.property)).size,module}
 }
-let currentGraph=null,cy=null,selectedNode=null;
 const MODULE_COLORS={core:"#23b8e6",forecast:"#f0a447",geo:"#34bd91",extreme:"#a16ee8",risk:"#e5658b"};
 function graphStyle(){const color=MODULE_COLORS[currentGraph?.module]||MODULE_COLORS.core;return[
 {selector:"node",style:{"background-color":color,"border-width":2,"border-color":"#95ddff","width":46,"height":46,"label":"data(label)","color":"#f2f9ff","font-size":10,"font-weight":650,"text-wrap":"ellipsis","text-max-width":100,"text-valign":"bottom","text-margin-y":8,"text-background-color":"#041a2d","text-background-opacity":.82,"text-background-padding":3,"overlay-opacity":0}},
@@ -271,7 +302,7 @@ function renderGraph(){
  cy=cytoscape({container:host,elements:[...currentGraph.nodes,...currentGraph.edges],style:graphStyle(),layout:{name:"preset"},minZoom:.18,maxZoom:3,wheelSensitivity:.18,selectionType:"single",autoungrabify:false,boxSelectionEnabled:false});
  cy.on("tap","node",event=>selectNode(event.target.id()));cy.on("mouseover","edge",event=>showEdge(event.target));cy.on("tap","edge",event=>showEdge(event.target));
  const query=document.getElementById("graphSearch").value.trim().toLowerCase();if(query)applyGraphSearch(query);
- const linked=new Set(currentGraph.edges.flatMap(e=>[e.data.source,e.data.target])),isolated=currentGraph.nodes.length-linked.size,moduleName=document.getElementById("module").options[document.getElementById("module").selectedIndex].text;document.getElementById("graphStatus").textContent=currentGraph.classCount+" class nodes · "+isolated+" unconnected · "+currentGraph.propertyCount+" object properties · "+currentGraph.edges.length+" connections";document.getElementById("moduleColorSwatch").style.backgroundColor=MODULE_COLORS[currentGraph.module]||MODULE_COLORS.core;document.getElementById("moduleColorLabel").textContent=moduleName;
+ const moduleName=document.getElementById("module").options[document.getElementById("module").selectedIndex].text;document.getElementById("graphStatus").textContent=currentGraph.classCount+" class nodes · "+currentGraph.isolatedCount+" unconnected · "+currentGraph.propertyCount+" object properties · "+currentGraph.edges.length+" connections";document.getElementById("moduleColorSwatch").style.backgroundColor=MODULE_COLORS[currentGraph.module]||MODULE_COLORS.core;document.getElementById("moduleColorLabel").textContent=moduleName;
  runLayout(true)
 }
 function applyGraphSearch(query){
