@@ -81,6 +81,6 @@ aside.sidebar > .side-group:nth-of-type(4){display:none!important}
 }
 
 /* One shared, prominent Mete∞nto wordmark on every documentation page */
-.brand{display:inline-flex;align-items:center;white-space:nowrap;font-size:1.58rem;font-weight:900;letter-spacing:-.06em;line-height:1;color:#f3faff}
-.brand span{display:inline-block;color:#48c3ff;font-size:1.12em;line-height:.9;text-shadow:0 0 16px #23aaff66;margin:0 .015em}
-@media(max-width:680px){.brand{font-size:1.42rem}}
+.brand{display:inline-flex;align-items:center;white-space:nowrap;font-size:2rem;font-weight:900;letter-spacing:-.06em;line-height:1;color:#f3faff}
+.brand span{display:inline-block;color:#48c3ff;font-size:1.2em;line-height:.9;text-shadow:0 0 16px #23aaff66;margin:0 .015em}
+@media(max-width:680px){.brand{font-size:1.72rem}}
