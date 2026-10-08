@@ -120,11 +120,41 @@ const local=u=>{const x=String(u).replace(/[\/#]+$/,"").split(/[\/#]/).pop();try
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const labels=new Map(),comments=new Map(),types=new Map(),domains=new Map(),ranges=new Map(),termModule=new Map(),triples=[];
 function add(map,k,v){if(!map.has(k))map.set(k,[]);map.get(k).push(v)}
-function cleanMap(map,k){return[...new Set(map.get(k)||[])].map(local).join(", ")}
+const blankTerms=new Set();
+const RDF_FIRST=RDF+"first",RDF_REST=RDF+"rest",RDF_NIL=RDF+"nil";
+function triplesFor(subject,predicate){return triples.filter(t=>t.s===subject&&(!predicate||t.p===predicate)).map(t=>t.o)}
+function listItems(head){
+ const out=[],seen=new Set();let cell=head;
+ while(cell&&cell!==RDF_NIL&&!seen.has(cell)&&out.length<100){
+  seen.add(cell);const first=triplesFor(cell,RDF_FIRST)[0];if(first)out.push(first);
+  cell=triplesFor(cell,RDF_REST)[0];
+ }
+ return out;
+}
+function displayNode(value,depth=0){
+ if(depth>8)return "Anonymous expression";
+ if(!blankTerms.has(value))return local(value);
+ const union=triplesFor(value,OWL+"unionOf")[0],intersection=triplesFor(value,OWL+"intersectionOf")[0],complement=triplesFor(value,OWL+"complementOf")[0],oneOf=triplesFor(value,OWL+"oneOf")[0];
+ if(union)return listItems(union).map(v=>displayNode(v,depth+1)).join(" ∪ ")||"Empty union";
+ if(intersection)return listItems(intersection).map(v=>displayNode(v,depth+1)).join(" ∩ ")||"Empty intersection";
+ if(complement)return "Complement of "+displayNode(complement,depth+1);
+ if(oneOf)return "{ "+listItems(oneOf).map(v=>displayNode(v,depth+1)).join(", ")+" }";
+ const onProperty=triplesFor(value,OWL+"onProperty")[0];
+ if(onProperty){
+  for(const [predicate,word] of [[OWL+"someValuesFrom","some"],[OWL+"allValuesFrom","only"],[OWL+"hasValue","value"]]){
+   const target=triplesFor(value,predicate)[0];if(target)return local(onProperty)+" "+word+" "+displayNode(target,depth+1);
+  }
+  for(const [predicate,word] of [[OWL+"minCardinality","min"],[OWL+"maxCardinality","max"],[OWL+"cardinality","exactly"]]){
+   const amount=triplesFor(value,predicate)[0];if(amount)return local(onProperty)+" "+word+" "+local(amount);
+  }
+ }
+ return "Anonymous class expression";
+}
+function cleanMap(map,k){return[...new Set(map.get(k)||[])].map(v=>displayNode(v)).join(", ")||"—"}
 function describe(file,quads){
  for(const q of quads){
   const s=q.subject.value,p=q.predicate.value,o=q.object.value;
-  triples.push({s,p,o,term:q.object.termType});
+  triples.push({s,p,o,subjectTerm:q.subject.termType,term:q.object.termType});\n  if(q.subject.termType==="BlankNode")blankTerms.add(s);\n  if(q.object.termType==="BlankNode")blankTerms.add(o);
   if(p===RDFS+"label"||p===SKOS+"prefLabel"){if(!labels.has(s))labels.set(s,o)}
   if((p===RDFS+"comment"||p===SKOS+"definition")&&!comments.has(s))comments.set(s,o)
   if(p===RDF+"type"&&(o===OWL+"Class"||o===RDFS+"Class")&&internal(s)){types.set(s,"Class");termModule.set(s,file[1])}
