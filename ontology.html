@@ -38,6 +38,11 @@
 .term-uri{display:block;margin-top:4px;font-size:.73rem}
 .status-note{padding:13px;border-radius:8px;background:#082a43;color:#b8dcf5}
 @media(max-width:680px){.ontology-figure iframe{height:660px}.doc-section h2{font-size:1.35rem}.namespace-table td,.term-table td{font-size:.78rem}}
+
+/* Keep the documentation topics visible while the page scrolls. */
+.site-layout{align-items:start}
+.sidebar{position:sticky!important;top:82px!important;align-self:start;max-height:calc(100vh - 96px)!important;overflow-y:auto!important}
+@media(max-width:680px){.sidebar{position:sticky!important;top:70px!important;max-height:calc(100vh - 82px)!important;overflow-y:auto!important;margin-bottom:18px}}
 </style>
 </head>
 <body>
