@@ -154,7 +154,8 @@ function cleanMap(map,k){return[...new Set(map.get(k)||[])].map(v=>displayNode(v
 function describe(file,quads){
  for(const q of quads){
   const s=q.subject.value,p=q.predicate.value,o=q.object.value;
-  triples.push({s,p,o,subjectTerm:q.subject.termType,term:q.object.termType});\n  if(q.subject.termType==="BlankNode")blankTerms.add(s);\n  if(q.object.termType==="BlankNode")blankTerms.add(o);
+  triples.push({s,p,o,subjectTerm:q.subject.termType,term:q.object.termType});
+  if(q.subject.termType==="BlankNode")blankTerms.add(s);\n  if(q.object.termType==="BlankNode")blankTerms.add(o);
   if(p===RDFS+"label"||p===SKOS+"prefLabel"){if(!labels.has(s))labels.set(s,o)}
   if((p===RDFS+"comment"||p===SKOS+"definition")&&!comments.has(s))comments.set(s,o)
   if(p===RDF+"type"&&(o===OWL+"Class"||o===RDFS+"Class")&&internal(s)){types.set(s,"Class");termModule.set(s,file[1])}
