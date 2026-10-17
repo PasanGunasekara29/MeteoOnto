@@ -1,1 +1,209 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#031321"><meta name="description" content="How to Query Mete∞nto · Mete∞nto documentation"><title>How to Query Mete∞nto · Mete∞nto</title><link rel="stylesheet" href="docs.css"></head><body><header class="topbar"><div class="top-inner"><button class="menu-button" id="menuToggle" aria-controls="topicSidebar" aria-expanded="false">☰ Topics</button><a class="brand" href="index.html">Mete<span>∞</span>nto</a><nav class="toplinks" aria-label="Primary navigation"><a href="index.html">Introduction</a><a href="ontology.html">Ontology Documentation</a><a href="lifecycle/development.html">Lifecycle</a><a href="data/observations.html">Data Sources</a><a href="playground.html">Playground</a><a href="downloads.html">Downloads</a><a class="repo" href="https://github.com/PasanGunasekara29/MeteoOnto" target="_blank" rel="noreferrer">GitHub ↗</a></nav></div></header><div class="site-layout"><aside class="sidebar" id="topicSidebar" aria-label="Mete∞nto topics"><div class="side-label">Documentation topics</div><input class="side-search" id="topicSearch" type="search" placeholder="Search topics…" aria-label="Search topics"><div class="side-group"><strong>Introduction</strong><div class="side-links"><a href="index.html"  data-topic="introduction what is meteorology knowledge connected">What is Mete∞nto?</a><a href="ontology.html" data-topic="ontology documentation classes properties modules visualization alignments">Ontology Documentation</a></div></div><div class="side-group"><strong>Mete∞nto Lifecycle</strong><div class="side-links"><a href="lifecycle/development.html"  data-topic="lifecycle Development ontology">Development</a><a href="lifecycle/requirements.html"  data-topic="lifecycle Requirements ontology">Requirements</a><a href="lifecycle/implementation.html"  data-topic="lifecycle Implementation ontology">Implementation</a><a href="lifecycle/evaluation.html"  data-topic="lifecycle Evaluation ontology">Evaluation</a><a href="lifecycle/publication.html"  data-topic="lifecycle Publication ontology">Publication</a></div></div><div class="side-group"><strong>Data Sources</strong><div class="side-links"><a href="data/observations.html"  data-topic="data source Weather Observations">Weather Observations</a><a href="data/sensors.html"  data-topic="data source Sensors & Platforms">Sensors & Platforms</a><a href="data/datasets.html"  data-topic="data source Datasets & Provenance">Datasets & Provenance</a><a href="data/forecasts.html"  data-topic="data source Forecasts & Models">Forecasts & Models</a><a href="data/places.html"  data-topic="data source Places & Time">Places & Time</a><a href="data/hazards.html"  data-topic="data source Extreme Weather & Risk">Extreme Weather & Risk</a></div></div><div class="side-group"><strong>Mete∞nto Playground</strong><div class="side-links"><a href="playground.html"  data-topic="playground ontology graph explorer visualization">Explore the Ontology Graph</a><a href="using.html#sparql" data-topic="playground query sparql query example">Query with SPARQL</a></div></div><div class="side-group"><strong>Mete∞nto Downloads</strong><div class="side-links"><a href="downloads.html"  data-topic="downloads ontology turtle owl files">Ontology Download Formats</a></div></div><div class="side-group"><strong>Using Mete∞nto</strong><div class="side-links"><a href="using.html" aria-current="page" data-topic="using query python sparql competency questions">How to Query Mete∞nto</a></div></div><div class="side-group"><strong>Related Project</strong><div class="side-links"><a href="https://pasangunasekara29.github.io/Agentic-AI-for-Recursive-Meteorological-Knowledge-Exploration-and-Graph-Construction/" data-topic="agentic ai recursive meteorological knowledge exploration knowledge graph construction" target="_blank" rel="noreferrer">Agentic Meteorological Knowledge Exploration ↗</a></div></div><div class="side-empty" id="topicEmpty">No matching topics.</div></aside><main class="main"><div class="content-width"><div class="page-head"><div class="crumbs"><a href="index.html">Introduction</a> / Using Mete∞nto</div><div class="eyebrow">Using Mete∞nto</div><h1>Load, inspect, and query the ontology.</h1><p>Use standard RDF tooling to work with Mete∞nto’s Turtle files and ask questions across classes, properties, and linked datasets.</p></div><section class="doc-section"><h2>Load with Python and RDFLib</h2><p>Download the core Turtle file, then parse it as an RDF graph:</p><pre class="code">from rdflib import Graph\n\ng = Graph()\ng.parse("Meteo_Onto_Core.ttl", format="turtle")\nprint(len(g), "triples")</pre><a class="button" href="downloads.html">Get the core Turtle file ↗</a></section><section class="doc-section" id="sparql"><h2>Query with SPARQL</h2><p>For example, list named classes in the Mete∞nto core namespace:</p><pre class="code">PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;\n\nSELECT ?class WHERE {\n  ?class a owl:Class .\n  FILTER(STRSTARTS(STR(?class),\n    "http://meteo_onto.org/meteo_core/"))\n}</pre><p>Replace the class pattern with terms and relationships relevant to your application. Check the ontology’s exact namespaces and axioms in the source files.</p></section><section class="doc-section"><h2>Competency questions</h2><ul><li>Which classes describe weather observations and their results?</li><li>Which sensors or platforms are associated with an observation?</li><li>Which aligned terms relate a Mete∞nto class to SOSA/SSN, QUDT, PROV-O, time, or geospatial concepts?</li><li>Which module contains the forecasting or hazard concepts I need?</li></ul><div class="mini-links"><a href="playground.html">Explore the graph ↗</a><a href="guide.html#alignments">Inspect alignments ↗</a><a href="downloads.html">Download ontology files ↗</a></div></section></div></main></div><footer class="footer"><div class="footer-inner"><span><b style="color:#e8f6ff">Mete∞nto</b> · Meteorology Knowledge Connected.</span><span>Ontology files and source: <a href="https://github.com/PasanGunasekara29/MeteoOnto">GitHub ↗</a> · CC BY 4.0</span></div></footer><script>const q=document.getElementById("topicSearch"),side=document.getElementById("topicSidebar"),toggle=document.getElementById("menuToggle");q?.addEventListener("input",()=>{let n=0,s=q.value.trim().toLowerCase();document.querySelectorAll("[data-topic]").forEach(a=>{let ok=!s||a.dataset.topic.toLowerCase().includes(s)||a.textContent.toLowerCase().includes(s);a.hidden=!ok;if(ok)n++});const e=document.getElementById("topicEmpty");if(e)e.style.display=n?"none":"block"});toggle?.addEventListener("click",()=>{const o=side.classList.toggle("open");toggle.setAttribute("aria-expanded",String(o))});</script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#031321"><meta name="description" content="How to Query Mete∞nto · Mete∞nto documentation"><title>How to Query Mete∞nto · Mete∞nto</title><link rel="stylesheet" href="docs.css"></head><body><header class="topbar"><div class="top-inner"><button class="menu-button" id="menuToggle" aria-controls="topicSidebar" aria-expanded="false">☰ Topics</button><a class="brand" href="index.html">Mete<span>∞</span>nto</a><nav class="toplinks" aria-label="Primary navigation"><a href="index.html">Introduction</a><a href="ontology.html">Ontology Documentation</a><a href="lifecycle/development.html">Lifecycle</a><a href="data/observations.html">Data Sources</a><a href="playground.html">Playground</a><a href="downloads.html">Downloads</a><a class="repo" href="https://github.com/PasanGunasekara29/MeteoOnto" target="_blank" rel="noreferrer">GitHub ↗</a></nav></div></header><div class="site-layout"><aside class="sidebar" id="topicSidebar" aria-label="Mete∞nto topics"><div class="side-label">Documentation topics</div><input class="side-search" id="topicSearch" type="search" placeholder="Search topics…" aria-label="Search topics"><div class="side-group"><strong>Introduction</strong><div class="side-links"><a href="index.html"  data-topic="introduction what is meteorology knowledge connected">What is Mete∞nto?</a><a href="ontology.html" data-topic="ontology documentation classes properties modules visualization alignments">Ontology Documentation</a></div></div><div class="side-group"><strong>Mete∞nto Lifecycle</strong><div class="side-links"><a href="lifecycle/development.html"  data-topic="lifecycle Development ontology">Development</a><a href="lifecycle/requirements.html"  data-topic="lifecycle Requirements ontology">Requirements</a><a href="lifecycle/implementation.html"  data-topic="lifecycle Implementation ontology">Implementation</a><a href="lifecycle/evaluation.html"  data-topic="lifecycle Evaluation ontology">Evaluation</a><a href="lifecycle/publication.html"  data-topic="lifecycle Publication ontology">Publication</a></div></div><div class="side-group"><strong>Data Sources</strong><div class="side-links"><a href="data/observations.html"  data-topic="data source Weather Observations">Weather Observations</a><a href="data/sensors.html"  data-topic="data source Sensors & Platforms">Sensors & Platforms</a><a href="data/datasets.html"  data-topic="data source Datasets & Provenance">Datasets & Provenance</a><a href="data/forecasts.html"  data-topic="data source Forecasts & Models">Forecasts & Models</a><a href="data/places.html"  data-topic="data source Places & Time">Places & Time</a><a href="data/hazards.html"  data-topic="data source Extreme Weather & Risk">Extreme Weather & Risk</a></div></div><div class="side-group"><strong>Mete∞nto Playground</strong><div class="side-links"><a href="playground.html"  data-topic="playground ontology graph explorer visualization">Explore the Ontology Graph</a><a href="using.html#sparql" data-topic="playground query sparql query example">Query with SPARQL</a></div></div><div class="side-group"><strong>Mete∞nto Downloads</strong><div class="side-links"><a href="downloads.html"  data-topic="downloads ontology turtle owl files">Ontology Download Formats</a></div></div><div class="side-group"><strong>Using Mete∞nto</strong><div class="side-links"><a href="using.html" aria-current="page" data-topic="using query python sparql competency questions">How to Query Mete∞nto</a></div></div><div class="side-group"><strong>Related Project</strong><div class="side-links"><a href="https://pasangunasekara29.github.io/Agentic-AI-for-Recursive-Meteorological-Knowledge-Exploration-and-Graph-Construction/" data-topic="agentic ai recursive meteorological knowledge exploration knowledge graph construction" target="_blank" rel="noreferrer">Agentic Meteorological Knowledge Exploration ↗</a></div></div><div class="side-empty" id="topicEmpty">No matching topics.</div></aside><main class="main"><div class="content-width"><div class="page-head"><div class="crumbs"><a href="index.html">Introduction</a> / Using Mete∞nto</div><div class="eyebrow">Using Mete∞nto</div><h1>Load, inspect, and query the ontology.</h1><p>Use standard RDF tooling to work with Mete∞nto’s Turtle files and ask questions across classes, properties, and linked datasets.</p></div><section class="doc-section"><h2>Load with Python and RDFLib</h2><p>Download the core Turtle file, then parse it as an RDF graph:</p><pre class="code">from rdflib import Graph\n\ng = Graph()\ng.parse("Meteo_Onto_Core.ttl", format="turtle")\nprint(len(g), "triples")</pre><a class="button" href="downloads.html">Get the core Turtle file ↗</a></section><section class="doc-section" id="sparql"><h2>Query with SPARQL</h2><p>For example, list named classes in the Mete∞nto core namespace:</p><pre class="code">PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;\n\nSELECT ?class WHERE {\n  ?class a owl:Class .\n  FILTER(STRSTARTS(STR(?class),\n    "http://meteo_onto.org/meteo_core/"))\n}</pre><p>Replace the class pattern with terms and relationships relevant to your application. Check the ontology’s exact namespaces and axioms in the source files.</p></section><section class="doc-section" id="competency-examples"><h2>Competency questions and SPARQL examples</h2><p>The examples below pair each meteorological competency question with a SPARQL query and its sample result.</p><div class="callout"><strong>Example data:</strong> The supplied results were generated from a synthetic graph containing 45 triples. They are illustrative examples, not live weather observations. Check each term against the current Turtle files before using the query with another dataset.</div><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ1 · Which weather observations were recorded at a specific geographic location during a given time interval, and what observable properties and measurements were associated with those observations?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?observation ?location ?property ?start ?finish ?result ?value ?unit
+WHERE {
+  ?observation core:hasLocation ?location ;
+               core:hasObservationTime ?time ;
+               core:observedProperty ?property ;
+               core:hasResult ?result .
+  ?location geo:hasName &quot;Colombo&quot; .
+
+  ?time core:hasBeginTime ?begin ;
+        core:hasEndTime ?end .
+  ?begin core:hasTime ?start .
+  ?end core:hasTime ?finish .
+
+  FILTER(
+    ?start &lt;= &quot;2026-01-02T00:00:00Z&quot;^^xsd:dateTime &amp;&amp;
+    ?finish &gt;= &quot;2026-01-01T00:00:00Z&quot;^^xsd:dateTime
+  )
+
+  OPTIONAL { ?result core:hasValue ?value }
+  OPTIONAL { ?result core:hasUnit ?unit }
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">observation</th><th scope="col">location</th><th scope="col">property</th><th scope="col">start</th><th scope="col">finish</th><th scope="col">result</th><th scope="col">value</th><th scope="col">unit</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Observation1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Colombo</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/AirTemperature</td><td style="overflow-wrap:anywhere">2026-01-01T06:00:00+00:00</td><td style="overflow-wrap:anywhere">2026-01-01T06:10:00+00:00</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Result1</td><td style="overflow-wrap:anywhere">29.5</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/DegreeCelsius</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ2 · Which sensors or observation platforms produced observations for a particular location, and what data provider was responsible for those platforms?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?observation ?location ?sensor ?platform ?provider
+WHERE {
+  ?observation core:hasLocation ?location ;
+               core:madeBySensor ?sensor .
+  ?location geo:hasName &quot;Colombo&quot; .
+  ?sensor core:isHostedBy ?platform .
+  ?platform core:hasDataProvider ?provider .
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">observation</th><th scope="col">location</th><th scope="col">sensor</th><th scope="col">platform</th><th scope="col">provider</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Observation1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Colombo</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Sensor1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Platform1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Provider1</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ3 · Which forecast predictions are available for a specific location and forecast-valid time, and what forecast data and results support those predictions?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?prediction ?location ?validAt ?property ?result ?value ?probability ?forecastData
+WHERE {
+  ?prediction forecast:hasLocation ?location ;
+              forecast:hasForecastValidTime ?validTime ;
+              forecast:observedProperty ?property ;
+              forecast:hasForecastResult ?result .
+  ?location geo:hasName &quot;Colombo&quot; .
+  ?validTime core:hasTime ?validAt .
+
+  FILTER(
+    ?validAt &gt;= &quot;2026-01-01T12:00:00Z&quot;^^xsd:dateTime &amp;&amp;
+    ?validAt &lt;  &quot;2026-01-01T13:00:00Z&quot;^^xsd:dateTime
+  )
+
+  OPTIONAL { ?result forecast:hasValue ?value }
+  OPTIONAL { ?result forecast:hasProbability ?probability }
+  OPTIONAL { ?result forecast:hasForecastData ?forecastData }
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">prediction</th><th scope="col">location</th><th scope="col">validAt</th><th scope="col">property</th><th scope="col">result</th><th scope="col">value</th><th scope="col">probability</th><th scope="col">forecastData</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Prediction1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Colombo</td><td style="overflow-wrap:anywhere">2026-01-01T12:00:00+00:00</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/AirTemperature</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/ForecastResult1</td><td style="overflow-wrap:anywhere">31.0</td><td style="overflow-wrap:anywhere">0.8</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/ForecastData1</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ4 · Which forecast model and deployment were used to generate a particular forecast, and which platform hosts that deployment?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?prediction ?procedure ?model ?deployment ?platform
+WHERE {
+  VALUES ?prediction {
+    &lt;https://example.org/synthetic/Prediction1&gt;
+  }
+  ?prediction forecast:isProducedBy ?procedure .
+  ?model forecast:implement ?procedure ;
+         forecast:hasDeployment ?deployment .
+  ?platform core:deploy ?deployment .
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">prediction</th><th scope="col">procedure</th><th scope="col">model</th><th scope="col">deployment</th><th scope="col">platform</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Prediction1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Procedure1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Model1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Deployment1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/ForecastPlatform1</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ5 · Which extreme weather events occurred or are forecast to occur in a particular administrative region, and what were their duration, spatial extent, status, and severity?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?event ?region ?duration ?extent ?status ?severity
+WHERE {
+  ?event ext:occursInAdministrativeRegion ?region .
+  ?region geo:hasName &quot;Colombo District&quot; .
+
+  OPTIONAL { ?event ext:hasEventDuration ?duration }
+  OPTIONAL { ?event ext:hasSpatialExtent ?extent }
+  OPTIONAL { ?event ext:hasEventStatus ?status }
+  OPTIONAL {
+    ?event ext:isEventOf ?representation .
+    ?representation ext:hasSeverity ?severity .
+  }
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">event</th><th scope="col">region</th><th scope="col">duration</th><th scope="col">extent</th><th scope="col">status</th><th scope="col">severity</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/ColomboDistrict</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Duration1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Extent1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/ObservedStatus</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Severity1</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ6 · Which indicators were used to identify or characterize a particular extreme weather event, such as drought, rainfall, temperature, pressure, snow, or wind indicators?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?event ?representation ?severity ?indicator
+WHERE {
+  VALUES ?event {
+    &lt;https://example.org/synthetic/Event1&gt;
+  }
+  ?event ext:isEventOf ?representation .
+  ?representation ext:hasSeverity ?severity .
+  ?severity ext:basedOnIndicator ?indicator .
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">event</th><th scope="col">representation</th><th scope="col">severity</th><th scope="col">indicator</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/EventObservation1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/Severity1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/RainfallIndicator</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ7 · Which geographic features or critical infrastructure are affected by a particular extreme weather event, and what risk level is assigned to each affected feature?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?event ?feature ?riskLevel
+WHERE {
+  VALUES ?event {
+    &lt;https://example.org/synthetic/Event1&gt;
+  }
+  ?event risk:affects ?feature .
+  OPTIONAL { ?feature risk:hasRiskLeveL ?riskLevel }
+}</pre><p><strong>Sample answer (2 rows)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">event</th><th scope="col">feature</th><th scope="col">riskLevel</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/MainRoad</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/HighRiskAssignment</td></tr><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/GeneralHospital</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/VeryHighRiskAssignment</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ8 · Which government authorities are responsible for governing a geographic feature, and what are the corresponding national, state, district, and local authorities?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?feature ?national ?state ?district ?local
+WHERE {
+  ?local risk:governs ?feature .
+  ?feature geo:hasName &quot;Colombo&quot; .
+
+  OPTIONAL { ?district risk:hasLocalAuthority ?local }
+  OPTIONAL { ?state risk:hasDistrictAuthority ?district }
+  OPTIONAL { ?national risk:hasStateAuthority ?state }
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">feature</th><th scope="col">national</th><th scope="col">state</th><th scope="col">district</th><th scope="col">local</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Colombo</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/NationalAuthority</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/StateAuthority</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/DistrictAuthority</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/LocalAuthority</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ9 · Which emergency response agencies manage geographic areas affected by extreme weather events, and what types of response organizations are responsible for those areas?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?event ?area ?agency
+WHERE {
+  VALUES ?event {
+    &lt;https://example.org/synthetic/Event1&gt;
+  }
+  ?event risk:affects ?area .
+  ?agency risk:manage ?area .
+}</pre><p><strong>Sample answer (1 row)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">event</th><th scope="col">area</th><th scope="col">agency</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/MainRoad</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/ResponseAgency1</td></tr></tbody></table></div></details><details style="border:1px solid #0e4b72;border-radius:8px;background:#061b2c;margin:10px 0;padding:12px 14px"><summary style="cursor:pointer;color:#e7f5ff;font-weight:750">CQ10 · Given an extreme weather event and its affected geographic features, which high-risk or very-high-risk geographical features are associated with it?</summary><h3>SPARQL query</h3><pre class="code">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX core: &lt;http://meteo_onto.org/meteo_core/&gt;
+PREFIX geo: &lt;http://meteo_onto.org/meteo_geo/&gt;
+PREFIX forecast: &lt;http://meteo_onto.org/meteo_forecasting/&gt;
+PREFIX ext: &lt;http://meteo_onto.org/meteo_extreame/&gt;
+PREFIX risk: &lt;http://meteo_onto.org/meteo_risk/&gt;
+
+SELECT DISTINCT ?event ?feature ?riskLevel ?riskCategory
+WHERE {
+  VALUES ?event {
+    &lt;https://example.org/synthetic/Event1&gt;
+  }
+  ?event risk:affects ?feature .
+  ?feature risk:hasRiskLeveL ?riskLevel .
+
+  VALUES ?riskCategory {
+    risk:HighRisk
+    risk:VeryHighRisk
+  }
+  ?riskLevel rdf:type ?riskCategory .
+}</pre><p><strong>Sample answer (2 rows)</strong></p><div style="overflow-x:auto;margin-top:10px"><table style="table-layout:fixed;min-width:640px"><thead><tr><th scope="col">event</th><th scope="col">feature</th><th scope="col">riskLevel</th><th scope="col">riskCategory</th></tr></thead><tbody><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/MainRoad</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/HighRiskAssignment</td><td style="overflow-wrap:anywhere">http://meteo_onto.org/meteo_risk/HighRisk</td></tr><tr><td style="overflow-wrap:anywhere">https://example.org/synthetic/Event1</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/GeneralHospital</td><td style="overflow-wrap:anywhere">https://example.org/synthetic/VeryHighRiskAssignment</td><td style="overflow-wrap:anywhere">http://meteo_onto.org/meteo_risk/VeryHighRisk</td></tr></tbody></table></div></details></section></div></main></div><footer class="footer"><div class="footer-inner"><span><b style="color:#e8f6ff">Mete∞nto</b> · Meteorology Knowledge Connected.</span><span>Ontology files and source: <a href="https://github.com/PasanGunasekara29/MeteoOnto">GitHub ↗</a> · CC BY 4.0</span></div></footer><script>const q=document.getElementById("topicSearch"),side=document.getElementById("topicSidebar"),toggle=document.getElementById("menuToggle");q?.addEventListener("input",()=>{let n=0,s=q.value.trim().toLowerCase();document.querySelectorAll("[data-topic]").forEach(a=>{let ok=!s||a.dataset.topic.toLowerCase().includes(s)||a.textContent.toLowerCase().includes(s);a.hidden=!ok;if(ok)n++});const e=document.getElementById("topicEmpty");if(e)e.style.display=n?"none":"block"});toggle?.addEventListener("click",()=>{const o=side.classList.toggle("open");toggle.setAttribute("aria-expanded",String(o))});</script></body></html>
